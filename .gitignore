@@ -35,4 +35,4 @@ lib/generated_plugin_registrant.dart
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 # Secrets
-./databaseFunctions/ServiceAccountKey.json
+databaseFunctions/ServiceAccountKey.json

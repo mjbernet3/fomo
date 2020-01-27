@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/discover_page.dart';
+import 'package:project_fomo/frontend/pages/discover_page.dart';
 
 void main() => runApp(AppName());
 

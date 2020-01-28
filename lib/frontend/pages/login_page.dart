@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
-import 'package:project_fomo/backend/services/authentication.dart';
+import 'package:project_fomo/backend/services/AuthService.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -10,8 +10,9 @@ class LoginPage extends StatelessWidget {
     String _password;
 
     return ChangeNotifierProvider(
-      create: (_) =>
-          LoginModel(authenticator: Provider.of<Authentication>(context)),
+      create: (_) => LoginModel(
+        authenticator: Provider.of<AuthService>(context),
+      ),
       child: Consumer<LoginModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
@@ -58,8 +59,6 @@ class LoginPage extends StatelessWidget {
                           var success = await model.login(_email, _password);
                           if (success) {
                             Navigator.pushNamed(context, '/discover');
-                          } else {
-                            print('Unable to login');
                           }
                         },
                         child: Text(

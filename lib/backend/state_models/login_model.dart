@@ -1,11 +1,11 @@
-import 'package:project_fomo/backend/services/authentication.dart';
+import 'package:project_fomo/backend/services/AuthService.dart';
 import 'package:flutter/foundation.dart';
 
 class LoginModel extends ChangeNotifier {
-  Authentication _authenticator;
+  AuthService _authenticator;
   bool _isLoading = false;
 
-  LoginModel({Authentication authenticator}) {
+  LoginModel({AuthService authenticator}) {
     this._authenticator = authenticator;
   }
 
@@ -17,8 +17,6 @@ class LoginModel extends ChangeNotifier {
   }
 
   Future<bool> login(String email, String password) async {
-    print(email);
-    print(password);
     isLoading = true;
     bool success =
         await _authenticator.signInWithEmailAndPassword(email, password);

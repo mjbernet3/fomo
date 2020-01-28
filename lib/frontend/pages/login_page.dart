@@ -56,7 +56,7 @@ class LoginPage extends StatelessWidget {
                       RaisedButton(
                         color: Color(0xCF40E0D0),
                         onPressed: () async {
-                          var success = await model.login(_email, _password);
+                          bool success = await model.login(_email, _password);
                           if (success) {
                             Navigator.pushNamed(context, '/discover');
                           }

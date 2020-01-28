@@ -10,10 +10,13 @@ class WelcomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Welcome',
+              'F O M O',
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 50.0,
               ),
+            ),
+            SizedBox(
+              height: 40.0,
             ),
             RaisedButton(
               color: Color(0xCF40E0D0),

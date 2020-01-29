@@ -6,8 +6,7 @@ import 'package:provider/single_child_widget.dart';
 /*
     This is the place to register dependencies to be used throughout application
 
-    1) You will not have access to dependency you want unless you register here first
-    2) If one dependency needs another, the dependent one needs to be registered second
+    Note: If one dependency relies on another, register reliant one second
  */
 class AppContainer {
   static AuthService authService = AuthService();

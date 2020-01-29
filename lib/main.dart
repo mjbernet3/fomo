@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/frontend/pages/discover_page.dart';
 import 'package:project_fomo/frontend/pages/welcome_page.dart';
 import 'package:project_fomo/frontend/pages/login_page.dart';
+import 'package:project_fomo/frontend/pages/register_page.dart';
 import 'package:provider/provider.dart';
 import 'app_container.dart';
 
@@ -17,6 +18,7 @@ class AppName extends StatelessWidget {
         theme: ThemeData.dark(),
         routes: {
           '/': (context) => WelcomePage(),
+          '/register': (context) => RegisterPage(),
           '/login': (context) => LoginPage(),
           '/discover': (context) => DiscoverPage(),
         },

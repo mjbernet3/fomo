@@ -21,6 +21,15 @@ class WelcomePage extends StatelessWidget {
             RaisedButton(
               color: Color(0xCF40E0D0),
               onPressed: () {
+                Navigator.pushNamed(context, '/register');
+              },
+              child: Text(
+                'Register',
+              ),
+            ),
+            RaisedButton(
+              color: Color(0xCF40E0D0),
+              onPressed: () {
                 Navigator.pushNamed(context, '/login');
               },
               child: Text(

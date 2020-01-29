@@ -19,6 +19,19 @@ class AuthService {
     });
   }
 
+  Future<bool> registerWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      return result.user != null;
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(

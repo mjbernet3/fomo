@@ -1,17 +1,17 @@
 import 'package:project_fomo/backend/services/AuthService.dart';
 import 'package:project_fomo/backend/state_models/root_model.dart';
 
-class LoginModel extends RootModel {
+class RegisterModel extends RootModel {
   AuthService _authenticator;
 
-  LoginModel({AuthService authenticator}) {
+  RegisterModel({AuthService authenticator}) {
     this._authenticator = authenticator;
   }
 
-  Future<bool> login(String email, String password) async {
+  Future<bool> register(String email, String password) async {
     isLoading = true;
     bool success =
-        await _authenticator.signInWithEmailAndPassword(email, password);
+        await _authenticator.registerWithEmailAndPassword(email, password);
     isLoading = false;
     return success;
   }

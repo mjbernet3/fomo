@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
 import 'package:project_fomo/backend/services/AuthService.dart';
 
+//TODO: Recreate login page UI
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

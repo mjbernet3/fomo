@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/register_model.dart';
 import 'package:project_fomo/backend/services/AuthService.dart';
 
+//TODO: Recreate register page UI
 class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

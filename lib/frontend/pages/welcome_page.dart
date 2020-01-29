@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: Recreate welcome page UI
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

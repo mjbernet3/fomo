@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/user.dart';
 import 'package:provider/provider.dart';
 
+//TODO: Recreate discover page UI
 class DiscoverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

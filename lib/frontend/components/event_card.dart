@@ -2,107 +2,139 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_fomo/backend/models/event.dart';
 
-Widget eventCard(Event event) {
-  return Card(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-    ),
-    color: Color(0x0DFFFFFF),
-    child: ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            flex: 9,
-            child: eventCardImage(event.getImageURL()),
-          ),
-          Expanded(
-            flex: 5,
-            child: eventCardTray(
-                event.getName(), event.getVenueName(), event.getDate()),
-          ),
-        ],
+const double cardBorderRadius = 8.0;
+
+const double cardFieldPadding = 6.0;
+const double cardFieldSpacing = 2.0;
+const int cardTitleFlex = 7;
+const int cardSubtitleFlex = 5;
+
+const double cardBookmarkPadding = 6.0;
+const int cardBookmarkFlex = 5;
+const int cardBookmarkSpacerFlex = 4;
+
+class EventCard extends StatelessWidget {
+  final Event event;
+
+  EventCard(this.event);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(cardBorderRadius)),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Color(0x0DFFFFFF),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            eventCardImage(event.imageUrl),
+            eventCardTray(event.title, event.venue, event.date),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 Widget eventCardImage(String url) {
-  return FittedBox(
-    fit: BoxFit.cover,
-    child: Image.network(url),
+  return Expanded(
+    flex: 9,
+    child: FittedBox(
+      fit: BoxFit.cover,
+      child: Image.network(url),
+    ),
   );
 }
 
-Widget eventCardTray(String eventName, String venueName, DateTime date) {
-  return Stack(
-    children: <Widget>[
-      Row(
+Widget eventCardTray(String title, String venue, DateTime date) {
+  return Expanded(
+    flex: 5,
+    child: Row(
+      children: <Widget>[
+        eventCardField(title, venue, date),
+        eventCardTrayBookmark(),
+      ],
+    ),
+  );
+}
+
+Widget eventCardField(String title, String venue, DateTime date) {
+  return Expanded(
+    child: Padding(
+      padding: const EdgeInsets.all(cardFieldPadding),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Container(),
-          ),
-          Expanded(
-            flex: 30,
-            child: eventCardTrayField(eventName, venueName, date),
-          ),
+          eventCardTitle(title),
+          eventCardSubtitle(venue),
+          eventCardSubtitle(DateFormat('MMMMEEEEd').format(date)),
         ],
       ),
-      Align(
-        alignment: Alignment.bottomRight,
-        child: eventCardTrayBookmark(),
-      ),
-    ],
+    ),
   );
 }
 
-Widget eventCardTrayField(String eventName, String venueName, DateTime date) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: <Widget>[
-      Expanded(
-        flex: 2,
-        child: Container(),
-      ),
-      Expanded(
-        flex: 7,
-        child: eventCardTrayTitle(eventName),
-      ),
-      Expanded(
-        flex: 5,
-        child: eventCardTraySubtitle(venueName),
-      ),
-      Expanded(
-        flex: 5,
-        child: eventCardTraySubtitle(
-          DateFormat('MMMMEEEEd').format(date),
+Widget eventCardTitle(String title) {
+  return Expanded(
+    flex: cardTitleFlex,
+    child: FittedBox(
+      fit: BoxFit.fitHeight,
+      alignment: Alignment.centerLeft,
+      child: Container(
+        child: Text(
+          title,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.w500,
+            color: Color(0xFAFFFFFF),
+          ),
         ),
       ),
-      Expanded(
-        flex: 1,
-        child: Container(),
+    ),
+  );
+}
+
+Widget eventCardSubtitle(String subtitle) {
+  return Expanded(
+    flex: cardSubtitleFlex,
+    child: FittedBox(
+      fit: BoxFit.fitHeight,
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(top: cardFieldSpacing),
+        child: Text(
+          subtitle,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.w300,
+            color: Color(0x99FFFFFF),
+          ),
+        ),
       ),
-    ],
+    ),
   );
 }
 
 Widget eventCardTrayBookmark() {
   return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
       Expanded(
-        flex: 10,
+        flex: cardBookmarkSpacerFlex,
         child: Container(),
       ),
       Expanded(
-        flex: 9,
+        flex: cardBookmarkFlex,
         child: FittedBox(
-          fit: BoxFit.contain,
-          alignment: Alignment.centerRight,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 5.0, right: 5.0),
+            padding: const EdgeInsets.only(
+              bottom: cardBookmarkPadding,
+              right: cardBookmarkPadding,
+            ),
             child: Icon(
               Icons.bookmark_border,
               color: Color(0x99FFFFFF),
@@ -111,43 +143,5 @@ Widget eventCardTrayBookmark() {
         ),
       ),
     ],
-  );
-}
-
-Widget eventCardTrayTitle(String title) {
-  return FittedBox(
-    fit: BoxFit.fitHeight,
-    alignment: Alignment.centerLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 1.0, bottom: 1.0),
-      child: Text(
-        title,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontFamily: 'Raleway',
-          fontWeight: FontWeight.w600,
-          color: Color(0xFAFFFFFF),
-        ),
-      ),
-    ),
-  );
-}
-
-Widget eventCardTraySubtitle(String subtitle) {
-  return FittedBox(
-    fit: BoxFit.fitHeight,
-    alignment: Alignment.centerLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 1.0, bottom: 1.0),
-      child: Text(
-        subtitle,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontFamily: 'Raleway',
-          fontWeight: FontWeight.w400,
-          color: Color(0x99FFFFFF),
-        ),
-      ),
-    ),
   );
 }

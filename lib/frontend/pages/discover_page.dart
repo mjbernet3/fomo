@@ -175,7 +175,7 @@ Widget eventCategoryView(
         return ListView(
           scrollDirection: Axis.horizontal,
           itemExtent: itemExtent,
-          children: events.map((event) => eventCard(event)).toList(),
+          children: events.map((event) => EventCard(event)).toList(),
         );
       }
     },
@@ -200,7 +200,7 @@ class FeaturedCarouselSlider extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 viewportFraction: 1.0,
                 items: snapshot.data
-                    .map<Widget>((event) => eventCard(event))
+                    .map<Widget>((event) => EventCard(event))
                     .toList(),
               );
             }

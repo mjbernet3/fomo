@@ -1,33 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
-  String _name;
-  String _venueName;
+  String _title;
+  String _venue;
   DateTime _date;
-  String _imageURL;
+  String _imageUrl;
 
-  Event(this._name, this._venueName, this._date, this._imageURL);
+  Event({String title, String venue, DateTime date, String imageUrl}) {
+    this._title = title;
+    this._venue = venue;
+    this._date = date;
+    this._imageUrl = imageUrl;
+  }
 
   Event.fromDoc(DocumentSnapshot doc) {
-    this._name = doc.data['eventName'];
-    this._venueName = doc.data['venueName'];
+    this._title = doc.data['eventName'];
+    this._venue = doc.data['venueName'];
     this._date = DateTime.parse(doc.data['date']);
-    this._imageURL = doc.data['image'];
+    this._imageUrl = doc.data['image'];
   }
 
-  String getName() {
-    return _name;
+  String get title {
+    return _title;
   }
 
-  String getVenueName() {
-    return _venueName;
+  String get venue {
+    return _venue;
   }
 
-  DateTime getDate() {
+  DateTime get date {
     return _date;
   }
 
-  String getImageURL() {
-    return _imageURL;
+  String get imageUrl {
+    return _imageUrl;
   }
 }

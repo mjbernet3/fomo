@@ -5,6 +5,8 @@ import 'package:project_fomo/backend/services/AuthService.dart';
 
 //TODO: Recreate login page UI
 class LoginPage extends StatelessWidget {
+  static const pageRoute = '/login';
+
   @override
   Widget build(BuildContext context) {
     String _email;

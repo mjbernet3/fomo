@@ -5,6 +5,8 @@ import 'package:project_fomo/backend/services/AuthService.dart';
 
 //TODO: Recreate register page UI
 class RegisterPage extends StatelessWidget {
+  static const pageRoute = '/register';
+
   @override
   Widget build(BuildContext context) {
     String _email;

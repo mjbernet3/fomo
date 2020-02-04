@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/register_model.dart';
 import 'package:project_fomo/backend/services/AuthService.dart';
+import 'package:project_fomo/frontend/components/GradientButton.dart';
 
 //TODO: Recreate register page UI
 class RegisterPage extends StatelessWidget {
@@ -54,19 +55,16 @@ class RegisterPage extends StatelessWidget {
                           _password = typedValue;
                         },
                       ),
-                      RaisedButton(
-                        color: Color(0xCF40E0D0),
-                        onPressed: () async {
-                          bool success =
-                              await model.register(_email, _password);
+                      GradientButton(
+                        buttonText: 'Register',
+                        buttonPressed: () async {
+                        bool success =
+                          await model.register(_email, _password);
                           if (success) {
                             Navigator.pushNamed(context, '/discover');
                           }
                         },
-                        child: Text(
-                          'Login',
-                        ),
-                      ),
+                      )
                     ],
                   ),
           ),

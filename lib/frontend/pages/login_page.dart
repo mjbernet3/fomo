@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
 import 'package:project_fomo/backend/services/AuthService.dart';
-import 'package:project_fomo/frontend/components/inputFieldWidget.dart';
+import 'package:project_fomo/frontend/components/InputFieldWidget.dart';
+import 'package:project_fomo/frontend/components/GradientButton.dart';
+import 'package:project_fomo/frontend/components/loginPageHeader.dart';
 
 //TODO: Recreate login page UI
 class LoginPage extends StatelessWidget {
@@ -10,6 +12,11 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     String _email;
     String _password;
+
+    InputField emailInput = InputField('Email or Username', Icons.person,
+            (String input) { _email = input; });
+    InputField passwordInput = InputField('Password', Icons.lock,
+            (String input) { _password = input;}, true);
 
     return ChangeNotifierProvider(
       create: (_) => LoginModel(
@@ -21,85 +28,40 @@ class LoginPage extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
+          body: SingleChildScrollView(child: Padding(
+            padding: EdgeInsets.only(bottom: 40, left: 15, right: 15, top: 30),
             child: model.isLoading
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       loginPageHeader('Log In'),
+                      SizedBox(height: 60),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget> [
-                          inputField('Email or Username', Icons.person,
-                                  (String input) { _email = input; }),
-                          inputField('Password', Icons.lock,
-                              (String input) { _password = input;}, true)
+                          emailInput,
+                          SizedBox(height:10),
+                          passwordInput
                         ]
-                      )
+                      ),
+                      SizedBox(height:50),
+                      GradientButton(buttonText: 'Log In', buttonPressed: () async {
+                        bool success = await model.login(_email, _password);
+                        if (success) {
+                          Navigator.pushNamed(context, '/discover');
+                        }
+                      }),
+                      SizedBox(height:30)
                     ],
                   ),
           ),
+          )
         ),
       ),
     );
   }
-}
-
-
-/*
-Widget created using Paul's rules
- */
-Widget loginPageHeader(String title) {
-  return Row(
-      children: <Widget>[
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              FittedBox(
-                fit: BoxFit.cover,
-                child: Text(
-                  title,
-                  style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFFFFF)),
-                ),
-              ),
-              SizedBox(
-                height: 3.0,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        Color(0xFFFF6C1A),
-                        Color(0xFFF01844),
-                        Color(0xFF7E0BC9),
-                      ],
-                      stops: [
-                        0.0,
-                        .528,
-                        1.0,
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Container(),
-        ),
-      ],
-  );
 }

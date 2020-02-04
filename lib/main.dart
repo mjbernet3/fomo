@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/pages/test_page.dart';
+import 'package:project_fomo/frontend/pages/discover_page.dart';
 
 void main() => runApp(AppName());
 
@@ -10,7 +10,7 @@ class AppName extends StatelessWidget {
       initialRoute: '/discover',
       theme: ThemeData.dark(),
       routes: {
-        '/discover': (context) => TestPage(),
+        '/discover': (context) => DiscoverPage(),
       },
     );
   }

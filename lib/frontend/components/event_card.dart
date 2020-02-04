@@ -5,13 +5,18 @@ import 'package:project_fomo/backend/models/event.dart';
 const double cardBorderRadius = 8.0;
 
 const double cardFieldPadding = 6.0;
-const double cardFieldSpacing = 2.0;
+const double cardFieldSpacing = 0.5;
 const int cardTitleFlex = 7;
 const int cardSubtitleFlex = 5;
 
 const double cardBookmarkPadding = 6.0;
 const int cardBookmarkFlex = 5;
 const int cardBookmarkSpacerFlex = 4;
+
+const Color cardTrayColor = Color(0x0DFFFFFF);
+const Color cardTitleColor = Color(0xFAFFFFFF);
+const Color cardSubtitleColor = Color(0x99FFFFFF);
+const Color cardBookmarkColor = cardSubtitleColor;
 
 class EventCard extends StatelessWidget {
   final Event event;
@@ -24,7 +29,7 @@ class EventCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(cardBorderRadius)),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Color(0x0DFFFFFF),
+          color: cardTrayColor,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,15 +88,12 @@ Widget eventCardTitle(String title) {
     child: FittedBox(
       fit: BoxFit.fitHeight,
       alignment: Alignment.centerLeft,
-      child: Container(
-        child: Text(
-          title,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontFamily: 'Raleway',
-            fontWeight: FontWeight.w500,
-            color: Color(0xFAFFFFFF),
-          ),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontFamily: 'Raleway',
+          fontWeight: FontWeight.w600,
+          color: cardTitleColor,
         ),
       ),
     ),
@@ -108,11 +110,10 @@ Widget eventCardSubtitle(String subtitle) {
         padding: const EdgeInsets.only(top: cardFieldSpacing),
         child: Text(
           subtitle,
-          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontFamily: 'Raleway',
-            fontWeight: FontWeight.w300,
-            color: Color(0x99FFFFFF),
+            fontWeight: FontWeight.w400,
+            color: cardSubtitleColor,
           ),
         ),
       ),
@@ -137,7 +138,7 @@ Widget eventCardTrayBookmark() {
             ),
             child: Icon(
               Icons.bookmark_border,
-              color: Color(0x99FFFFFF),
+              color: cardBookmarkColor,
             ),
           ),
         ),

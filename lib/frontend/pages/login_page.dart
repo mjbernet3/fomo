@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
 import 'package:project_fomo/backend/services/AuthService.dart';
+import 'package:project_fomo/frontend/components/inputFieldWidget.dart';
 
 //TODO: Recreate login page UI
 class LoginPage extends StatelessWidget {
@@ -17,7 +18,8 @@ class LoginPage extends StatelessWidget {
       child: Consumer<LoginModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
-            title: Text('Login'),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
           ),
           body: Padding(
             padding: EdgeInsets.all(20.0),
@@ -26,46 +28,19 @@ class LoginPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   )
                 : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      TextField(
-                        autofocus: true,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Email',
-                        ),
-                        onChanged: (String typedValue) {
-                          _email = typedValue;
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextField(
-                        textAlign: TextAlign.center,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password',
-                        ),
-                        onChanged: (String typedValue) {
-                          _password = typedValue;
-                        },
-                      ),
-                      RaisedButton(
-                        color: Color(0xCF40E0D0),
-                        onPressed: () async {
-                          bool success = await model.login(_email, _password);
-                          if (success) {
-                            Navigator.pushNamed(context, '/discover');
-                          }
-                        },
-                        child: Text(
-                          'Login',
-                        ),
-                      ),
+                      loginPageHeader('Log In'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget> [
+                          inputField('Email or Username', Icons.person,
+                                  (String input) { _email = input; }),
+                          inputField('Password', Icons.lock,
+                              (String input) { _password = input;}, true)
+                        ]
+                      )
                     ],
                   ),
           ),
@@ -73,4 +48,63 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+}
+
+
+/*
+Widget created using Paul's rules
+ */
+Widget loginPageHeader(String title) {
+  return Padding(
+    padding: const EdgeInsets.only(
+      left: 10,
+    ),
+    child: Row(
+      children: <Widget>[
+        Expanded(
+          flex: 2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              FittedBox(
+                fit: BoxFit.cover,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFFFFFF)),
+                ),
+              ),
+              SizedBox(
+                height: 3.0,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Color(0xFFFF6C1A),
+                        Color(0xFFF01844),
+                        Color(0xFF7E0BC9),
+                      ],
+                      stops: [
+                        0.0,
+                        .528,
+                        1.0,
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Container(),
+        ),
+      ],
+    ),
+  );
 }

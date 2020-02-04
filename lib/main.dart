@@ -32,7 +32,6 @@ class InitialPageSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
     return user != null ? DiscoverPage() : WelcomePage();
   }
 }

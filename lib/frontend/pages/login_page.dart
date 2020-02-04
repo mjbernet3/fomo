@@ -22,14 +22,14 @@ class LoginPage extends StatelessWidget {
             elevation: 0.0,
           ),
           body: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20),
             child: model.isLoading
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       loginPageHeader('Log In'),
                       Column(
@@ -55,11 +55,7 @@ class LoginPage extends StatelessWidget {
 Widget created using Paul's rules
  */
 Widget loginPageHeader(String title) {
-  return Padding(
-    padding: const EdgeInsets.only(
-      left: 10,
-    ),
-    child: Row(
+  return Row(
       children: <Widget>[
         Expanded(
           flex: 2,
@@ -105,6 +101,5 @@ Widget loginPageHeader(String title) {
           child: Container(),
         ),
       ],
-    ),
   );
 }

@@ -5,7 +5,7 @@ import 'package:project_fomo/backend/services/AuthService.dart';
 
 //TODO: Recreate register page UI
 class RegisterPage extends StatelessWidget {
-  static const pageRoute = '/register';
+  static const String pageRoute = '/register';
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,8 @@ class RegisterPage extends StatelessWidget {
                           bool success =
                               await model.register(_email, _password);
                           if (success) {
-                            Navigator.pushNamed(context, '/discover');
+                            Navigator.pushNamed(
+                                context, RegisterPage.pageRoute);
                           }
                         },
                         child: Text(

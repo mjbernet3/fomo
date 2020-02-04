@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 //TODO: Recreate welcome page UI
 class WelcomePage extends StatelessWidget {
-  static const pageRoute = '/welcome';
+  static const String pageRoute = '/welcome';
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 //TODO: Recreate discover page UI
 class DiscoverPage extends StatelessWidget {
-  static const pageRoute = '/discover';
+  static const String pageRoute = '/discover';
 
   @override
   Widget build(BuildContext context) {

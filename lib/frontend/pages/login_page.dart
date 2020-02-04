@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/pages/root_page.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
 import 'package:project_fomo/backend/services/AuthService.dart';
 
 //TODO: Recreate login page UI
 class LoginPage extends StatelessWidget {
-  static const pageRoute = '/login';
+  static const String pageRoute = '/login';
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: () async {
                           bool success = await model.login(_email, _password);
                           if (success) {
-                            Navigator.pushNamed(context, '/discover');
+                            Navigator.pushNamed(context, RootPage.pageRoute);
                           }
                         },
                         child: Text(

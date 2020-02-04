@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/user.dart';
+import 'package:project_fomo/frontend/pages/root_page.dart';
 import 'package:project_fomo/frontend/pages/welcome_page.dart';
 import 'package:project_fomo/router.dart' as router;
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class AppName extends StatelessWidget {
       child: MaterialApp(
         initialRoute: WelcomePage.pageRoute,
         theme: ThemeData.dark(),
-        onGenerateRoute: router.generateRoute,
+        onGenerateRoute: router.generateMainRoute,
       ),
     );
   }

@@ -21,3 +21,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/frontend/assets/images/welcome-background.jpeg
+    - lib/frontend/assets/images/MusicIcon.png

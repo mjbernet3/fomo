@@ -15,7 +15,9 @@ class AppName extends StatelessWidget {
       providers: AppContainer().providers,
       child: MaterialApp(
         initialRoute: WelcomePage.pageRoute,
-        theme: ThemeData.dark(),
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Color(0xFF121212),
+        ),
         onGenerateRoute: Router.generateMainRoute,
       ),
     );

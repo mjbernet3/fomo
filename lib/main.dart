@@ -16,7 +16,9 @@ class AppName extends StatelessWidget {
       providers: AppContainer().providers,
       child: MaterialApp(
         home: InitialPageSelector(),
-        theme: ThemeData.dark(),
+        theme: ThemeData(
+          canvasColor: Color(0xFF121212)
+        ),
         routes: {
           '/welcome': (context) => WelcomePage(),
           '/register': (context) => RegisterPage(),

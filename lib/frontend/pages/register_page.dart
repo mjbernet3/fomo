@@ -20,7 +20,7 @@ class RegisterPage extends StatelessWidget {
             (String input) { _email = input; });
     InputField nameInput = InputField('Name', Icons.person,
             (String input) { _name = input; });
-    InputField usernameInput = InputField('Username', Icons.person,
+    InputField usernameInput = InputField('Username', Icons.done,
             (String input) { _username = input; });
     InputField passwordInput = InputField('Password', Icons.lock,
             (String input) { _password = input; }, true);
@@ -34,11 +34,16 @@ class RegisterPage extends StatelessWidget {
       child: Consumer<RegisterModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back_ios,
+                  color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+            ),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
           body: SingleChildScrollView(child: Padding(
-            padding: EdgeInsets.only(bottom: 40, left: 15, right: 15, top: 30),
+            padding: EdgeInsets.only(bottom: 40, left: 20, right: 20, top: 30),
             child: model.isLoading
                 ? Center(
                     child: CircularProgressIndicator(),
@@ -51,15 +56,15 @@ class RegisterPage extends StatelessWidget {
                       SizedBox(height: 60),
                       emailInput,
                       SizedBox(
-                        height: 10.0,
+                        height: 30.0,
                       ),
                       nameInput,
                       SizedBox(
-                        height: 10.0,
+                        height: 30.0,
                       ),
                       usernameInput,
                       SizedBox(
-                        height: 10.0,
+                        height: 30.0,
                       ),
                       passwordInput,
                       SizedBox(

@@ -8,6 +8,11 @@ class InputField extends StatelessWidget {
 
   InputField(this.title, this.icon, this.changed, [this.hidden = false]);
 
+  final UnderlineInputBorder defaultLine = UnderlineInputBorder(
+      borderSide: const BorderSide(
+          color: Color(0xFF939393),
+          width: 2.5));
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -16,29 +21,37 @@ class InputField extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(title,
                   style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       fontSize: 20,
                       fontFamily: 'Raleway',
-                      color: Colors.white)
+                      color: Color(0xFF939393))
               )
           ),
           Padding(
             padding: EdgeInsets.only(top: 15),
-            child: TextField(
+            child:
+            TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Raleway',
+                  fontSize: 20
+                ),
                 obscureText: hidden,
                 decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white)
-                    ),
-                    border: UnderlineInputBorder(),
+                    contentPadding: EdgeInsets.only(
+                        top: 20,
+                        bottom: 5),
+                    alignLabelWithHint: false,
+                    focusedBorder: defaultLine,
+                    enabledBorder: defaultLine,
                     suffixIcon: Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 0),
-                        child: Icon(icon,
-                            color: Colors.white)
+                        padding: const EdgeInsetsDirectional.only(
+                            end: 0, top: 10),
+                        child: Icon(
+                            icon,
+                            size: 30,
+                            color: Color(0xFF939393))
                     ),
-                    labelStyle: TextStyle(
-                        fontSize: 40,
-                        fontFamily: 'Raleway',
-                        color: Colors.white)
                 ),
                 onChanged: (String typedValue) {
                   changed(typedValue);

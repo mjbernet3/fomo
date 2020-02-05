@@ -25,6 +25,10 @@ class LoginPage extends StatelessWidget {
       child: Consumer<LoginModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
@@ -40,21 +44,20 @@ class LoginPage extends StatelessWidget {
                     children: <Widget>[
                       loginPageHeader('Log In'),
                       SizedBox(height: 60),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget> [
                           emailInput,
-                          SizedBox(height:10),
-                          passwordInput
-                        ]
+                          SizedBox(height:30),
+                          passwordInput,
+                      SizedBox(
+                          height:50),
+                      GradientButton(
+                          buttonText: 'Log In',
+                          buttonPressed: () async {
+                              bool success = await model.login(_email, _password);
+                              if (success) {
+                                Navigator.pushNamed(context, '/discover');
+                              }
+                          }
                       ),
-                      SizedBox(height:50),
-                      GradientButton(buttonText: 'Log In', buttonPressed: () async {
-                        bool success = await model.login(_email, _password);
-                        if (success) {
-                          Navigator.pushNamed(context, '/discover');
-                        }
-                      }),
                       SizedBox(height:30)
                     ],
                   ),

@@ -11,12 +11,13 @@ class _DiscoverState extends State<Discover> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      initialRoute: DiscoverPage.pageRoute,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
             switch (settings.name) {
-              case '/':
+              case DiscoverPage.pageRoute:
                 return DiscoverPage();
               default:
                 return UnknownPage();

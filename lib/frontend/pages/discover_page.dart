@@ -14,9 +14,9 @@ class DiscoverPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('How did you get in here?'),
+            Text('Discover'),
             SizedBox(
-              height: 40.0,
+              height: 10.0,
             ),
             RaisedButton(
               color: Color(0xCF40E0D0),

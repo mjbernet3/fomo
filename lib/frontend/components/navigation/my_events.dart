@@ -11,12 +11,13 @@ class _MyEventsState extends State<MyEvents> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      initialRoute: MyEventsPage.pageRoute,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
             switch (settings.name) {
-              case '/':
+              case MyEventsPage.pageRoute:
                 return MyEventsPage();
               default:
                 return UnknownPage();

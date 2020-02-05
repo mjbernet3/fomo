@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyEventsPage extends StatelessWidget {
-  static const String pageRoute = '/myevents';
+  static const String pageRoute = '/my-events';
 
   @override
   Widget build(BuildContext context) {

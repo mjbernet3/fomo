@@ -11,12 +11,13 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      initialRoute: SearchPage.pageRoute,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
             switch (settings.name) {
-              case '/':
+              case SearchPage.pageRoute:
                 return SearchPage();
               default:
                 return UnknownPage();

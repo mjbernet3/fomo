@@ -11,12 +11,13 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      initialRoute: ProfilePage.pageRoute,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
             switch (settings.name) {
-              case '/':
+              case ProfilePage.pageRoute:
                 return ProfilePage();
               default:
                 return UnknownPage();

@@ -11,12 +11,13 @@ class _FriendsState extends State<Friends> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      initialRoute: FriendsPage.pageRoute,
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
             switch (settings.name) {
-              case '/':
+              case FriendsPage.pageRoute:
                 return FriendsPage();
               default:
                 return UnknownPage();

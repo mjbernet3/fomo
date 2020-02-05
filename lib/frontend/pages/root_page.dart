@@ -55,7 +55,7 @@ class _RootPageState extends State<RootPage> {
             title: Text(''),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_border),
+            icon: Icon(Icons.event_note),
             title: Text(''),
           ),
           BottomNavigationBarItem(

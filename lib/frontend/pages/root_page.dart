@@ -3,7 +3,7 @@ import 'package:project_fomo/frontend/pages/friends_page.dart';
 import 'package:project_fomo/frontend/pages/my_events_page.dart';
 import 'package:project_fomo/frontend/pages/profile_page.dart';
 import 'package:project_fomo/frontend/pages/search_page.dart';
-import 'package:project_fomo/router.dart' as router;
+import 'package:project_fomo/router.dart';
 import 'package:project_fomo/frontend/pages/discover_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _RootPageState extends State<RootPage> {
       body: Navigator(
         key: _navigatorKey,
         initialRoute: DiscoverPage.pageRoute,
-        onGenerateRoute: router.generateRoute,
+        onGenerateRoute: Router.generateRoute,
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black26,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/user.dart';
 import 'package:project_fomo/frontend/pages/root_page.dart';
 import 'package:project_fomo/frontend/pages/welcome_page.dart';
-import 'package:project_fomo/router.dart' as router;
+import 'package:project_fomo/router.dart';
 import 'package:provider/provider.dart';
 import 'app_container.dart';
 
@@ -16,7 +16,7 @@ class AppName extends StatelessWidget {
       child: MaterialApp(
         initialRoute: WelcomePage.pageRoute,
         theme: ThemeData.dark(),
-        onGenerateRoute: router.generateMainRoute,
+        onGenerateRoute: Router.generateMainRoute,
       ),
     );
   }

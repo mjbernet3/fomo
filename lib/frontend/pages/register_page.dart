@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/register_model.dart';
-import 'package:project_fomo/backend/services/AuthService.dart';
+import 'package:project_fomo/backend/services/auth_service.dart';
 
 //TODO: Recreate register page UI
 class RegisterPage extends StatelessWidget {
+  static const String pageRoute = '/register';
+
   @override
   Widget build(BuildContext context) {
     String _email;
@@ -60,7 +62,8 @@ class RegisterPage extends StatelessWidget {
                           bool success =
                               await model.register(_email, _password);
                           if (success) {
-                            Navigator.pushNamed(context, '/discover');
+                            Navigator.pushNamed(
+                                context, RegisterPage.pageRoute);
                           }
                         },
                         child: Text(

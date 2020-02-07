@@ -1,4 +1,4 @@
-import 'package:project_fomo/backend/services/AuthService.dart';
+import 'package:project_fomo/backend/services/auth_service.dart';
 import 'package:project_fomo/backend/state_models/root_model.dart';
 
 class RegisterModel extends RootModel {

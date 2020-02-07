@@ -43,4 +43,12 @@ class AuthService {
       return false;
     }
   }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (error) {
+      print(error.toString());
+    }
+  }
 }

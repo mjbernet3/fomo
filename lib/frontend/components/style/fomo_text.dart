@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/components/style/fomo_color.dart';
+import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
 
 class FomoFontSize {
   static const double h1 = 36.0;
@@ -25,6 +25,11 @@ class FomoTextStyle extends TextStyle {
     fontSize: FomoFontSize.h2,
     fontWeight: FomoFontWeight.bold,
   );
+
+  static final FomoTextStyle giantTitle = FomoTextStyle(
+      color: FomoColor.onPrimary,
+      fontSize: FomoFontSize.h1,
+      fontWeight: FomoFontWeight.bold);
 
   static final FomoTextStyle largeTitle = FomoTextStyle(
       color: FomoColor.onPrimary,

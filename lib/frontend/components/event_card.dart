@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_fomo/backend/models/event.dart';
-import 'package:project_fomo/frontend/components/style/fomo_color.dart';
+import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
 import 'package:project_fomo/frontend/components/style/fomo_spacing.dart';
 import 'package:project_fomo/frontend/components/style/fomo_text.dart';
 
@@ -13,23 +13,18 @@ class SmallEventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minWidth: 200,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: FomoColor.surface,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              cardImage(event.imageUrl),
-              cardTray(event.title, event.venue, event.date),
-            ],
-          ),
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: FomoColor.surface,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            cardImage(event.imageUrl),
+            cardTray(event.title, event.venue, event.date),
+          ],
         ),
       ),
     );

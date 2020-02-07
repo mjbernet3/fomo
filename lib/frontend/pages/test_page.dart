@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/event.dart';
 import 'package:project_fomo/frontend/components/event_slider.dart';
-import 'package:project_fomo/frontend/components/style/fomo_color.dart';
+import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
 
 final Event event1 = Event(
   title: "My Event 1",
@@ -44,7 +44,7 @@ class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FomoColor.background,
+      backgroundColor: FomoColor.primary,
       body: SafeArea(
         child: Container(
           child: Column(

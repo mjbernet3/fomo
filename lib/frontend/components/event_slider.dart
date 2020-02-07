@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/event.dart';
 import 'package:project_fomo/frontend/components/event_card.dart';
+import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
 import 'package:project_fomo/frontend/components/style/fomo_spacing.dart';
 import 'package:project_fomo/frontend/components/style/fomo_text.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,7 @@ Widget sliderProvider(List<Event> events) {
 Widget slider(List<Event> events) {
   return Consumer<SliderModel>(
     builder: (context, sliderModel, child) => CarouselSlider(
+      height: 275,
       viewportFraction: 1.0,
       onPageChanged: (int index) => (sliderModel.index = index),
       items: events
@@ -104,22 +106,7 @@ Widget ellipse(bool activated) {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: activated ? null : Color(0x0FFFFFFF),
-        gradient: activated
-            ? LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [
-                  Color(0xFFFF6C1A),
-                  Color(0xFFF01844),
-                  Color(0xFF7E0BC9),
-                ],
-                stops: [
-                  0.0,
-                  .528,
-                  1.0,
-                ],
-              )
-            : null,
+        gradient: activated ? FomoGradient.main : null,
       ),
     ),
   );

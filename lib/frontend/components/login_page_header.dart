@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/style.dart';
 
-/*
-Widget created using Paul's rules
- */
 Widget loginPageHeader(String title) {
   return Row(
     children: <Widget>[
@@ -15,30 +13,14 @@ Widget loginPageHeader(String title) {
               fit: BoxFit.cover,
               child: Text(
                 title,
-                style: TextStyle(
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFFFFFFF)),
+                style: AppTextStyle.pageHeader,
               ),
             ),
             SizedBox(
               height: 3.0,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.topRight,
-                    colors: [
-                      Color(0xFFFF6C1A),
-                      Color(0xFFF01844),
-                      Color(0xFF7E0BC9),
-                    ],
-                    stops: [
-                      0.0,
-                      .528,
-                      1.0,
-                    ],
-                  ),
+                  gradient: AppColor.gradient,
                 ),
               ),
             )

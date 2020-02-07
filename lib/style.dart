@@ -53,32 +53,41 @@ class AppTextStyle {
     color: AppTextColor.title,
     fontSize: AppFontSize.h2,
     fontWeight: AppFontWeight.bold,
+    fontFamily: AppFontFamily.family,
   );
 
   static const TextStyle giantTitle = TextStyle(
-      color: AppTextColor.title,
-      fontSize: AppFontSize.h1,
-      fontWeight: FontWeight.bold);
+    color: AppTextColor.title,
+    fontSize: AppFontSize.h1,
+    fontWeight: FontWeight.bold,
+    fontFamily: AppFontFamily.family,
+  );
 
   static const TextStyle largeTitle = TextStyle(
-      color: AppTextColor.title,
-      fontSize: AppFontSize.h2,
-      fontWeight: FontWeight.bold);
+    color: AppTextColor.title,
+    fontSize: AppFontSize.h2,
+    fontWeight: FontWeight.bold,
+    fontFamily: AppFontFamily.family,
+  );
 
   static const TextStyle smallTitle = TextStyle(
-      color: AppTextColor.title,
-      fontSize: AppFontSize.h3,
-      fontWeight: FontWeight.bold);
+    color: AppTextColor.title,
+    fontSize: AppFontSize.h3,
+    fontWeight: FontWeight.bold,
+    fontFamily: AppFontFamily.family,
+  );
 
   static const TextStyle largeSubtitle = TextStyle(
     color: AppTextColor.highEmphasis,
     fontSize: AppFontSize.p1,
     fontWeight: FontWeight.normal,
+    fontFamily: AppFontFamily.family,
   );
 
   static const TextStyle smallSubtitle = TextStyle(
     color: AppTextColor.highEmphasis,
     fontSize: AppFontSize.p2,
     fontWeight: FontWeight.normal,
+    fontFamily: AppFontFamily.family,
   );
 }

@@ -9,8 +9,11 @@ class InputField extends StatelessWidget {
 
   InputField(this.title, this.icon, this.changed, [this.hidden = false]);
 
-  final UnderlineInputBorder defaultLine = UnderlineInputBorder(
-    borderSide: const BorderSide(color: AppColor.divider, width: 2.5),
+  static const UnderlineInputBorder defaultLine = UnderlineInputBorder(
+    borderSide: const BorderSide(
+      color: AppColor.dp8,
+      width: 2.5,
+    ),
   );
 
   @override
@@ -21,16 +24,24 @@ class InputField extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             title,
-            style: AppTextStyle.smallSubtitle,
+            style: TextStyle(
+              color: AppTextColor.mediumEmphasis,
+              fontSize: AppFontSize.size16,
+              fontFamily: AppFontFamily.family,
+            ),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 15),
           child: TextField(
-            style: AppTextStyle.smallSubtitle,
+            style: TextStyle(
+              color: AppTextColor.highEmphasis,
+              fontSize: AppFontSize.size14,
+              fontFamily: AppFontFamily.family,
+            ),
             obscureText: hidden,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 20, bottom: 5),
+              contentPadding: EdgeInsets.only(left: 2, top: 20, bottom: 5),
               alignLabelWithHint: false,
               focusedBorder: defaultLine,
               enabledBorder: defaultLine,
@@ -39,7 +50,7 @@ class InputField extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 30,
-                  color: Color(0xFF939393),
+                  color: AppColor.dp24,
                 ),
               ),
             ),
@@ -47,7 +58,7 @@ class InputField extends StatelessWidget {
               changed(typedValue);
             },
           ),
-        )
+        ),
       ],
     );
   }

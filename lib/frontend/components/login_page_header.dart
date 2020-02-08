@@ -13,7 +13,11 @@ Widget loginPageHeader(String title) {
               fit: BoxFit.cover,
               child: Text(
                 title,
-                style: AppTextStyle.pageHeader,
+                style: TextStyle(
+                  color: AppTextColor.title,
+                  fontSize: AppFontSize.size36,
+                  fontFamily: AppFontFamily.family,
+                ),
               ),
             ),
             SizedBox(
@@ -23,7 +27,7 @@ Widget loginPageHeader(String title) {
                   gradient: AppColor.gradient,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

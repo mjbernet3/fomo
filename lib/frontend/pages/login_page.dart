@@ -15,64 +15,70 @@ class LoginPage extends StatelessWidget {
     String _email;
     String _password;
 
-    InputField emailInput =
-        InputField('Email or Username', Icons.person, (String input) {
-      _email = input;
-    });
-    InputField passwordInput =
-        InputField('Password', Icons.lock, (String input) {
-      _password = input;
-    }, true);
-
     return ChangeNotifierProvider(
       create: (_) => LoginModel(
         authenticator: Provider.of<AuthService>(context),
       ),
       child: Consumer<LoginModel>(
         builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
-                onPressed: () => Navigator.of(context).pop(),
+          appBar: AppBar(
+            leading: new IconButton(
+              icon: new Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
               ),
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
+              onPressed: () => Navigator.of(context).pop(),
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding:
-                    EdgeInsets.only(bottom: 40, left: 15, right: 15, top: 30),
-                child: model.isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          loginPageHeader('Log In'),
-                          SizedBox(height: 60),
-                          emailInput,
-                          SizedBox(height: 30),
-                          passwordInput,
-                          SizedBox(
-                            height: 50,
-                          ),
-                          GradientButton(
-                            buttonText: 'Log In',
-                            buttonPressed: () async {
-                              bool success =
-                                  await model.login(_email, _password);
-                              if (success) {
-                                Navigator.pushNamed(
-                                    context, RootPage.pageRoute);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-              ),
-            )),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  EdgeInsets.only(bottom: 40, left: 15, right: 15, top: 30),
+              child: model.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        loginPageHeader('Log In'),
+                        SizedBox(height: 60),
+                        InputField(
+                          'Email or Username',
+                          Icons.person,
+                          (String input) {
+                            _email = input;
+                          },
+                        ),
+                        SizedBox(height: 30),
+                        InputField(
+                          'Password',
+                          Icons.lock,
+                          (String input) {
+                            _password = input;
+                          },
+                          true,
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        GradientButton(
+                          buttonText: 'Log In',
+                          buttonPressed: () async {
+                            bool success = await model.login(_email, _password);
+                            if (success) {
+                              Navigator.pushNamed(context, RootPage.pageRoute);
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+        ),
       ),
     );
   }

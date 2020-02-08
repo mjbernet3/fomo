@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/pages/root_page.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/register_model.dart';
 import 'package:project_fomo/frontend/components/gradient_button.dart';
@@ -15,22 +16,6 @@ class RegisterPage extends StatelessWidget {
     String _password;
     String _name;
     String _username;
-
-    InputField emailInput =
-        InputField('Email Address', Icons.mail, (String input) {
-      _email = input;
-    });
-    InputField nameInput = InputField('Name', Icons.person, (String input) {
-      _name = input;
-    });
-    InputField usernameInput =
-        InputField('Username', Icons.done, (String input) {
-      _username = input;
-    });
-    InputField passwordInput =
-        InputField('Password', Icons.lock, (String input) {
-      _password = input;
-    }, true);
 
     return ChangeNotifierProvider(
       create: (_) => RegisterModel(
@@ -59,20 +44,47 @@ class RegisterPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         loginPageHeader('Register'),
-                        SizedBox(height: 60),
-                        emailInput,
+                        SizedBox(
+                          height: 60,
+                        ),
+                        InputField(
+                          'Email Address',
+                          Icons.mail,
+                          (String input) {
+                            _email = input;
+                          },
+                        ),
                         SizedBox(
                           height: 30.0,
                         ),
-                        nameInput,
+                        InputField(
+                          'Name',
+                          Icons.person,
+                          (String input) {
+                            _name = input;
+                          },
+                        ),
                         SizedBox(
                           height: 30.0,
                         ),
-                        usernameInput,
+                        InputField(
+                          'Username',
+                          Icons.done,
+                          (String input) {
+                            _username = input;
+                          },
+                        ),
                         SizedBox(
                           height: 30.0,
                         ),
-                        passwordInput,
+                        InputField(
+                          'Password',
+                          Icons.lock,
+                          (String input) {
+                            _password = input;
+                          },
+                          true,
+                        ),
                         SizedBox(
                           height: 50.0,
                         ),
@@ -82,11 +94,10 @@ class RegisterPage extends StatelessWidget {
                             bool success =
                                 await model.register(_email, _password);
                             if (success) {
-                              Navigator.pushNamed(
-                                  context, RegisterPage.pageRoute);
+                              Navigator.pushNamed(context, RootPage.pageRoute);
                             }
                           },
-                        )
+                        ),
                       ],
                     ),
             ),

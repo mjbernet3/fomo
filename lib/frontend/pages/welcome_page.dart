@@ -1,45 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/components/gradient_button.dart';
+import 'package:project_fomo/frontend/pages/login_page.dart';
+import 'package:project_fomo/frontend/pages/register_page.dart';
+import 'package:project_fomo/style.dart';
 
-//TODO: Recreate welcome page UI
 class WelcomePage extends StatelessWidget {
   static const String pageRoute = '/welcome';
+
+  static const TextStyle subTextStyle = TextStyle(
+    fontFamily: AppFontFamily.family,
+    fontSize: AppFontSize.size16,
+    color: AppTextColor.mediumEmphasis,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'F O M O',
-              style: TextStyle(
-                fontSize: 50.0,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "lib/frontend/assets/images/welcome-background.jpeg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 50, right: 15, left: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
+                    new Image.asset(
+                      "lib/frontend/assets/images/MusicIcon.png",
+                      height: 120,
+                      width: 120,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'FOMO',
+                      style: TextStyle(
+                        fontFamily: AppFontFamily.family,
+                        fontWeight: AppFontWeight.bold,
+                        fontSize: 64,
+                      ),
+                    ),
+                    SizedBox(height: 75),
+                    Text(
+                      'Bringing Atlanta together',
+                      style: subTextStyle,
+                    ),
+                    Text(
+                      'through NOISE',
+                      style: subTextStyle,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 40.0,
-            ),
-            RaisedButton(
-              color: Color(0xCF40E0D0),
-              onPressed: () {
-                Navigator.pushNamed(context, '/register');
-              },
-              child: Text(
-                'Register',
+              SizedBox(height: 50),
+              GradientButton(
+                buttonText: 'Log In',
+                buttonPressed: () {
+                  Navigator.pushNamed(context, LoginPage.pageRoute);
+                },
               ),
-            ),
-            RaisedButton(
-              color: Color(0xCF40E0D0),
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
-              child: Text(
-                'Login',
+              GradientButton(
+                buttonText: 'Register',
+                buttonPressed: () {
+                  Navigator.pushNamed(context, RegisterPage.pageRoute);
+                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

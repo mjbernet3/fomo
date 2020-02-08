@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/pages/view_all_page.dart';
 
-//TODO: Recreate discover page UI
-class DiscoverPage extends StatelessWidget {
-  static const String pageRoute = '/discover';
+class ViewAllPage extends StatelessWidget {
+  static const String pageRoute = '/view-all';
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +10,17 @@ class DiscoverPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Discover'),
+            Text('View All'),
             SizedBox(
               height: 10.0,
             ),
             RaisedButton(
               color: Color(0xCF40E0D0),
               onPressed: () {
-                Navigator.pushNamed(context, ViewAllPage.pageRoute);
+                Navigator.pop(context);
               },
               child: Text(
-                'View all',
+                'Go back',
               ),
             ),
           ],

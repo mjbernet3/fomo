@@ -1,5 +1,5 @@
 import 'package:project_fomo/backend/models/user.dart';
-import 'package:project_fomo/backend/services/AuthService.dart';
+import 'package:project_fomo/backend/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

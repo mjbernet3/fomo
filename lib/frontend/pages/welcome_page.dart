@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/components/GradientButton.dart';
+import 'package:project_fomo/frontend/components/gradient_button.dart';
 
-//TODO: Recreate welcome page UI
 class WelcomePage extends StatelessWidget {
+  static const String pageRoute = '/welcome';
+
   final TextStyle titleStyle = TextStyle(
     fontFamily: 'Raleway',
     fontWeight: FontWeight.bold,

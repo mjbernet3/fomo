@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/frontend/components/gradient_button.dart';
+import 'package:project_fomo/frontend/pages/login_page.dart';
+import 'package:project_fomo/frontend/pages/register_page.dart';
+import 'package:project_fomo/style.dart';
 
 class WelcomePage extends StatelessWidget {
   static const String pageRoute = '/welcome';
 
-  final TextStyle titleStyle = TextStyle(
-    fontFamily: 'Raleway',
-    fontWeight: FontWeight.bold,
-    fontSize: 64,
+  static const TextStyle subTextStyle = TextStyle(
+    fontFamily: AppFontFamily.family,
+    fontSize: AppFontSize.size16,
+    color: AppTextColor.mediumEmphasis,
   );
-
-  final TextStyle subTextStyle =
-      TextStyle(fontFamily: 'Raleway', fontSize: 16, color: Color(0xFF939393));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                    "lib/frontend/assets/images/welcome-background.jpeg"),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+            image: AssetImage(
+                "lib/frontend/assets/images/welcome-background.jpeg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Padding(
-            padding: EdgeInsets.only(bottom: 50, right: 15, left: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Column(children: <Widget>[
+          padding: EdgeInsets.only(bottom: 50, right: 15, left: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: <Widget>[
                     new Image.asset(
                       "lib/frontend/assets/images/MusicIcon.png",
                       height: 120,
@@ -39,30 +42,40 @@ class WelcomePage extends StatelessWidget {
                     SizedBox(height: 20),
                     Text(
                       'FOMO',
-                      style: titleStyle,
+                      style: TextStyle(
+                        fontFamily: AppFontFamily.family,
+                        fontWeight: AppFontWeight.bold,
+                        fontSize: 64,
+                      ),
                     ),
                     SizedBox(height: 75),
-                    Text('Bringing Atlanta together', style: subTextStyle),
+                    Text(
+                      'Bringing Atlanta together',
+                      style: subTextStyle,
+                    ),
                     Text(
                       'through NOISE',
                       style: subTextStyle,
-                    )
-                  ]),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 50),
-                GradientButton(
-                  buttonText: 'Log In',
-                  buttonPressed: () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                ),
-                GradientButton(
-                    buttonText: 'Register',
-                    buttonPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    }),
-              ],
-            )),
+              ),
+              SizedBox(height: 50),
+              GradientButton(
+                buttonText: 'Log In',
+                buttonPressed: () {
+                  Navigator.pushNamed(context, LoginPage.pageRoute);
+                },
+              ),
+              GradientButton(
+                buttonText: 'Register',
+                buttonPressed: () {
+                  Navigator.pushNamed(context, RegisterPage.pageRoute);
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

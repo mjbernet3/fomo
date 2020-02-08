@@ -22,5 +22,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - lib/frontend/assets/images/welcome-background.jpeg
-    - lib/frontend/assets/images/MusicIcon.png
+    - lib/assets/images/
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: lib/assets/fonts/Raleway-Bold.ttf
+        - asset: lib/assets/fonts/Raleway-Medium.ttf
+        - asset: lib/assets/fonts/Raleway-Regular.ttf
+        - asset: lib/assets/fonts/Raleway-SemiBold.ttf

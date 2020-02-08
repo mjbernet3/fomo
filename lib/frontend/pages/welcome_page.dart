@@ -19,8 +19,7 @@ class WelcomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                "lib/frontend/assets/images/welcome-background.jpeg"),
+            image: AssetImage("lib/assets/images/welcome-background.jpeg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -35,7 +34,7 @@ class WelcomePage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     new Image.asset(
-                      "lib/frontend/assets/images/MusicIcon.png",
+                      "lib/assets/images/MusicIcon.png",
                       height: 120,
                       width: 120,
                     ),

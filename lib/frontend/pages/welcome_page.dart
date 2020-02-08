@@ -33,7 +33,7 @@ class WelcomePage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Column(
                   children: <Widget>[
-                    new Image.asset(
+                    Image.asset(
                       "lib/assets/images/MusicIcon.png",
                       height: 120,
                       width: 120,

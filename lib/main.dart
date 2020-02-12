@@ -7,6 +7,12 @@ import 'package:project_fomo/frontend/pages/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'app_container.dart';
 
+
+/*
+
+I hope this fixes my git
+
+ */
 void main() => runApp(AppName());
 
 class AppName extends StatelessWidget {

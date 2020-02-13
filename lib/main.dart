@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/backend/models/user.dart';
-import 'package:project_fomo/frontend/pages/discover_page.dart';
-import 'package:project_fomo/frontend/pages/welcome_page.dart';
+import 'package:project_fomo/frontend/pages/forgot_pass_page.dart';
 import 'package:project_fomo/frontend/pages/login_page.dart';
 import 'package:project_fomo/frontend/pages/register_page.dart';
+import 'package:project_fomo/frontend/pages/root_page.dart';
+import 'package:project_fomo/frontend/pages/unknown_page.dart';
+import 'package:project_fomo/frontend/pages/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'app_container.dart';
 
@@ -15,26 +16,32 @@ class AppName extends StatelessWidget {
     return MultiProvider(
       providers: AppContainer().providers,
       child: MaterialApp(
-        home: InitialPageSelector(),
-        theme: ThemeData(
-          canvasColor: Color(0xFF121212)
+        initialRoute: WelcomePage.pageRoute,
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Color(0xFF121212),
         ),
-        routes: {
-          '/welcome': (context) => WelcomePage(),
-          '/register': (context) => RegisterPage(),
-          '/login': (context) => LoginPage(),
-          '/discover': (context) => DiscoverPage(),
+        onGenerateRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (BuildContext context) {
+              switch (settings.name) {
+                case WelcomePage.pageRoute:
+                  return WelcomePage();
+                case RegisterPage.pageRoute:
+                  return RegisterPage();
+                case LoginPage.pageRoute:
+                  return LoginPage();
+                case ForgotPassPage.pageRoute:
+                  return ForgotPassPage();
+                case RootPage.pageRoute:
+                  return RootPage();
+                default:
+                  return UnknownPage();
+              }
+            },
+          );
         },
       ),
     );
-  }
-}
-
-class InitialPageSelector extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-
-    return user != null ? DiscoverPage() : WelcomePage();
   }
 }

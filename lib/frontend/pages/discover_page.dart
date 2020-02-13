@@ -29,12 +29,14 @@ final List<Event> events = [
 ];
 
 class DiscoverPage extends StatelessWidget {
+  static const String pageRoute = '/discover';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: FomoColor.primary,
-        body: SafeArea(
-            child: ListView(
+      backgroundColor: FomoColor.primary,
+      body: SafeArea(
+        child: ListView(
           children: <Widget>[
             FomoPageHeader("Discover"),
             EventCarouselSlider("Featured", events),
@@ -44,6 +46,8 @@ class DiscoverPage extends StatelessWidget {
             FomoSeparator.horizontalSeparator[3],
             EventScroller("Popular", events),
           ],
-        )));
+        ),
+      ),
+    );
   }
 }

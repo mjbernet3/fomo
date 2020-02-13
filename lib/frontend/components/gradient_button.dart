@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/style.dart';
 
 class GradientButton extends StatelessWidget {
-  final String buttonText;
+  final Text buttonText;
   final Function buttonPressed;
 
   GradientButton({@required this.buttonText, @required this.buttonPressed});
@@ -21,15 +21,7 @@ class GradientButton extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(50),
                 ),
-                child: Text(
-                  buttonText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppTextColor.highEmphasis,
-                    fontFamily: AppFontFamily.family,
-                    fontSize: AppFontSize.size22,
-                  ),
-                ),
+                child: buttonText,
               ),
               minWidth: 88.0,
               height: MediaQuery.of(context).size.width * 0.12),

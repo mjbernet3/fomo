@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/frontend/pages/root_page.dart';
+import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/register_model.dart';
 import 'package:project_fomo/frontend/components/gradient_button.dart';
@@ -89,7 +90,13 @@ class RegisterPage extends StatelessWidget {
                           height: 50.0,
                         ),
                         GradientButton(
-                          buttonText: 'Register',
+                          buttonText: Text(
+                            'Register',
+                            style: TextStyle(
+                              fontSize: AppFontSize.size22,
+                              fontFamily: AppFontFamily.family,
+                            ),
+                          ),
                           buttonPressed: () async {
                             bool success =
                                 await model.register(_email, _password);

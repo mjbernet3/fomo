@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/pages/forgot_pass_page.dart';
 import 'package:project_fomo/frontend/pages/login_page.dart';
 import 'package:project_fomo/frontend/pages/register_page.dart';
 import 'package:project_fomo/frontend/pages/root_page.dart';
@@ -30,6 +31,8 @@ class AppName extends StatelessWidget {
                   return RegisterPage();
                 case LoginPage.pageRoute:
                   return LoginPage();
+                case ForgotPassPage.pageRoute:
+                  return ForgotPassPage();
                 case RootPage.pageRoute:
                   return RootPage();
                 default:

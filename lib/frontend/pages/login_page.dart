@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/pages/forgot_pass_page.dart';
 import 'package:project_fomo/frontend/pages/root_page.dart';
+import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
 import 'package:project_fomo/frontend/components/input_field.dart';
 import 'package:project_fomo/frontend/components/gradient_button.dart';
-import 'package:project_fomo/frontend/components/login_page_header.dart';
+import 'package:project_fomo/frontend/components/auth_page_header.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
@@ -44,7 +46,7 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        loginPageHeader('Log In'),
+                        AuthPageHeader('Log In'),
                         SizedBox(height: 60),
                         InputField(
                           'Email or Username',
@@ -66,13 +68,33 @@ class LoginPage extends StatelessWidget {
                           height: 50,
                         ),
                         GradientButton(
-                          buttonText: 'Log In',
+                          buttonText: Text(
+                            'Log In',
+                            style: TextStyle(
+                              fontSize: AppFontSize.size22,
+                              fontFamily: AppFontFamily.family,
+                            ),
+                          ),
                           buttonPressed: () async {
                             bool success = await model.login(_email, _password);
                             if (success) {
                               Navigator.pushNamed(context, RootPage.pageRoute);
                             }
                           },
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, ForgotPassPage.pageRoute);
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: AppTextColor.mediumEmphasis,
+                              fontFamily: AppFontFamily.family,
+                              fontSize: AppFontSize.size14,
+                            ),
+                          ),
                         ),
                       ],
                     ),

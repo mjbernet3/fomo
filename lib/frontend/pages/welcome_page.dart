@@ -61,13 +61,25 @@ class WelcomePage extends StatelessWidget {
               ),
               SizedBox(height: 50),
               GradientButton(
-                buttonText: 'Log In',
+                buttonText: Text(
+                  'Log In',
+                  style: TextStyle(
+                    fontSize: AppFontSize.size22,
+                    fontFamily: AppFontFamily.family,
+                  ),
+                ),
                 buttonPressed: () {
                   Navigator.pushNamed(context, LoginPage.pageRoute);
                 },
               ),
               GradientButton(
-                buttonText: 'Register',
+                buttonText: Text(
+                  'Register',
+                  style: TextStyle(
+                    fontSize: AppFontSize.size22,
+                    fontFamily: AppFontFamily.family,
+                  ),
+                ),
                 buttonPressed: () {
                   Navigator.pushNamed(context, RegisterPage.pageRoute);
                 },

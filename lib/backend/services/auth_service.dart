@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project_fomo/backend/models/user.dart';
 
 class AuthService {
-  final _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Stream<User> get signedInUser {
     return _auth.onAuthStateChanged.map((FirebaseUser firebaseUser) {
@@ -41,6 +41,14 @@ class AuthService {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (error) {
+      print(error.toString());
     }
   }
 

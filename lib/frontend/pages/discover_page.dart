@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/frontend/pages/view_all_page.dart';
 
-//TODO: Recreate discover page UI
 class DiscoverPage extends StatelessWidget {
   static const String pageRoute = '/discover';
 

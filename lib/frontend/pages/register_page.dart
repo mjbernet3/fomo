@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/register_model.dart';
 import 'package:project_fomo/frontend/components/gradient_button.dart';
 import 'package:project_fomo/frontend/components/input_field.dart';
-import 'package:project_fomo/frontend/components/login_page_header.dart';
+import 'package:project_fomo/frontend/components/auth_page_header.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        loginPageHeader('Register'),
+                        AuthPageHeader('Register'),
                         SizedBox(
                           height: 60,
                         ),

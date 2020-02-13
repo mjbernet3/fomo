@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
 import 'package:project_fomo/frontend/components/input_field.dart';
 import 'package:project_fomo/frontend/components/gradient_button.dart';
-import 'package:project_fomo/frontend/components/login_page_header.dart';
+import 'package:project_fomo/frontend/components/auth_page_header.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        loginPageHeader('Log In'),
+                        AuthPageHeader('Log In'),
                         SizedBox(height: 60),
                         InputField(
                           'Email or Username',

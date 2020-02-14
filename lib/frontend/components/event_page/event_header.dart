@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/components/gradient_button.dart';
+import 'package:project_fomo/frontend/components/shared/gradient_button.dart';
 import 'package:project_fomo/style.dart';
 
 class EventHeader extends StatelessWidget {

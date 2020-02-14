@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
-import 'package:project_fomo/frontend/components/gradient_button.dart';
-import 'package:project_fomo/frontend/components/input_field.dart';
+import 'package:project_fomo/frontend/components/shared/gradient_button.dart';
+import 'package:project_fomo/frontend/components/shared/input_field.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
 

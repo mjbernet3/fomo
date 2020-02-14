@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/components/shared/auth_page_header.dart';
+import 'package:project_fomo/frontend/components/shared/loading_indicator.dart';
 import 'package:project_fomo/frontend/pages/forgot_pass_page.dart';
 import 'package:project_fomo/frontend/pages/root_page.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/backend/state_models/login_model.dart';
-import 'package:project_fomo/frontend/components/input_field.dart';
-import 'package:project_fomo/frontend/components/gradient_button.dart';
-import 'package:project_fomo/frontend/components/auth_page_header.dart';
+import 'package:project_fomo/frontend/components/shared/input_field.dart';
+import 'package:project_fomo/frontend/components/shared/gradient_button.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,15 +35,13 @@ class LoginPage extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding:
-                  EdgeInsets.only(bottom: 40, left: 15, right: 15, top: 30),
-              child: model.isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Column(
+          body: model.isLoading
+              ? LoadingIndicator()
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        bottom: 40, left: 15, right: 15, top: 30),
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
@@ -98,8 +97,8 @@ class LoginPage extends StatelessWidget {
                         ),
                       ],
                     ),
-            ),
-          ),
+                  ),
+                ),
         ),
       ),
     );

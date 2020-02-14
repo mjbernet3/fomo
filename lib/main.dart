@@ -8,6 +8,7 @@ import 'package:project_fomo/frontend/pages/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'app_container.dart';
 
+
 void main() => runApp(AppName());
 
 class AppName extends StatelessWidget {

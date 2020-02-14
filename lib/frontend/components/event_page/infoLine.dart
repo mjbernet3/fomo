@@ -9,32 +9,32 @@ class InfoLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Padding(
-          padding: EdgeInsets.all(15),
-          child: Row(
-              children: <Widget>[
-                Text(
-                    type,
-                    style: TextStyle(
-                        fontFamily: AppFontFamily.family,
-                        color: AppTextColor.mediumEmphasis,
-                        fontSize: AppFontSize.size18
-                    )
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                    content,
-                    style: TextStyle(
-                        fontWeight: AppFontWeight.bold,
-                        fontFamily: AppFontFamily.family,
-                        fontSize: AppFontSize.size18
-                    )
-                )
-              ]
-          )
-      );
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: Row(
+        children: <Widget>[
+          Text(
+            type,
+            style: TextStyle(
+              fontFamily: AppFontFamily.family,
+              color: AppTextColor.mediumEmphasis,
+              fontSize: AppFontSize.size18,
+              fontWeight: AppFontWeight.normal,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            content,
+            style: TextStyle(
+              fontWeight: AppFontWeight.normal,
+              fontFamily: AppFontFamily.family,
+              fontSize: AppFontSize.size18,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

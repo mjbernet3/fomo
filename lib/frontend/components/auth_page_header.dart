@@ -20,6 +20,7 @@ class AuthPageHeader extends StatelessWidget {
                 child: Text(
                   title,
                   style: TextStyle(
+                    fontWeight: AppFontWeight.bold,
                     color: AppTextColor.title,
                     fontSize: AppFontSize.size36,
                     fontFamily: AppFontFamily.family,

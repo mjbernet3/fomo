@@ -8,9 +8,13 @@ class OutputLink extends StatelessWidget {
   final IconData urlIcon;
   final IconData displayIcon;
 
-  OutputLink({@required this.title, @required this.url, @required this.urlIcon, @required this.displayIcon});
+  OutputLink(
+      {@required this.title,
+      @required this.url,
+      @required this.urlIcon,
+      @required this.displayIcon});
 
-  _launchURL  (String url) async {
+  _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -21,57 +25,57 @@ class OutputLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(color: Color(0xFF343434)))
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Color(0xFF343434),
+          ),
         ),
-        child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Row(
-
-              children: <Widget>[
-                Expanded(
-                    flex: 1,
-                    child:Icon(
-                        displayIcon,
-                        color: Colors.white
-                    )
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(15),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Icon(
+                displayIcon,
+                color: AppColor.dp24,
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              flex: 6,
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontFamily: AppFontFamily.family,
+                  color: AppTextColor.highEmphasis,
+                  fontSize: AppFontSize.size18,
+                  fontWeight: AppFontWeight.normal,
                 ),
-                SizedBox(
-                  width: 8,
+              ),
+            ),
+            Expanded(
+              flex: 6,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: Icon(
+                    urlIcon,
+                    color: AppColor.dp24,
+                  ),
+                  onPressed: () {
+                    _launchURL(url);
+                  },
                 ),
-                Expanded(
-                    flex: 6,
-                    child: Text(
-                        title,
-                        style: TextStyle(
-                            fontFamily: AppFontFamily.family,
-                            color: AppTextColor.highEmphasis,
-                            fontSize: AppFontSize.size18
-                        )
-                    )
-                ),
-
-                Expanded(
-                    flex: 6,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        icon: Icon(
-                            urlIcon,
-                            color: Colors.white
-                        )
-                        ,
-                        onPressed: () {
-                          _launchURL(url);
-                        },
-                      ),
-                    )
-                )
-              ],
-            )
-        )
+              ),
+            ),
+          ],
+        ),
+      ),
     );
-
   }
 }

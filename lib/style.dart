@@ -40,8 +40,8 @@ class AppFontSize {
 }
 
 class AppFontWeight {
-  static const FontWeight bold = FontWeight.w600;
-  static const FontWeight normal = FontWeight.w400;
+  static const FontWeight bold = FontWeight.w800;
+  static const FontWeight normal = FontWeight.w600;
 }
 
 class AppFontFamily {

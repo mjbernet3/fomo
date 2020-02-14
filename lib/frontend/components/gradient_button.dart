@@ -31,7 +31,7 @@ class GradientButton extends StatelessWidget {
                   ),
                 ),
               ),
-              minWidth: 88.0,
+              minWidth: 150.0,
               height: MediaQuery.of(context).size.width * 0.12),
           decoration: BoxDecoration(
             color: AppColor.background,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/frontend/pages/view_all_page.dart';
+import 'package:project_fomo/frontend/pages/event_page.dart';
 
 //TODO: Recreate discover page UI
 class DiscoverPage extends StatelessWidget {
@@ -21,8 +22,18 @@ class DiscoverPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, ViewAllPage.pageRoute);
               },
+
               child: Text(
                 'View all',
+              ),
+            ),
+            RaisedButton(
+              color: Color(0xCF40E0D0),
+              onPressed: () {
+                Navigator.pushNamed(context, EventPage.pageRoute);
+              },
+              child: Text(
+                'Event Page',
               ),
             ),
           ],

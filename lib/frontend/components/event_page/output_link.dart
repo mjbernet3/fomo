@@ -1,26 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/style.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OutputLink extends StatelessWidget {
   final String url;
   final String title;
-  final IconData urlIcon;
   final IconData displayIcon;
 
   OutputLink(
-      {@required this.title,
-      @required this.url,
-      @required this.urlIcon,
-      @required this.displayIcon});
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch \$url';
-    }
-  }
+      {@required this.title, @required this.url, @required this.displayIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +51,11 @@ class OutputLink extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   icon: Icon(
-                    urlIcon,
+                    Icons.open_in_new,
                     color: AppColor.dp24,
                   ),
                   onPressed: () {
-                    _launchURL(url);
+                    print('Launch URL');
                   },
                 ),
               ),

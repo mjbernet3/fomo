@@ -16,17 +16,16 @@ class AppColor {
   static const Color imageOverlay = Color(0x73121212);
 
   static const LinearGradient gradient = LinearGradient(
-    begin: Alignment.bottomLeft,
-    end: Alignment.topRight,
+    transform: GradientRotation(-1.0),
     colors: [
       Color(0xFFFF6C1A),
       Color(0xFFF01844),
       Color(0xFF7E0BC9),
     ],
     stops: [
-      0.0,
-      .528,
-      1.0,
+      0.2,
+      0.5,
+      0.8,
     ],
   );
 }

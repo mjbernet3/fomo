@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/user.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
+import 'package:project_fomo/backend/services/event_service.dart';
 import 'package:provider/provider.dart';
 
 class AppBuilder extends StatelessWidget {
@@ -22,6 +23,9 @@ class AppBuilder extends StatelessWidget {
           return MultiProvider(
             providers: [
               Provider<User>.value(value: user),
+              Provider<EventService>(
+                create: (context) => EventService(user.uid),
+              )
             ],
             child: builder(context, snapshot),
           );

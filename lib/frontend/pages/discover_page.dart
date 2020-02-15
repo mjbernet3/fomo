@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/pages/view_all_page.dart';
 import 'package:project_fomo/frontend/pages/event_page.dart';
+import 'package:project_fomo/frontend/pages/view_all_page.dart';
 
 class DiscoverPage extends StatelessWidget {
   static const String pageRoute = '/discover';
@@ -19,9 +19,11 @@ class DiscoverPage extends StatelessWidget {
             RaisedButton(
               color: Color(0xCF40E0D0),
               onPressed: () {
-                Navigator.pushNamed(context, ViewAllPage.pageRoute);
+                Navigator.pushNamed(
+                  context,
+                  ViewAllPage.pageRoute,
+                );
               },
-
               child: Text(
                 'View all',
               ),
@@ -29,7 +31,10 @@ class DiscoverPage extends StatelessWidget {
             RaisedButton(
               color: Color(0xCF40E0D0),
               onPressed: () {
-                Navigator.pushNamed(context, EventPage.pageRoute);
+                Navigator.pushNamed(
+                  context,
+                  EventPage.pageRoute,
+                );
               },
               child: Text(
                 'Event Page',

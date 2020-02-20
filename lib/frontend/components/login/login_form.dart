@@ -22,7 +22,6 @@ class _LoginFormState extends State<LoginForm> {
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             autocorrect: false,
-            enableInteractiveSelection: false,
             decoration: InputDecoration(
               icon: Icon(Icons.email),
               labelText: 'Enter your email',
@@ -40,7 +39,7 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: true,
             autocorrect: false,
             decoration: InputDecoration(
-              icon: Icon(Icons.email),
+              icon: Icon(Icons.lock),
               labelText: 'Enter your password',
             ),
             validator: (value) {

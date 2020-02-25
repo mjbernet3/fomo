@@ -44,7 +44,7 @@ class DiscoverPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
           child: ListView(
             children: <Widget>[
               PageHeader("Discover"),

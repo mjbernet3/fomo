@@ -10,7 +10,7 @@ class ListEventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120.0,
+      height: 100.0,
       padding: EdgeInsets.fromLTRB(15.0, 7.5, 15.0, 7.5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

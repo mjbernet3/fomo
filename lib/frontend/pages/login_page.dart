@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
-import 'package:project_fomo/frontend/components/shared/auth_page_header.dart';
+import 'package:project_fomo/frontend/components/shared/page_header.dart';
 import 'package:project_fomo/frontend/components/shared/loading_indicator.dart';
 import 'package:project_fomo/frontend/components/state_widget.dart';
 import 'package:project_fomo/frontend/pages/forgot_pass_page.dart';
@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    AuthPageHeader('Log In'),
+                    PageHeader('Log In'),
                     SizedBox(height: 60),
                     InputField(
                       'Email or Username',

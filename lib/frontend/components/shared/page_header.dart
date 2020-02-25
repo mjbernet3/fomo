@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/style.dart';
 
-class AuthPageHeader extends StatelessWidget {
+class PageHeader extends StatelessWidget {
   final String title;
 
-  AuthPageHeader(this.title);
+  PageHeader(this.title);
 
   @override
   Widget build(BuildContext context) {

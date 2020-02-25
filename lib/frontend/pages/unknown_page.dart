@@ -6,7 +6,7 @@ class UnknownPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          'Incorrect route.',
+          'You shouldn\'t be here',
           style: TextStyle(
             fontSize: 40.0,
           ),

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/event.dart';
 import 'package:project_fomo/backend/state_models/carousel_model.dart';
+import 'package:project_fomo/frontend/components/discover/carousel_ellipse.dart';
 import 'package:project_fomo/frontend/components/discover/event_card.dart';
 import 'package:project_fomo/frontend/components/state_widget.dart';
 import 'package:project_fomo/style.dart';
@@ -37,7 +38,7 @@ class FeaturedCarousel extends StatelessWidget {
           builder: (context, model, child) {
             List<Widget> ellipses = [];
             for (var i = 0; i < events.length; i++) {
-              ellipses.add(ellipse(i == model.index));
+              ellipses.add(CarouselEllipse(activated: (i == model.index)));
             }
             return Column(
               children: <Widget>[
@@ -49,7 +50,7 @@ class FeaturedCarousel extends StatelessWidget {
                       .map<Widget>(
                         (event) => Padding(
                           padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                          child: SmallEventCard.fromEvent(event),
+                          child: SmallEventCard(event: event),
                         ),
                       )
                       .toList(),
@@ -71,18 +72,4 @@ class FeaturedCarousel extends StatelessWidget {
       ],
     );
   }
-}
-
-Widget ellipse(bool activated) {
-  return SizedBox(
-    width: 12,
-    height: 12,
-    child: DecoratedBox(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: activated ? null : Color(0x0FFFFFFF),
-        gradient: activated ? AppColor.gradient : null,
-      ),
-    ),
-  );
 }

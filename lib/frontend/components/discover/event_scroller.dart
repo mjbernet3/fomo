@@ -73,8 +73,8 @@ class EventScroller extends StatelessWidget {
             ),
             separatorBuilder: (context, index) => SizedBox(
               width: 220,
-              child: SmallEventCard.fromEvent(
-                events[index],
+              child: SmallEventCard(
+                event: events[index],
               ),
             ),
           ),

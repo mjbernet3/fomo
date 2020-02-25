@@ -3,7 +3,7 @@ import 'package:project_fomo/backend/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
-  static const String pageRoute = '/profile';
+  static const String pageRoute = '/';
 
   @override
   Widget build(BuildContext context) {

@@ -37,7 +37,7 @@ final List<Event> events = [
 ];
 
 class DiscoverPage extends StatelessWidget {
-  static const String pageRoute = '/discover';
+  static const String pageRoute = '/';
 
   @override
   Widget build(BuildContext context) {

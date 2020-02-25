@@ -1,37 +1,34 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/event.dart';
-import 'package:project_fomo/frontend/components/event_card.dart';
-import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
-import 'package:project_fomo/frontend/components/style/fomo_spacing.dart';
-import 'package:project_fomo/frontend/components/style/fomo_text.dart';
+import 'package:project_fomo/frontend/components/discover/event_card.dart';
+import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
 
-class EventCarouselSlider extends StatelessWidget {
-  final String title;
+class FeaturedCarousel extends StatelessWidget {
   final List<Event> events;
 
-  EventCarouselSlider(this.title, this.events);
+  FeaturedCarousel(this.events);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        sliderHeader(title),
+        sliderHeader(),
         sliderProvider(events),
       ],
     );
   }
 }
 
-Widget sliderHeader(String title) {
+Widget sliderHeader() {
   return Padding(
-    padding: FomoEdgeInsets.all[3],
+    padding: EdgeInsets.all(15.0),
     child: Padding(
-      padding: FomoEdgeInsets.left[3],
+      padding: EdgeInsets.only(left: 3.0),
       child: Align(
           alignment: Alignment.centerLeft,
-          child: Text(title, style: FomoTextStyle.largeTitle)),
+          child: Text("Featured", style: TextStyle())),
     ),
   );
 }
@@ -67,8 +64,7 @@ Widget slider(List<Event> events) {
       items: events
           .map<Widget>(
             (event) => Padding(
-              padding: EdgeInsets.only(
-                  left: FomoSpacer.unit[3], right: FomoSpacer.unit[3]),
+              padding: EdgeInsets.only(left: 30.0, right: 30.0),
               child: SmallEventCard.fromEvent(event),
             ),
           )
@@ -106,7 +102,7 @@ Widget ellipse(bool activated) {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: activated ? null : Color(0x0FFFFFFF),
-        gradient: activated ? FomoGradient.main : null,
+        gradient: activated ? AppColor.gradient : null,
       ),
     ),
   );

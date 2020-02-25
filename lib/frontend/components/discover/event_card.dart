@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_fomo/backend/models/event.dart';
-import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
-import 'package:project_fomo/frontend/components/style/fomo_spacing.dart';
-import 'package:project_fomo/frontend/components/style/fomo_text.dart';
+import 'package:project_fomo/style.dart';
 
 class SmallEventCard extends StatelessWidget {
   final Event event;
@@ -17,7 +15,7 @@ class SmallEventCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: FomoColor.surface,
+          color: AppColor.dp3,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,25 +40,21 @@ Widget cardImage(String imageUrl) {
 
 Widget cardTray(String title, String venue, DateTime date) {
   return Padding(
-    padding: FomoEdgeInsets.left[2],
+    padding: EdgeInsets.all(10.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        FomoSeparator.horizontalSeparator[2],
         cardTitle(
           title,
         ),
-        FomoSeparator.horizontalSeparator[0],
         Text(
           venue,
-          style: FomoTextStyle.smallSubtitle,
+          style: TextStyle(),
         ),
-        FomoSeparator.horizontalSeparator[0],
         Text(
           getDateString(date),
-          style: FomoTextStyle.smallSubtitle,
+          style: TextStyle(),
         ),
-        FomoSeparator.horizontalSeparator[2],
       ],
     ),
   );
@@ -74,17 +68,17 @@ Widget cardTitle(String title) {
         children: <Widget>[
           Text(
             "",
-            style: FomoTextStyle.smallTitle,
+            style: TextStyle(),
           ),
           Text(
             "",
-            style: FomoTextStyle.smallTitle,
+            style: TextStyle(),
           ),
         ],
       ),
       Text(
         title,
-        style: FomoTextStyle.smallTitle,
+        style: TextStyle(),
         maxLines: 2,
       ),
     ],

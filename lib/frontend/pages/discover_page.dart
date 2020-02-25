@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/event.dart';
-import 'package:project_fomo/frontend/components/event_scroller.dart';
-import 'package:project_fomo/frontend/components/event_slider.dart';
-import 'package:project_fomo/frontend/components/headers.dart';
-import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
-import 'package:project_fomo/frontend/components/style/fomo_spacing.dart';
+import 'package:project_fomo/frontend/components/discover/event_scroller.dart';
+import 'package:project_fomo/frontend/components/discover/featured_carousel.dart';
+import 'package:project_fomo/frontend/components/shared/page_header.dart';
 
 String url =
     'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6358/6358944_sd.jpg;maxHeight=640;maxWidth=550';
@@ -44,18 +42,18 @@ class DiscoverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FomoColor.primary,
       body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            FomoPageHeader("Discover"),
-            EventCarouselSlider("Featured", events),
-            EventScroller("Popular", events),
-            FomoSeparator.horizontalSeparator[3],
-            EventScroller("Popular", events),
-            FomoSeparator.horizontalSeparator[3],
-            EventScroller("Popular", events),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ListView(
+            children: <Widget>[
+              PageHeader("Discover"),
+              FeaturedCarousel(events),
+              EventScroller("Popular", events),
+              EventScroller("Upcoming", events),
+              EventScroller("Nearby", events),
+            ],
+          ),
         ),
       ),
     );

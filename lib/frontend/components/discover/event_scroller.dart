@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/models/event.dart';
-import 'package:project_fomo/frontend/components/event_card.dart';
-import 'package:project_fomo/frontend/components/style/fomo_colors.dart';
-import 'package:project_fomo/frontend/components/style/fomo_spacing.dart';
-import 'package:project_fomo/frontend/components/style/fomo_text.dart';
+import 'package:project_fomo/frontend/components/discover/event_card.dart';
+import 'package:project_fomo/style.dart';
 
 class EventScroller extends StatelessWidget {
   final String title;
@@ -24,15 +22,18 @@ class EventScroller extends StatelessWidget {
 
 Widget srollerHeader(String title) {
   return Padding(
-    padding: FomoEdgeInsets.all[3],
+    padding: EdgeInsets.all(10.0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[
         Padding(
-          padding: FomoEdgeInsets.left[3],
-          child: Text(title, style: FomoTextStyle.largeTitle),
+          padding: EdgeInsets.all(3.0),
+          child: Text(
+            title,
+            style: TextStyle(),
+          ),
         ),
         viewAllButton(),
       ],
@@ -45,11 +46,17 @@ Widget viewAllButton() {
     onTap: null,
     child: Row(
       children: <Widget>[
-        Text("View All", style: FomoTextStyle.smallSubtitle),
+        Text(
+          "View All",
+          style: TextStyle(),
+        ),
         Padding(
-          padding: FomoEdgeInsets.left[1],
-          child: Icon(Icons.arrow_forward_ios,
-              size: FomoFontSize.p2, color: FomoColor.onPrimaryVariant),
+          padding: EdgeInsets.only(left: 10.0),
+          child: Icon(
+            Icons.arrow_forward_ios,
+            size: AppFontSize.size16,
+            color: AppColor.dp12,
+          ),
         ),
       ],
     ),
@@ -62,7 +69,9 @@ Widget scroller(List<Event> events) {
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: events.length,
-      itemBuilder: (context, index) => FomoSeparator.verticalSeparator[3],
+      itemBuilder: (context, index) => SizedBox(
+        width: 15.0,
+      ),
       separatorBuilder: (context, index) =>
           SizedBox(width: 275, child: SmallEventCard.fromEvent(events[index])),
     ),

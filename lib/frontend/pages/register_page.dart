@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/components/shared/auth_page_header.dart';
+import 'package:project_fomo/frontend/components/shared/page_header.dart';
 import 'package:project_fomo/frontend/components/shared/loading_indicator.dart';
 import 'package:project_fomo/frontend/components/state_widget.dart';
 import 'package:project_fomo/frontend/pages/root_page.dart';
@@ -42,7 +42,7 @@ class RegisterPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    AuthPageHeader('Register'),
+                    PageHeader('Register'),
                     SizedBox(
                       height: 60,
                     ),

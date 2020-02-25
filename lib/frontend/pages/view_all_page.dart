@@ -26,7 +26,9 @@ class ViewAllPage extends StatelessWidget {
         ),
         bottom: PreferredSize(
           child: Container(
-            color: Colors.red,
+            decoration: BoxDecoration(
+              gradient: AppColor.gradient,
+            ),
             height: 2.0,
           ),
           preferredSize: Size.fromHeight(2.0),

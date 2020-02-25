@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/frontend/components/gradient_button.dart';
+import 'package:project_fomo/frontend/components/shared/gradient_button.dart';
 import 'package:project_fomo/frontend/pages/login_page.dart';
 import 'package:project_fomo/frontend/pages/register_page.dart';
 import 'package:project_fomo/style.dart';

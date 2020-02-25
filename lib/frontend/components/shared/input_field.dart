@@ -11,8 +11,8 @@ class InputField extends StatelessWidget {
 
   static const UnderlineInputBorder defaultLine = UnderlineInputBorder(
     borderSide: const BorderSide(
-      color: AppColor.dp8,
-      width: 2.5,
+      color: AppColor.dp24,
+      width: 2,
     ),
   );
 
@@ -28,6 +28,7 @@ class InputField extends StatelessWidget {
               color: AppTextColor.mediumEmphasis,
               fontSize: AppFontSize.size16,
               fontFamily: AppFontFamily.family,
+              fontWeight: AppFontWeight.normal,
             ),
           ),
         ),
@@ -49,7 +50,7 @@ class InputField extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.only(end: 0, top: 10),
                 child: Icon(
                   icon,
-                  size: 30,
+                  size: 25,
                   color: AppColor.dp24,
                 ),
               ),

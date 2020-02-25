@@ -23,7 +23,7 @@ class SmallEventCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             cardImage(event.imageUrl),
-            cardTray(event.title, event.venue, event.date),
+            cardTray(event.name, event.venueName, DateTime.now()),
           ],
         ),
       ),

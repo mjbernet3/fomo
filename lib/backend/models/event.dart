@@ -1,38 +1,49 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Event {
-  String _title;
-  String _venue;
-  DateTime _date;
-  String _imageUrl;
+  int id;
+  String address;
+  String date;
+  String name;
+  String imageUrl;
+  Map location;
+  String time;
+  String ticketUrl;
+  String venueName;
+  String description;
+  List usersGoing;
+  List usersInterested;
+  List genres;
 
-  Event({String title, String venue, DateTime date, String imageUrl}) {
-    this._title = title;
-    this._venue = venue;
-    this._date = date;
-    this._imageUrl = imageUrl;
-  }
+  Event({
+    this.id,
+    this.address,
+    this.date,
+    this.name,
+    this.imageUrl,
+    this.location,
+    this.time,
+    this.ticketUrl,
+    this.venueName,
+    this.description,
+    this.usersGoing,
+    this.usersInterested,
+    this.genres,
+  });
 
-  Event.fromDoc(DocumentSnapshot doc) {
-    this._title = doc.data['eventName'];
-    this._venue = doc.data['venueName'];
-    this._date = DateTime.parse(doc.data['date']);
-    this._imageUrl = doc.data['image'];
-  }
-
-  String get title {
-    return _title;
-  }
-
-  String get venue {
-    return _venue;
-  }
-
-  DateTime get date {
-    return _date;
-  }
-
-  String get imageUrl {
-    return _imageUrl;
+  factory Event.fromMap(Map<String, dynamic> event) {
+    return Event(
+      id: event['id'],
+      address: event['address'],
+      date: event['date'],
+      name: event['name'],
+      imageUrl: event['imageUrl'],
+      location: event['location'],
+      time: event['time'],
+      ticketUrl: event['ticketUrl'],
+      venueName: event['venueName'],
+      description: event['description'],
+      usersGoing: event['usersGoing'],
+      usersInterested: event['usersInterested'],
+      genres: event['genres'],
+    );
   }
 }

@@ -1,31 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/backend/models/event.dart';
 import 'package:project_fomo/frontend/components/event_page/event_header.dart';
 import 'package:project_fomo/frontend/components/event_page/info_line.dart';
 import 'package:project_fomo/frontend/components/event_page/output_link.dart';
 import 'package:project_fomo/style.dart';
 
-class EventPage extends StatelessWidget {
-  static const String pageRoute = '/event-page';
+Event myEvent = Event(
+    name: 'My Event 4',
+    venueName: 'PIKE',
+    description: "This event will be a lot of fun",
+    date: "Thurs, January 13th",
+    genres: ['Pop'],
+    ticketUrl: 'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
+    location: {'Latitude': '33.7573', 'Longitude': '-84.3963'},
+    imageUrl: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6358/6358944_sd.jpg;maxHeight=640;maxWidth=550');
 
-  //Placeholder data
-  static const String imageURL =
-      'https://s1.ticketm.net/dam/a/987/76ff7a29-6b21-4ac5-bdf3-d7268760e987_1206471_RETINA_LANDSCAPE_16_9.jpg';
-  static const String eventName = 'Harry Styles';
-  static const String description =
-      'Harry Styles announced a 2020 world tour, \‘Love On Tour,\' in support of his upcoming album Fine Line. The extensive run of shows begins in April in the UK and travels across Europe and North America before concluding in Mexico in October.';
-  static const String location = 'State Farm Arena';
-  static const String date = 'Wednesday, Jul 29 at 8:00 pm';
-  static const String genre = 'Pop';
-  static const String ticketURL =
-      'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316';
-  static var coordinates = {'Latitude': '33.7573', 'Longitude': '-84.3963'};
-  static const String locationURL =
-      'https://www.google.com/maps/search/?api=1&query=33.7573,-84.3963';
-  static const String appleURL = 'https://maps.apple.com/?q=33.7573,-84.3963';
-  //End placeholder data
+class EventPage extends StatelessWidget {
+
+  static const String pageRoute = '/event-page';
+  final Event event;
+
+  EventPage({@required this.event});
+
+//  checkEvent() async {
+//    print(event);
+//    print(event.name);
+//    print(event.venueName);
+//    print(event.description);
+//    print(event.date);
+//    print(event.genres);
+//    print(event.ticketUrl);
+//    print(event.location);
+//    print(event.imageUrl);
+//  }
+
 
   @override
   Widget build(BuildContext context) {
+
+
+//    checkEvent();
+
+//    final num latitude = event.location['Latitude'];
+//    final num longitude = event.location['Longitude'];
+//    final String appleUrl = 'https://maps.apple.com/?q=$latitude,$longitude';
+
+    final String appleUrl = 'https://maps.apple.com/?q=33.7573,-84.3963';
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -42,7 +63,7 @@ class EventPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            EventHeader(imageURL: imageURL, eventName: eventName),
+            EventHeader(imageURL: myEvent.imageUrl, eventName: myEvent.name),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -78,7 +99,7 @@ class EventPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(15),
                         child: Text(
-                          description,
+                          myEvent.description,
                           style: TextStyle(
                             fontFamily: AppFontFamily.family,
                             fontSize: AppFontSize.size18,
@@ -88,15 +109,15 @@ class EventPage extends StatelessWidget {
                       ),
                       InfoLine(
                         type: 'Location:',
-                        content: location,
+                        content: myEvent.venueName,
                       ),
                       InfoLine(
                         type: 'Time:',
-                        content: date,
+                        content: myEvent.date,
                       ),
                       InfoLine(
                         type: 'Genre(s):',
-                        content: genre,
+                        content: myEvent.genres.join(', '),
                       ),
                     ],
                   ),
@@ -105,12 +126,12 @@ class EventPage extends StatelessWidget {
             ),
             OutputLink(
               title: 'Get Tickets',
-              url: ticketURL,
+              url: myEvent.ticketUrl,
               displayIcon: Icons.receipt,
             ),
             OutputLink(
               title: 'Get Directions',
-              url: appleURL,
+              url: appleUrl,
               displayIcon: Icons.gps_fixed,
             ),
           ],

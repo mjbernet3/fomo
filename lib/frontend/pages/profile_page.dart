@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   static const String pageRoute = '/';
+  static const String name = 'Emma Chadwick';
+  static const String email = 'emma.m.chadwick@gmail.com';
+
 
   @override
   Widget build(BuildContext context) {

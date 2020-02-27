@@ -20,8 +20,8 @@ class GradientIcon extends StatelessWidget {
         blendMode: BlendMode.srcIn,
         shaderCallback: (Rect bounds) {
           return RadialGradient(
-            center: Alignment.topLeft,
-            radius: 0.60,
+            focal: Alignment.centerLeft,
+            radius: 1.5,
             colors: <Color>[
               Color(0xFFFF6C1A),
               Color(0xFFF01844),

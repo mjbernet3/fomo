@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/frontend/components/profile/profile_header.dart';
+import 'package:project_fomo/frontend/components/profile/settings_list.dart';
 import 'package:project_fomo/style.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -12,19 +13,14 @@ class ProfilePage extends StatelessWidget {
   static const String profileUrl = 'https://twistedsifter.files.wordpress.com/2012/09/trippy-profile-pic-portrait-head-on-and-from-side-angle.jpg?w=800';
   static const String tag = '@jack';
 
-
-
   @override
   Widget build(BuildContext context) {
     AuthService authService = Provider.of<AuthService>(context);
 
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
-            child: Center(
+          child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   ProfileHeader(
                     name: name,
@@ -43,19 +39,17 @@ class ProfilePage extends StatelessWidget {
                     padding: EdgeInsets.only(top:40, bottom: 40,),
                     child: Text('Future Friend Work Here')
                   ),
-                  RaisedButton(
-                    color: Color(0xCF40E0D0),
-                    onPressed: () {
-                      authService.signOut();
-                    },
-                    child: Text(
-                      'Logout',
-                    ),
+                  Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Color(0xFF343434)),
+                        ),
+                      )
                   ),
+                  SettingList(),
                 ],
               ),
             ),
-          )
       ),
     );
   }

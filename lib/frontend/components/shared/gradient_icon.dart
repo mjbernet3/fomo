@@ -10,8 +10,9 @@ import 'package:project_fomo/style.dart';
 class GradientIcon extends StatelessWidget {
 
   final IconData icon;
+  final double size;
 
-  GradientIcon({@required this.icon});
+  GradientIcon({@required this.icon, @required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class GradientIcon extends StatelessWidget {
         shaderCallback: (Rect bounds) {
           return RadialGradient(
             center: Alignment.topLeft,
-            radius: 0.75,
+            radius: 0.60,
             colors: <Color>[
               Color(0xFFFF6C1A),
               Color(0xFFF01844),
@@ -30,7 +31,9 @@ class GradientIcon extends StatelessWidget {
 
           ).createShader(bounds);
         },
-        child: Icon(icon)
+        child: Icon(
+            icon,
+        size: size,)
     );
   }
 

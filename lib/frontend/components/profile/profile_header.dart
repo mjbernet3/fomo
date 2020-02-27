@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/frontend/components/shared/gradient_icon.dart';
+import 'package:project_fomo/style.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;
@@ -12,21 +14,72 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          width: 150,
-          height: 150,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(profileUrl),
-            )
-          ),
-        ),
-        Text(bio),
-      ],
+    return Padding(
+        padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 30,),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+                children: <Widget> [
+                  Stack(
+                      alignment: Alignment.bottomRight,
+                      children: <Widget> [
+                        Padding(
+                          padding: EdgeInsets.only(right: 10,),
+                          child: Container(
+                            width: 125,
+                            height: 125,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(profileUrl),
+                              )
+                            ),
+                          ),
+                        ),
+                        GradientIcon(icon: Icons.add_circle, size: 35),
+                      ],
+                    ),
+                  SizedBox(width: 20,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        name,
+                        style: TextStyle(
+                            fontWeight: AppFontWeight.bold,
+                            fontSize: AppFontSize.size22,
+                            fontFamily: AppFontFamily.family,
+                            color: AppTextColor.title,
+                        ),
+                      ),
+                      SizedBox(height: 15,),
+                      Text(
+                          tag,
+                          style: TextStyle(
+                            fontWeight: AppFontWeight.normal,
+                            fontSize: AppFontSize.size16,
+                            fontFamily: AppFontFamily.family,
+                            color: AppTextColor.mediumEmphasis,
+                          ),
+                      ),
+                    ],
+                  )
+                ]
+            ),
+            SizedBox(height: 15,),
+            Text(
+                bio,
+                style: TextStyle(
+                  fontWeight: AppFontWeight.bold,
+                  fontSize: AppFontSize.size16,
+                  fontFamily: AppFontFamily.family,
+                  color: AppTextColor.title,
+                ),
+            ),
+          ],
+      )
     );
   }
 }

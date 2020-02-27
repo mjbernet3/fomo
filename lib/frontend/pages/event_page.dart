@@ -68,6 +68,13 @@ class EventPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
+                    height: 2,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      gradient: AppColor.gradient,
+                    )
+                ),
+                Container(
                   child: Padding(
                     padding: EdgeInsets.all(15),
                     child: Text(

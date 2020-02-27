@@ -8,6 +8,8 @@ class LoginBloc extends Bloc {
   final BehaviorSubject<String> _email = BehaviorSubject<String>();
   final BehaviorSubject<String> _password = BehaviorSubject<String>();
   final PublishSubject<bool> _isLoading = PublishSubject<bool>();
+  static final RegExp _emailRegExp =
+      RegExp('[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+');
 
   LoginBloc({AuthService authService}) : _authService = authService;
 
@@ -26,20 +28,20 @@ class LoginBloc extends Bloc {
 
   final StreamTransformer<String, String> _validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
-    if (email.contains('@')) {
+    if (email.length == 0 || _emailRegExp.hasMatch(email)) {
       sink.add(email);
     } else {
-      sink.addError('Email failed validation');
+      sink.addError('Email address is improperly formatted');
     }
   });
 
   final StreamTransformer<String, String> _validatePassword =
       StreamTransformer<String, String>.fromHandlers(
           handleData: (password, sink) {
-    if (password.length > 6) {
+    if (password.length == 0 || password.length > 6) {
       sink.add(password);
     } else {
-      sink.addError('Password failed validation');
+      sink.addError('Password must be at least 6 characters');
     }
   });
 

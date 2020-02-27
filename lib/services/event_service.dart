@@ -9,7 +9,7 @@ class EventService {
 
   EventService(this._userId);
 
-  Future<List<Event>> getEvents() async {
+  Future<List<Event>> getAllEvents() async {
     QuerySnapshot eventSnapshot = await _eventCollection.getDocuments();
 
     List<Event> events =

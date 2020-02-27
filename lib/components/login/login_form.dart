@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/blocs/login_bloc.dart';
 import 'package:project_fomo/components/shared/gradient_button.dart';
 import 'package:project_fomo/style.dart';
+import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -8,9 +10,14 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  LoginBloc _bloc;
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    _bloc = Provider.of<LoginBloc>(context);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,35 +25,37 @@ class _LoginFormState extends State<LoginForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          TextFormField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            autocorrect: false,
-            decoration: InputDecoration(
-              icon: Icon(Icons.email),
-              labelText: 'Enter your email',
-            ),
-            validator: (value) {
-              //TODO: Implement login email validation
-              return null;
-            },
-          ),
+          StreamBuilder(
+              stream: _bloc.validatedEmail,
+              builder: (context, snapshot) {
+                return TextField(
+                  onChanged: (value) => _bloc.changeEmail(value),
+                  keyboardType: TextInputType.emailAddress,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.email),
+                    labelText: 'Enter your email',
+                    errorText: snapshot.error,
+                  ),
+                );
+              }),
           SizedBox(
             height: 30,
           ),
-          TextFormField(
-            controller: _passwordController,
-            obscureText: true,
-            autocorrect: false,
-            decoration: InputDecoration(
-              icon: Icon(Icons.lock),
-              labelText: 'Enter your password',
-            ),
-            validator: (value) {
-              //TODO: Implement login password validation
-              return null;
-            },
-          ),
+          StreamBuilder(
+              stream: _bloc.validatedPassword,
+              builder: (context, snapshot) {
+                return TextField(
+                  onChanged: (value) => _bloc.changePassword(value),
+                  obscureText: true,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.lock),
+                    labelText: 'Enter your password',
+                    errorText: snapshot.error,
+                  ),
+                );
+              }),
           SizedBox(
             height: 50,
           ),
@@ -59,9 +68,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
             buttonPressed: () {
-              if (_formKey.currentState.validate()) {
-                print('Input validated and can now login');
-              }
+              signIn();
             },
           ),
         ],
@@ -69,10 +76,10 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  Future<void> signIn() async {
+    bool success = await _bloc.login();
+    if (!success) {
+      print('Something went wrong while trying to login');
+    }
   }
 }

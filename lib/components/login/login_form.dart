@@ -77,9 +77,11 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future<void> signIn() async {
+    _bloc.changeLoading(true);
     bool success = await _bloc.login();
     if (!success) {
       print('Something went wrong while trying to login');
     }
+    _bloc.changeLoading(false);
   }
 }

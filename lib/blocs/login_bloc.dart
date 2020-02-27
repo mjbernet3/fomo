@@ -7,6 +7,7 @@ class LoginBloc extends Bloc {
   final AuthService _authService;
   final BehaviorSubject<String> _email = BehaviorSubject<String>();
   final BehaviorSubject<String> _password = BehaviorSubject<String>();
+  final PublishSubject<bool> _isLoading = PublishSubject<bool>();
 
   LoginBloc({AuthService authService}) : _authService = authService;
 
@@ -15,9 +16,13 @@ class LoginBloc extends Bloc {
   Stream<String> get validatedPassword =>
       _password.stream.transform(_validatePassword);
 
+  Stream<bool> get loading => _isLoading.stream;
+
   Function(String email) get changeEmail => _email.sink.add;
 
   Function(String password) get changePassword => _password.sink.add;
+
+  Function(bool loading) get changeLoading => _isLoading.sink.add;
 
   final StreamTransformer<String, String> _validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
@@ -47,5 +52,6 @@ class LoginBloc extends Bloc {
   dispose() {
     _email.close();
     _password.close();
+    _isLoading.close();
   }
 }

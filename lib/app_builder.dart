@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/backend/models/user.dart';
-import 'package:project_fomo/backend/services/auth_service.dart';
-import 'package:project_fomo/backend/services/event_service.dart';
+import 'package:project_fomo/models/user.dart';
+import 'package:project_fomo/services/auth_service.dart';
+import 'package:project_fomo/services/event_service.dart';
 import 'package:provider/provider.dart';
 
 class AppBuilder extends StatelessWidget {

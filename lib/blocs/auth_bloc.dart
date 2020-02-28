@@ -3,7 +3,11 @@ import 'package:project_fomo/blocs/bloc.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginBloc extends Bloc {
+/*
+    Since login/register pages have the same need using one bloc to avoid
+    duplicating code.
+ */
+class AuthBloc extends Bloc {
   final AuthService _authService;
   final BehaviorSubject<String> _emailSubject = BehaviorSubject<String>();
   final BehaviorSubject<String> _passwordSubject = BehaviorSubject<String>();
@@ -11,7 +15,7 @@ class LoginBloc extends Bloc {
   static final RegExp _emailRegExp =
       RegExp('[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+');
 
-  LoginBloc({AuthService authService}) : _authService = authService;
+  AuthBloc({AuthService authService}) : _authService = authService;
 
   Stream<String> get validatedEmail =>
       _emailSubject.stream.transform(_validateEmail);
@@ -48,6 +52,11 @@ class LoginBloc extends Bloc {
 
   Future<bool> login() async {
     return await _authService.signInWithEmailAndPassword(
+        _emailSubject.value, _passwordSubject.value);
+  }
+
+  Future<bool> register() async {
+    return await _authService.registerWithEmailAndPassword(
         _emailSubject.value, _passwordSubject.value);
   }
 

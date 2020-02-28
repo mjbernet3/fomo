@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/blocs/login_bloc.dart';
+import 'package:project_fomo/blocs/auth_bloc.dart';
 import 'package:project_fomo/components/shared/gradient_button.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
@@ -20,11 +20,11 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  LoginBloc _bloc;
+  AuthBloc _bloc;
 
   @override
   void didChangeDependencies() {
-    _bloc = Provider.of<LoginBloc>(context);
+    _bloc = Provider.of<AuthBloc>(context);
     super.didChangeDependencies();
   }
 

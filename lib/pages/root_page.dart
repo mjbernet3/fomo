@@ -16,6 +16,14 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   int _selectedIndex = 0;
 
+  List<Widget> subNavigators = [
+    Discover(),
+    Search(),
+    Friends(),
+    MyEvents(),
+    Profile(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +31,7 @@ class _RootPageState extends State<RootPage> {
         top: false,
         child: IndexedStack(
           index: _selectedIndex,
-          children: <Widget>[
-            Discover(),
-            Search(),
-            Friends(),
-            MyEvents(),
-            Profile(),
-          ],
+          children: subNavigators,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -40,9 +42,11 @@ class _RootPageState extends State<RootPage> {
         unselectedItemColor: AppTextColor.disabled,
         currentIndex: _selectedIndex,
         onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          if (_selectedIndex != index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
         },
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[

@@ -5,7 +5,8 @@ import 'package:rxdart/rxdart.dart';
 
 class DiscoverBloc extends Bloc {
   final EventService _eventService;
-  final _events = PublishSubject<List<Event>>();
+  final PublishSubject<List<Event>> _eventsSubject =
+      PublishSubject<List<Event>>();
 
   /*
       Idea for later: How about caching a timestamp and then only getting
@@ -17,16 +18,16 @@ class DiscoverBloc extends Bloc {
 
   DiscoverBloc({EventService eventService}) : _eventService = eventService;
 
-  Stream<List<Event>> get events => _events.stream;
+  Stream<List<Event>> get events => _eventsSubject.stream;
 
   Future<void> refreshEvents() async {
     List<Event> events = await _eventService.getAllEvents();
 
-    _events.sink.add(events);
+    _eventsSubject.sink.add(events);
   }
 
   @override
   void dispose() {
-    _events.close();
+    _eventsSubject.close();
   }
 }

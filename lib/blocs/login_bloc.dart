@@ -5,26 +5,27 @@ import 'package:rxdart/rxdart.dart';
 
 class LoginBloc extends Bloc {
   final AuthService _authService;
-  final BehaviorSubject<String> _email = BehaviorSubject<String>();
-  final BehaviorSubject<String> _password = BehaviorSubject<String>();
-  final PublishSubject<bool> _isLoading = PublishSubject<bool>();
+  final BehaviorSubject<String> _emailSubject = BehaviorSubject<String>();
+  final BehaviorSubject<String> _passwordSubject = BehaviorSubject<String>();
+  final PublishSubject<bool> _isLoadingSubject = PublishSubject<bool>();
   static final RegExp _emailRegExp =
       RegExp('[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+');
 
   LoginBloc({AuthService authService}) : _authService = authService;
 
-  Stream<String> get validatedEmail => _email.stream.transform(_validateEmail);
+  Stream<String> get validatedEmail =>
+      _emailSubject.stream.transform(_validateEmail);
 
   Stream<String> get validatedPassword =>
-      _password.stream.transform(_validatePassword);
+      _passwordSubject.stream.transform(_validatePassword);
 
-  Stream<bool> get loading => _isLoading.stream;
+  Stream<bool> get loading => _isLoadingSubject.stream;
 
-  Function(String email) get changeEmail => _email.sink.add;
+  Function(String email) get changeEmail => _emailSubject.sink.add;
 
-  Function(String password) get changePassword => _password.sink.add;
+  Function(String password) get changePassword => _passwordSubject.sink.add;
 
-  Function(bool loading) get changeLoading => _isLoading.sink.add;
+  Function(bool loading) get changeLoading => _isLoadingSubject.sink.add;
 
   final StreamTransformer<String, String> _validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
@@ -47,13 +48,13 @@ class LoginBloc extends Bloc {
 
   Future<bool> login() async {
     return await _authService.signInWithEmailAndPassword(
-        _email.value, _password.value);
+        _emailSubject.value, _passwordSubject.value);
   }
 
   @override
   dispose() {
-    _email.close();
-    _password.close();
-    _isLoading.close();
+    _emailSubject.close();
+    _passwordSubject.close();
+    _isLoadingSubject.close();
   }
 }

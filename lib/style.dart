@@ -53,4 +53,5 @@ class AppTextColor {
   static const Color highEmphasis = Color(0xDEFFFFFF);
   static const Color mediumEmphasis = Color(0x99FFFFFF);
   static const Color disabled = Color(0x61FFFFFF);
+  static const Color danger = Colors.red;
 }

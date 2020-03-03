@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Event {
-  int id;
+  String id;
   String address;
   String date;
   String name;
@@ -29,9 +31,11 @@ class Event {
     this.genres,
   });
 
-  factory Event.fromMap(Map<String, dynamic> event) {
+  factory Event.fromDocSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> event = snapshot.data;
+
     return Event(
-      id: event['id'],
+      id: snapshot.documentID,
       address: event['address'],
       date: event['date'],
       name: event['name'],

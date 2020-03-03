@@ -10,12 +10,7 @@ class AuthService {
         return null;
       }
 
-      return User(
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-        displayName: firebaseUser.displayName,
-        photoUrl: firebaseUser.photoUrl,
-      );
+      return User.fromFirebaseUser(firebaseUser);
     });
   }
 

@@ -14,7 +14,7 @@ class EventService {
 
     List<Event> events =
         eventSnapshot.documents.map((DocumentSnapshot document) {
-      return Event.fromMap(document.data);
+      return Event.fromDocSnapshot(document);
     }).toList();
 
     return events;

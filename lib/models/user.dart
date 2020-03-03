@@ -1,14 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class User {
   String uid;
   String email;
-  String displayName;
-  String photoUrl;
 
-  User(
-      {@required this.uid,
-      @required this.email,
-      this.displayName,
-      this.photoUrl});
+  User({this.uid, this.email});
+
+  factory User.fromFirebaseUser(FirebaseUser firebaseUser) {
+    return User(
+      uid: firebaseUser.uid,
+      email: firebaseUser.email,
+    );
+  }
 }

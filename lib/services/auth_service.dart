@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project_fomo/models/user.dart';
+import 'package:project_fomo/models/user_data.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final CollectionReference _userInfoCollection =
+      Firestore.instance.collection('users');
 
   Stream<User> get signedInUser {
     return _auth.onAuthStateChanged.map((FirebaseUser firebaseUser) {
@@ -15,12 +19,19 @@ class AuthService {
   }
 
   Future<bool> registerWithEmailAndPassword(
-      String email, String password) async {
+      String email, String password, String userName, String name) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      return result.user != null;
+      if (result.user != null) {
+        UserData userData = UserData.initial(result.user.uid, userName, name);
+
+        await _userInfoCollection.add(userData.toMap());
+        return true;
+      }
+
+      return false;
     } catch (error) {
       print(error.toString());
       return false;

@@ -80,7 +80,8 @@ class _RegisterBodyState extends State<RegisterBody> {
             ),
             buttonPressed: () async {
               _bloc.changeLoading(true);
-              bool success = await _bloc.register();
+              bool success =
+                  await _bloc.register(userName: _userName, name: _name);
               if (!success) {
                 Scaffold.of(context).showSnackBar(
                   SnackBar(

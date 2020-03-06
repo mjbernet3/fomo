@@ -55,13 +55,14 @@ class AuthBloc extends Bloc {
         _emailSubject.value, _passwordSubject.value);
   }
 
-  Future<bool> register() async {
+  Future<bool> register({String userName, String name}) async {
     return await _authService.registerWithEmailAndPassword(
-        _emailSubject.value, _passwordSubject.value);
+        _emailSubject.value, _passwordSubject.value, userName, name);
   }
 
   @override
-  dispose() {
+  void dispose() {
+    print('Disposing auth bloc...');
     _emailSubject.close();
     _passwordSubject.close();
     _isLoadingSubject.close();

@@ -31,7 +31,7 @@ class _LoginBodyState extends State<LoginBody> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           PageHeader('Log In'),
-          SizedBox(height: 60),
+          SizedBox(height: 40),
           ValidInputField(
             inputStream: _bloc.validatedEmail,
             labelText: 'Email Address',

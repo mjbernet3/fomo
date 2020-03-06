@@ -6,9 +6,9 @@ class UserInfo {
   String profileUrl;
   bool shouldLocate;
   bool shouldNotify;
-  List interested;
-  List going;
-  List friends;
+  List<String> interested;
+  List<String> going;
+  List<String> friends;
 
   UserInfo({
     this.uid,

@@ -76,8 +76,9 @@ class _LoginBodyState extends State<LoginBody> {
                     duration: Duration(seconds: 2),
                   ),
                 );
+
+                _bloc.changeLoading(false);
               }
-              _bloc.changeLoading(false);
             },
           ),
           FlatButton(

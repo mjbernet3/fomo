@@ -96,8 +96,9 @@ class _RegisterBodyState extends State<RegisterBody> {
                     duration: Duration(seconds: 2),
                   ),
                 );
+
+                _bloc.changeLoading(false);
               }
-              _bloc.changeLoading(false);
             },
           ),
           StreamBuilder(

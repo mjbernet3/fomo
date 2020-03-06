@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                       )
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top:40, bottom: 40,),
+                    padding: EdgeInsets.only(top:20, bottom: 20,),
                     child: Text('Future Friend Work Here')
                   ),
                   Container(

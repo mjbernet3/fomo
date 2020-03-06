@@ -54,7 +54,7 @@ class ProfileHeader extends StatelessWidget {
                             color: AppTextColor.title,
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 10,),
                       Text(
                           tag,
                           style: TextStyle(

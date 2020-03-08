@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/app_builder.dart';
 import 'package:project_fomo/backend/models/user.dart';
 import 'package:project_fomo/backend/services/auth_service.dart';
+import 'package:project_fomo/backend/state_models/button_row_model.dart';
 import 'package:project_fomo/frontend/components/shared/loading_indicator.dart';
 import 'package:project_fomo/frontend/pages/forgot_pass_page.dart';
 import 'package:project_fomo/frontend/pages/login_page.dart';
@@ -29,6 +30,9 @@ class AppName extends StatelessWidget {
         Provider<AuthService>(
           create: (context) => AuthService(),
         ),
+        ChangeNotifierProvider<ButtonRowModel>.value(
+          value: ButtonRowModel()
+        )
       ],
       child: AppBuilder(
         builder: (context, userSnapshot) {

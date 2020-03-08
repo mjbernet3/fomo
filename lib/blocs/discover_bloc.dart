@@ -5,25 +5,23 @@ import 'package:rxdart/rxdart.dart';
 
 class DiscoverBloc extends Bloc {
   final EventService _eventService;
-  final PublishSubject<List<Event>> _eventsSubject =
-      PublishSubject<List<Event>>();
+  final PublishSubject<Map<String, List<Event>>> _eventsSubject =
+      PublishSubject<Map<String, List<Event>>>();
 
   /*
       Idea for later: How about caching a timestamp and then only getting
       events since that timestamp?
-
-      This bloc is not finished, just brainstorming. Right now you would refresh
-      and get duplicates.
    */
 
   DiscoverBloc({EventService eventService}) : _eventService = eventService;
 
-  Stream<List<Event>> get events => _eventsSubject.stream;
+  Stream<Map<String, List<Event>>> get events => _eventsSubject.stream;
 
-  Future<void> refreshEvents() async {
-    List<Event> events = await _eventService.getAllEvents();
+  Future<void> refreshEventCategories() async {
+    Map<String, List<Event>> categories =
+        await _eventService.getEventCategories();
 
-    _eventsSubject.sink.add(events);
+    _eventsSubject.sink.add(categories);
   }
 
   @override

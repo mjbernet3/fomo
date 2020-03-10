@@ -5,7 +5,7 @@ import 'package:project_fomo/models/user_data.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final CollectionReference _userInfoCollection =
+  final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
   Stream<User> get signedInUser {
@@ -27,7 +27,7 @@ class AuthService {
       if (result.user != null) {
         UserData userData = UserData.initial(result.user.uid, userName, name);
 
-        await _userInfoCollection.add(userData.toMap());
+        await _userDataCollection.add(userData.toMap());
         return true;
       }
 

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserData {
   String uid;
   String userName;
@@ -35,6 +37,21 @@ class UserData {
       interested: [],
       going: [],
       friends: [],
+    );
+  }
+
+  factory UserData.fromDocSnap(DocumentSnapshot doc) {
+    return UserData(
+      uid: doc['uid'],
+      userName: doc['userName'],
+      displayName: doc['displayName'],
+      bio: doc['bio'],
+      profileUrl: doc['profileUrl'],
+      shouldLocate: doc['shouldLocate'],
+      shouldNotify: doc['shouldNotify'],
+      interested: doc['interested'],
+      going: doc['going'],
+      friends: doc['friends'],
     );
   }
 

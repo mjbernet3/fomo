@@ -6,6 +6,7 @@ import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/components/shared/valid_input_field.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/utils/response.dart';
 import 'package:provider/provider.dart';
 
 class RegisterBody extends StatefulWidget {
@@ -80,13 +81,13 @@ class _RegisterBodyState extends State<RegisterBody> {
             ),
             buttonPressed: () async {
               _bloc.changeLoading(true);
-              bool success =
+              Response response =
                   await _bloc.register(userName: _userName, name: _name);
-              if (!success) {
+              if (response.status == Status.FAILURE) {
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      "Failed to register: Please enter valid credentials.",
+                      'Failed to register: ${response.message}',
                       style: TextStyle(
                         color: AppTextColor.title,
                         fontFamily: AppFontFamily.family,

@@ -25,9 +25,11 @@ class AuthService {
           email: email, password: password);
 
       if (result.user != null) {
-        UserData userData = UserData.initial(result.user.uid, userName, name);
+        UserData userData = UserData.initial(userName, name);
 
-        await _userDataCollection.add(userData.toMap());
+        await _userDataCollection
+            .document(result.user.uid)
+            .setData(userData.toMap());
         return true;
       }
 

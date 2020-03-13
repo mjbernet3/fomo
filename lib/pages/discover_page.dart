@@ -18,7 +18,8 @@ final List<Event> events = [
       description: "This event will be a lot of fun",
       date: "Thurs, January 13th",
       genres: ['Pop'],
-      ticketUrl: 'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
+      ticketUrl:
+          'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
       location: {'Latitude': '33.7573', 'Longitude': '-84.3963'},
       imageUrl: url),
   Event(
@@ -27,7 +28,8 @@ final List<Event> events = [
       description: "This event will be a lot of fun",
       date: "Thurs, January 13th",
       genres: ['Pop'],
-      ticketUrl: 'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
+      ticketUrl:
+          'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
       location: {'Latitude': '33.7573', 'Longitude': '-84.3963'},
       imageUrl: url),
   Event(
@@ -36,7 +38,8 @@ final List<Event> events = [
       description: "This event will be a lot of fun",
       date: "Thurs, January 13th",
       genres: ['Pop'],
-      ticketUrl: 'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
+      ticketUrl:
+          'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
       location: {'Latitude': '33.7573', 'Longitude': '-84.3963'},
       imageUrl: url),
   Event(
@@ -45,7 +48,8 @@ final List<Event> events = [
       description: "This event will be a lot of fun",
       date: "Thurs, January 13th",
       genres: ['Pop'],
-      ticketUrl: 'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
+      ticketUrl:
+          'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
       location: {'Latitude': '33.7573', 'Longitude': '-84.3963'},
       imageUrl: url),
   Event(
@@ -54,7 +58,8 @@ final List<Event> events = [
       description: "This event will be a lot of fun",
       date: "Thurs, January 13th",
       genres: ['Pop'],
-      ticketUrl: 'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
+      ticketUrl:
+          'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316',
       location: {'Latitude': '33.7573', 'Longitude': '-84.3963'},
       imageUrl: url),
 ];
@@ -64,8 +69,12 @@ class DiscoverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DiscoverBloc bloc =
-        DiscoverBloc(eventService: Provider.of<EventService>(context));
+    DiscoverBloc bloc = DiscoverBloc(
+      eventService: Provider.of<EventService>(
+        context,
+        listen: false,
+      ),
+    );
     bloc.refreshEventCategories();
 
     return Scaffold(

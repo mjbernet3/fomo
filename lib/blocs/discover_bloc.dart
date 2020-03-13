@@ -8,11 +8,6 @@ class DiscoverBloc extends Bloc {
   final PublishSubject<Map<String, List<Event>>> _eventsSubject =
       PublishSubject<Map<String, List<Event>>>();
 
-  /*
-      Idea for later: How about caching a timestamp and then only getting
-      events since that timestamp?
-   */
-
   DiscoverBloc({EventService eventService}) : _eventService = eventService;
 
   Stream<Map<String, List<Event>>> get events => _eventsSubject.stream;
@@ -26,6 +21,7 @@ class DiscoverBloc extends Bloc {
 
   @override
   void dispose() {
+    print('Disposing discover bloc...');
     _eventsSubject.close();
   }
 }

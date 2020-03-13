@@ -6,6 +6,7 @@ import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/components/shared/valid_input_field.dart';
 import 'package:project_fomo/pages/forgot_pass_page.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/utils/response.dart';
 import 'package:provider/provider.dart';
 
 class LoginBody extends StatefulWidget {
@@ -61,12 +62,12 @@ class _LoginBodyState extends State<LoginBody> {
             ),
             buttonPressed: () async {
               _bloc.changeLoading(true);
-              bool success = await _bloc.login();
-              if (!success) {
+              Response response = await _bloc.login();
+              if (response.status == Status.FAILURE) {
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      "Failed to login: Make sure email and password are correct.",
+                      'Failed to login: ${response.message}',
                       style: TextStyle(
                         color: AppTextColor.title,
                         fontFamily: AppFontFamily.family,

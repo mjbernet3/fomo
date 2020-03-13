@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:project_fomo/blocs/bloc.dart';
 import 'package:project_fomo/services/auth_service.dart';
+import 'package:project_fomo/utils/response.dart';
 import 'package:rxdart/rxdart.dart';
 
 /*
@@ -50,12 +51,12 @@ class AuthBloc extends Bloc {
     }
   });
 
-  Future<bool> login() async {
+  Future<Response> login() async {
     return await _authService.signInWithEmailAndPassword(
         _emailSubject.value, _passwordSubject.value);
   }
 
-  Future<bool> register({String userName, String name}) async {
+  Future<Response> register({String userName, String name}) async {
     return await _authService.registerWithEmailAndPassword(
         _emailSubject.value, _passwordSubject.value, userName, name);
   }

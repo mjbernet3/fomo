@@ -1,17 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserData {
-  String uid;
   String userName;
   String displayName;
   String bio;
   String profileUrl;
   bool shouldLocate;
   bool shouldNotify;
-  List<String> interested;
-  List<String> going;
-  List<String> friends;
+  List interested;
+  List going;
+  List friends;
 
   UserData({
-    this.uid,
     this.userName,
     this.displayName,
     this.bio,
@@ -23,13 +23,13 @@ class UserData {
     this.friends,
   });
 
-  factory UserData.initial(String uid, String userName, String name) {
+  factory UserData.initial(String userName, String name) {
     return UserData(
-      uid: uid,
       userName: userName,
       displayName: name,
       bio: '',
-      profileUrl: '', //TODO: Change to default profile URL when we have one
+      profileUrl:
+          'https://twistedsifter.files.wordpress.com/2012/09/trippy-profile-pic-portrait-head-on-and-from-side-angle.jpg?w=800',
       shouldLocate: false,
       shouldNotify: false,
       interested: [],
@@ -38,9 +38,22 @@ class UserData {
     );
   }
 
+  factory UserData.fromDocSnap(DocumentSnapshot doc) {
+    return UserData(
+      userName: doc['userName'],
+      displayName: doc['displayName'],
+      bio: doc['bio'],
+      profileUrl: doc['profileUrl'],
+      shouldLocate: doc['shouldLocate'],
+      shouldNotify: doc['shouldNotify'],
+      interested: doc['interested'],
+      going: doc['going'],
+      friends: doc['friends'],
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
-      'uid': uid,
       'userName': userName,
       'displayName': displayName,
       'bio': bio,

@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/models/user_data.dart';
+import 'package:project_fomo/utils/response.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final CollectionReference _userInfoCollection =
+  final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
   Stream<User> get signedInUser {
@@ -18,51 +19,63 @@ class AuthService {
     });
   }
 
-  Future<bool> registerWithEmailAndPassword(
+  Future<Response> registerWithEmailAndPassword(
       String email, String password, String userName, String name) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
       if (result.user != null) {
-        UserData userData = UserData.initial(result.user.uid, userName, name);
+        UserData userData = UserData.initial(userName, name);
 
-        await _userInfoCollection.add(userData.toMap());
-        return true;
+        await _userDataCollection
+            .document(result.user.uid)
+            .setData(userData.toMap());
+
+        return Response(status: Status.SUCCESS);
       }
 
-      return false;
+      return Response(
+          status: Status.FAILURE, message: "User null after creation.");
     } catch (error) {
-      print(error.toString());
-      return false;
+      return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 
-  Future<bool> signInWithEmailAndPassword(String email, String password) async {
+  Future<Response> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      return result.user != null;
+      if (result.user != null) {
+        return Response(status: Status.SUCCESS);
+      }
+
+      return Response(
+          status: Status.FAILURE, message: "User null after sign in.");
     } catch (error) {
-      print(error.toString());
-      return false;
+      return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 
-  Future<void> sendPasswordResetEmail(String email) async {
+  Future<Response> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+
+      return Response(status: Status.SUCCESS);
     } catch (error) {
-      print(error.toString());
+      return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 
-  Future<void> signOut() async {
+  Future<Response> signOut() async {
     try {
       await _auth.signOut();
+
+      return Response(status: Status.SUCCESS);
     } catch (error) {
-      print(error.toString());
+      return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 }

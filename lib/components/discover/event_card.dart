@@ -25,10 +25,7 @@ class SmallEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) => EventPage(event: this.event),
-          )
-        );
+        Navigator.pushNamed(context, EventPage.pageRoute);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.all(

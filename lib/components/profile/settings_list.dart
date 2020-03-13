@@ -2,25 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/style.dart';
-import 'package:custom_switch/custom_switch.dart';
 import 'package:project_fomo/pages/about_page.dart';
 import 'package:project_fomo/pages/account_page.dart';
 
 class SettingList extends StatelessWidget {
 
-  TextStyle listName = TextStyle(
+  static const TextStyle listName = TextStyle(
     fontSize: AppFontSize.size18,
     fontFamily: AppFontFamily.family,
     fontWeight: AppFontWeight.bold,
     color: AppTextColor.mediumEmphasis,
-  );
-
-  Container defaultLine = Container(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Color(0xFF343434)),
-        ),
-      ),
   );
 
   @override
@@ -51,7 +42,7 @@ class SettingList extends StatelessWidget {
                       "Location Services",
                       style: listName,
                     ),
-                    CustomSwitch(
+                    Switch(
                       value: true,
                       activeColor: Color(0xFFF01844),
                       onChanged: (bool) {
@@ -61,7 +52,13 @@ class SettingList extends StatelessWidget {
                   ],
                 ),
             ),
-            defaultLine,
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Color(0xFF343434)),
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(top: 15, bottom: 15,),
               child: Row(
@@ -71,7 +68,7 @@ class SettingList extends StatelessWidget {
                     "Notifications",
                     style: listName,
                   ),
-                  CustomSwitch(
+                  Switch(
                     value: true,
                     activeColor: Color(0xFFF01844),
                     onChanged: (bool) {
@@ -81,7 +78,13 @@ class SettingList extends StatelessWidget {
                 ],
               ),
             ),
-            defaultLine,
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Color(0xFF343434)),
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -103,7 +106,13 @@ class SettingList extends StatelessWidget {
                 ),
               ],
             ),
-            defaultLine,
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Color(0xFF343434)),
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -125,7 +134,13 @@ class SettingList extends StatelessWidget {
                 ),
               ],
             ),
-            defaultLine,
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Color(0xFF343434)),
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(top: 15,),
               child: GestureDetector(

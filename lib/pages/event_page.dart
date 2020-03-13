@@ -22,28 +22,9 @@ class EventPage extends StatelessWidget {
 
   EventPage({@required this.event});
 
-//  checkEvent() async {
-//    print(event);
-//    print(event.name);
-//    print(event.venueName);
-//    print(event.description);
-//    print(event.date);
-//    print(event.genres);
-//    print(event.ticketUrl);
-//    print(event.location);
-//    print(event.imageUrl);
-//  }
-
 
   @override
   Widget build(BuildContext context) {
-
-
-//    checkEvent();
-
-//    final num latitude = event.location['Latitude'];
-//    final num longitude = event.location['Longitude'];
-//    final String appleUrl = 'https://maps.apple.com/?q=$latitude,$longitude';
 
     final String appleUrl = 'https://maps.apple.com/?q=33.7573,-84.3963';
 

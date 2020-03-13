@@ -89,4 +89,10 @@ class _RootPageState extends State<RootPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    print('Disposing root page...');
+    super.dispose();
+  }
 }

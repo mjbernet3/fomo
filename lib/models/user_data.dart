@@ -28,7 +28,8 @@ class UserData {
       userName: userName,
       displayName: name,
       bio: '',
-      profileUrl: '', //TODO: Change to default profile URL when we have one
+      profileUrl:
+          'https://twistedsifter.files.wordpress.com/2012/09/trippy-profile-pic-portrait-head-on-and-from-side-angle.jpg?w=800',
       shouldLocate: false,
       shouldNotify: false,
       interested: [],

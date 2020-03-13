@@ -7,6 +7,14 @@ import 'package:project_fomo/pages/about_page.dart';
 import 'package:project_fomo/pages/account_page.dart';
 
 class SettingList extends StatelessWidget {
+  final bool shouldNotify;
+  final bool shouldLocate;
+
+  SettingList({
+    @required this.shouldNotify,
+    @required this.shouldLocate,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +38,7 @@ class SettingList extends StatelessWidget {
           SettingsItem(
             name: 'Location Services',
             trailing: Switch(
-              value: true,
+              value: shouldLocate,
               activeColor: Color(0xFFF01844),
               onChanged: (bool) => print('Setting location services to $bool'),
             ),
@@ -39,7 +47,7 @@ class SettingList extends StatelessWidget {
           SettingsItem(
             name: 'Notifications',
             trailing: Switch(
-              value: true,
+              value: shouldNotify,
               activeColor: Color(0xFFF01844),
               onChanged: (bool) => print('Setting notifications to $bool'),
             ),

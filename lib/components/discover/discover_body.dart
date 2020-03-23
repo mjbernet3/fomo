@@ -18,6 +18,7 @@ class _DiscoverBodyState extends State<DiscoverBody> {
   void didChangeDependencies() {
     _bloc = Provider.of<DiscoverBloc>(context);
     super.didChangeDependencies();
+    _bloc.refreshEventCategories();
   }
 
   Widget build(BuildContext context) {
@@ -37,7 +38,8 @@ class _DiscoverBodyState extends State<DiscoverBody> {
                   if (category == "featured") {
                     listChildren.insert(0, FeaturedCarousel(events));
                   } else {
-                    listChildren.add(EventScroller(category, events));
+                    listChildren.add(
+                        EventScroller(formatCategoryTitle(category), events));
                   }
                 }
               }
@@ -47,5 +49,11 @@ class _DiscoverBodyState extends State<DiscoverBody> {
         ),
       ),
     );
+  }
+
+  String formatCategoryTitle(String title) {
+    String newTitle = title.toLowerCase();
+    newTitle = newTitle.substring(0, 1).toUpperCase() + newTitle.substring(1);
+    return newTitle;
   }
 }

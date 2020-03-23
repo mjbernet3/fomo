@@ -12,6 +12,7 @@ class EventService {
         .document('tags')
         .get()
         .then((DocumentSnapshot ds) {
+      print(ds.data);
       return getCategories(ds.data);
     });
   }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/discover/carousel_ellipse.dart';
@@ -5,6 +7,8 @@ import 'package:project_fomo/components/discover/event_card.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
+
+const double leftTitlePadding = 15.0;
 
 class FeaturedCarousel extends StatelessWidget {
   final List<Event> events;
@@ -16,9 +20,9 @@ class FeaturedCarousel extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 15.0,
-            horizontal: 5.0,
+          padding: EdgeInsets.only(
+            left: leftTitlePadding,
+            bottom: 10.0,
           ),
           child: Align(
             alignment: Alignment.centerLeft,
@@ -58,7 +62,7 @@ class FeaturedCarousel extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                     child: SizedBox(
-                      width: 60,
+                      width: getElipsesWidth(events.length),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: ellipses,
@@ -84,4 +88,8 @@ class CarouselModel extends ChangeNotifier {
     this._index = index;
     notifyListeners();
   }
+}
+
+double getElipsesWidth(int numEllipses) {
+  return 30 * pow(numEllipses, 2 / 3);
 }

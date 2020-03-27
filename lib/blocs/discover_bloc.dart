@@ -13,15 +13,17 @@ class DiscoverBloc extends Bloc {
   Stream<Map<String, List<Event>>> get events => _eventsSubject.stream;
 
   Future<void> refreshEventCategories() async {
-    Map<String, List<Event>> categories =
-        await _eventService.getEventCategories();
-
-    _eventsSubject.sink.add(categories);
+    if (!_eventsSubject.isClosed) {
+      Map<String, List<Event>> categories =
+          await _eventService.getEventsByCategory();
+      if (!_eventsSubject.isClosed) {
+        _eventsSubject.sink.add(categories);
+      }
+    }
   }
 
   @override
   void dispose() {
-    print('Disposing discover bloc...');
     _eventsSubject.close();
   }
 }

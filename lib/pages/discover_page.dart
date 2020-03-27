@@ -11,17 +11,6 @@ class DiscoverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
       body: Provider<DiscoverBloc>(
         create: (context) => DiscoverBloc(
           eventService: Provider.of<EventService>(

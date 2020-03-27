@@ -36,7 +36,7 @@ class _DiscoverBodyState extends State<DiscoverBody> {
                 for (String category in categories.keys) {
                   List<Event> events = categories[category];
                   if (category == "featured") {
-                    listChildren.insert(0, FeaturedCarousel(events));
+                    listChildren.insert(1, FeaturedCarousel(events));
                   } else {
                     listChildren.add(
                         EventScroller(formatCategoryTitle(category), events));

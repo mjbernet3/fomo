@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/blocs/event_page_bloc.dart';
+import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/services/event_service.dart';
@@ -29,6 +31,12 @@ class AppBuilder extends StatelessWidget {
               Provider<UserService>(
                 create: (context) => UserService(user.uid),
               ),
+              Provider<EventPageBloc>(
+                create: (context) => EventPageBloc(Event(
+                    imageUrl:
+                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.telegraph.co.uk%2Fnews%2F0%2Fdo-trees-have-feelings-too-one-expert-says-they-do%2F&psig=AOvVaw3NmqXLkHcbvRCWj7PtoCzn&ust=1585495406460000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCY9uW8vegCFQAAAAAdAAAAABAD")),
+                dispose: (context, bloc) => bloc.dispose(),
+              )
             ],
             child: builder(context, snapshot),
           );

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
@@ -51,7 +53,7 @@ class Event {
       usersGoing: event['usersGoing'],
       usersInterested: event['usersInterested'],
       genres: event['genres'],
-      numGoing: event['numGoing'],
+      numGoing: Random().nextInt(1000),
     );
   }
 }

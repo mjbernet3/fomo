@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/event_page/event_page_body.dart';
+import 'package:project_fomo/components/event_clicked/event_clicked_body.dart';
 import 'package:project_fomo/models/event.dart';
 
 class EventPage extends StatelessWidget {

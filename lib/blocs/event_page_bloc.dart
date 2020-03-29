@@ -6,7 +6,6 @@ class EventPageBloc extends Bloc {
   Event _pageEvent;
   final BehaviorSubject<Event> _eventPageSubject = BehaviorSubject<Event>();
 
-  EventPageBloc(Event event) : _pageEvent = event;
   Stream<Event> get event => _eventPageSubject.stream;
 
   Future<void> setPageEvent(Event pageEvent) async {

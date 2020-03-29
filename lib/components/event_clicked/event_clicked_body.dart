@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/blocs/event_page_bloc.dart';
-import 'package:project_fomo/components/event_page/event_header.dart';
-import 'package:project_fomo/components/event_page/info_line.dart';
-import 'package:project_fomo/components/event_page/output_link.dart';
+import 'package:project_fomo/components/event_clicked/event_header.dart';
+import 'package:project_fomo/components/event_clicked/info_line.dart';
+import 'package:project_fomo/components/event_clicked/output_link.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';

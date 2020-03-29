@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/pages/discover_page.dart';
+import 'package:project_fomo/pages/event_clicked_page.dart';
 import 'package:project_fomo/pages/unknown_page.dart';
 import 'package:project_fomo/pages/view_all_page.dart';
-import 'package:project_fomo/pages/event_page.dart';
 
 class Discover extends StatefulWidget {
   @override

@@ -19,7 +19,7 @@ class _DiscoverBodyState extends State<DiscoverBody> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _bloc = Provider.of<DiscoverBloc>(context);
+    _bloc = Provider.of<DiscoverBloc>(context, listen: false);
   }
 
   Widget build(BuildContext context) {
@@ -55,6 +55,7 @@ class _DiscoverBodyState extends State<DiscoverBody> {
               ),
             );
             return RefreshIndicator(
+              displacement: 0,
               onRefresh: () => _bloc.refreshEventCategories(),
               child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(),

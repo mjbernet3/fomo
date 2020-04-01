@@ -21,7 +21,7 @@ class GenreCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("lib/assets/images/welcome-background.jpeg"),
+              image: genreImage,
               fit: BoxFit.cover,
             ),
           ),

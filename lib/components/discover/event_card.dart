@@ -76,7 +76,7 @@ class SmallEventCard extends StatelessWidget {
                       style: eventSubText,
                     ),
                     Text(
-                      event.date,
+                      event.dateTime.day.toString(),
                       style: eventSubText,
                     ),
                   ],
@@ -85,7 +85,7 @@ class SmallEventCard extends StatelessWidget {
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }

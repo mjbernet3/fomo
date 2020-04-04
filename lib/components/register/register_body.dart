@@ -38,7 +38,7 @@ class _RegisterBodyState extends State<RegisterBody> {
           SizedBox(height: 40),
           ValidInputField(
             inputStream: _bloc.validatedEmail,
-            labelText: 'Email Address',
+            hintText: 'Email Address',
             icon: Icons.email,
             onChanged: (value) => _bloc.changeEmail(value),
           ),
@@ -47,7 +47,7 @@ class _RegisterBodyState extends State<RegisterBody> {
           ),
           ValidInputField(
             inputStream: _bloc.validatedPassword,
-            labelText: 'Password',
+            hintText: 'Password',
             icon: Icons.lock,
             onChanged: (value) => _bloc.changePassword(value),
             isHidden: true,
@@ -56,7 +56,7 @@ class _RegisterBodyState extends State<RegisterBody> {
             height: 30,
           ),
           InputField(
-            labelText: 'Username',
+            hintText: 'Username',
             icon: Icons.person,
             onChanged: (value) => _userName = value,
           ),
@@ -64,7 +64,7 @@ class _RegisterBodyState extends State<RegisterBody> {
             height: 30,
           ),
           InputField(
-            labelText: 'Name',
+            hintText: 'Name',
             icon: Icons.face,
             onChanged: (value) => _name = value,
           ),

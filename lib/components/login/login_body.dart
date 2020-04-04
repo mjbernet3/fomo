@@ -35,7 +35,7 @@ class _LoginBodyState extends State<LoginBody> {
           SizedBox(height: 40),
           ValidInputField(
             inputStream: _bloc.validatedEmail,
-            labelText: 'Email Address',
+            hintText: 'Email Address',
             icon: Icons.email,
             onChanged: (value) => _bloc.changeEmail(value),
           ),
@@ -44,7 +44,7 @@ class _LoginBodyState extends State<LoginBody> {
           ),
           ValidInputField(
             inputStream: _bloc.validatedPassword,
-            labelText: 'Password',
+            hintText: 'Password',
             icon: Icons.lock,
             onChanged: (value) => _bloc.changePassword(value),
             isHidden: true,

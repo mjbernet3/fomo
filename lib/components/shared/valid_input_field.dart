@@ -3,14 +3,14 @@ import 'package:project_fomo/style.dart';
 
 class ValidInputField extends StatelessWidget {
   final Stream<String> inputStream;
-  final String labelText;
+  final String hintText;
   final IconData icon;
   final Function onChanged;
   final bool isHidden;
 
   const ValidInputField(
       {this.inputStream,
-      this.labelText,
+      this.hintText,
       this.icon,
       this.onChanged,
       this.isHidden = false});
@@ -33,8 +33,8 @@ class ValidInputField extends StatelessWidget {
               icon,
               color: AppColor.dp24,
             ),
-            labelText: labelText,
-            labelStyle: TextStyle(
+            hintText: hintText,
+            hintStyle: TextStyle(
               color: AppTextColor.mediumEmphasis,
             ),
             suffixIcon: _buildSuffixIcon(snapshot),

@@ -1,14 +1,13 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:project_fomo/blocs/search_bloc.dart';
 import 'package:project_fomo/components/search/genre_grid.dart';
+import 'package:project_fomo/components/shared/error_indicator.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/components/shared/vertical_event_listing.dart';
+import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/utils/structures/page_state.dart';
 import 'package:provider/provider.dart';
-import '../shared/input_field.dart';
 
 class SearchBody extends StatefulWidget {
   @override
@@ -17,9 +16,6 @@ class SearchBody extends StatefulWidget {
 
 class _SearchBodyState extends State<SearchBody> {
   SearchBloc _bloc;
-  TextEditingController _searchController = TextEditingController(
-    text: '',
-  );
 
   @override
   void didChangeDependencies() {
@@ -32,9 +28,9 @@ class _SearchBodyState extends State<SearchBody> {
     return Column(
       children: <Widget>[
         TextField(
-          controller: _searchController,
           cursorColor: AppTextColor.mediumEmphasis,
           autocorrect: false,
+          keyboardType: TextInputType.text,
           decoration: InputDecoration(
             alignLabelWithHint: false,
             focusedBorder: AppDecoration.inputFieldUnderline,
@@ -48,21 +44,13 @@ class _SearchBodyState extends State<SearchBody> {
               color: AppTextColor.mediumEmphasis,
             ),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            FlatButton(
-              color: Colors.blue,
-              child: Text(
-                "Search",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () => _bloc.search(_searchController.text),
-            ),
-          ],
+          onChanged: (text) {
+            if (text == '') {
+              _bloc.changeState(PageState(state: SearchState.IDLE));
+            } else {
+              _bloc.search(text);
+            }
+          },
         ),
         SizedBox(
           height: 20.0,
@@ -72,19 +60,31 @@ class _SearchBodyState extends State<SearchBody> {
           initialData: PageState(state: SearchState.IDLE),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  snapshot.error.toString(),
-                ),
+              return ErrorIndicator(
+                errorText: snapshot.error.toString(),
               );
             } else if (snapshot.data.state == SearchState.RESULT) {
-              return Expanded(
-                child: VerticalEventListing(
-                  events: snapshot.data.data,
-                ),
-              );
-            } else if (snapshot.data.state == SearchState.LOADING) {
-              return LoadingIndicator();
+              List<Event> events = snapshot.data.data;
+
+              if (events.length > 0) {
+                return Expanded(
+                  child: VerticalEventListing(
+                    events: events,
+                  ),
+                );
+              } else {
+                return Center(
+                  child: Text(
+                    'No results. Try something else.',
+                    style: TextStyle(
+                      color: AppTextColor.highEmphasis,
+                      fontFamily: AppFontFamily.family,
+                      fontSize: AppFontSize.size18,
+                      fontWeight: AppFontWeight.normal,
+                    ),
+                  ),
+                );
+              }
             } else {
               return Expanded(
                 child: GenreGrid(),

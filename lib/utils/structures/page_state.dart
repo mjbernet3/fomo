@@ -10,9 +10,3 @@ class PageState {
 
   PageState({@required this.state, this.data});
 }
-
-enum SearchState {
-  IDLE,
-  LOADING,
-  RESULT,
-}

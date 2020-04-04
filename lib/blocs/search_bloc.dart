@@ -5,6 +5,11 @@ import 'package:project_fomo/utils/structures/response.dart';
 import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
+enum SearchState {
+  IDLE,
+  RESULT,
+}
+
 class SearchBloc extends Bloc {
   SearchService _searchService;
   PublishSubject<PageState> _searchStateSubject = PublishSubject<PageState>();
@@ -14,9 +19,9 @@ class SearchBloc extends Bloc {
   // Streaming data with state to avoid nested StreamBuilder in UI
   Stream<PageState> get searchState => _searchStateSubject.stream;
 
-  Future<void> search(String searchText) async {
-    _searchStateSubject.sink.add(PageState(state: SearchState.LOADING));
+  Function(PageState state) get changeState => _searchStateSubject.sink.add;
 
+  Future<void> search(String searchText) async {
     Response response = await _searchService.searchEvents(searchText);
 
     if (response.status == Status.SUCCESS) {

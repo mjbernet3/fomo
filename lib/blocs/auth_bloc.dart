@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:project_fomo/blocs/bloc.dart';
 import 'package:project_fomo/services/auth_service.dart';
-import 'package:project_fomo/utils/response.dart';
+import 'package:project_fomo/utils/structures/response.dart';
 import 'package:rxdart/rxdart.dart';
 
 /*

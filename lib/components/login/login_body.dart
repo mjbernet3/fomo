@@ -6,7 +6,7 @@ import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/components/shared/valid_input_field.dart';
 import 'package:project_fomo/pages/forgot_pass_page.dart';
 import 'package:project_fomo/style.dart';
-import 'package:project_fomo/utils/response.dart';
+import 'package:project_fomo/utils/structures/response.dart';
 import 'package:provider/provider.dart';
 
 class LoginBody extends StatefulWidget {

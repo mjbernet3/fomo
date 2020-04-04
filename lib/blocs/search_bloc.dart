@@ -1,38 +1,29 @@
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/services/search_service.dart';
-import 'package:project_fomo/utils/response.dart';
+import 'package:project_fomo/utils/structures/page_state.dart';
+import 'package:project_fomo/utils/structures/response.dart';
 import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
-enum SearchState {
-  IDLE,
-  LOADING,
-  RESULT,
-  ERROR,
-}
-
 class SearchBloc extends Bloc {
   SearchService _searchService;
-  PublishSubject<SearchState> _searchStateSubject =
-      PublishSubject<SearchState>();
-  PublishSubject<List<Event>> _eventsSubject = PublishSubject<List<Event>>();
+  PublishSubject<PageState> _searchStateSubject = PublishSubject<PageState>();
 
   SearchBloc({SearchService searchService}) : _searchService = searchService;
 
-  Stream<SearchState> get searchState => _searchStateSubject.stream;
-
-  Stream<List<Event>> get events => _eventsSubject.stream;
+  // Streaming data with state to avoid nested StreamBuilder in UI
+  Stream<PageState> get searchState => _searchStateSubject.stream;
 
   Future<void> search(String searchText) async {
-    _searchStateSubject.sink.add(SearchState.LOADING);
+    _searchStateSubject.sink.add(PageState(state: SearchState.LOADING));
 
     Response response = await _searchService.searchEvents(searchText);
 
     if (response.status == Status.SUCCESS) {
-      _searchStateSubject.add(SearchState.RESULT);
-      _eventsSubject.sink.add(response.data);
+      _searchStateSubject.sink
+          .add(PageState(state: SearchState.RESULT, data: response.data));
     } else {
-      _searchStateSubject.add(SearchState.ERROR);
+      _searchStateSubject.sink.addError('Unable to complete search...');
     }
   }
 
@@ -40,6 +31,5 @@ class SearchBloc extends Bloc {
   void dispose() {
     print('Disposing search bloc...');
     _searchStateSubject.close();
-    _eventsSubject.close();
   }
 }

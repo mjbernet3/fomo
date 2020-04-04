@@ -1,6 +1,6 @@
 import 'package:algolia/algolia.dart';
 import 'package:project_fomo/models/event.dart';
-import 'package:project_fomo/utils/response.dart';
+import 'package:project_fomo/utils/structures/response.dart';
 
 class SearchService {
   // This should be the only instance of algolia

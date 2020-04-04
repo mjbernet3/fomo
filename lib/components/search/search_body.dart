@@ -6,6 +6,7 @@ import 'package:project_fomo/components/search/genre_grid.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/components/shared/vertical_event_listing.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/utils/structures/page_state.dart';
 import 'package:provider/provider.dart';
 import '../shared/input_field.dart';
 
@@ -68,18 +69,18 @@ class _SearchBodyState extends State<SearchBody> {
         ),
         StreamBuilder(
           stream: _bloc.searchState,
-          initialData: SearchState.IDLE,
+          initialData: PageState(state: SearchState.IDLE),
           builder: (context, snapshot) {
-            if (snapshot.data == SearchState.RESULT) {
-              return Expanded(
-                child: VerticalEventListing(),
-              );
-            } else if (snapshot.data == SearchState.LOADING) {
-              return LoadingIndicator();
-            } else if (snapshot.data == SearchState.ERROR) {
+            if (snapshot.hasError) {
               return Center(
                 child: Text('Oops...Something went wrong!'),
               );
+            } else if (snapshot.data.state == SearchState.RESULT) {
+              return Expanded(
+                child: VerticalEventListing(),
+              );
+            } else if (snapshot.data.state == SearchState.LOADING) {
+              return LoadingIndicator();
             } else {
               return Expanded(
                 child: GenreGrid(),

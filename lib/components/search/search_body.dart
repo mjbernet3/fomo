@@ -16,6 +16,14 @@ class SearchBody extends StatefulWidget {
 
 class _SearchBodyState extends State<SearchBody> {
   SearchBloc _bloc;
+  TextEditingController _searchController = TextEditingController(text: '');
+
+  static const UnderlineInputBorder searchBarUnderline = UnderlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.redAccent,
+      width: 2,
+    ),
+  );
 
   @override
   void didChangeDependencies() {
@@ -28,13 +36,14 @@ class _SearchBodyState extends State<SearchBody> {
     return Column(
       children: <Widget>[
         TextField(
+          controller: _searchController,
           cursorColor: AppTextColor.mediumEmphasis,
           autocorrect: false,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             alignLabelWithHint: false,
-            focusedBorder: AppDecoration.inputFieldUnderline,
-            enabledBorder: AppDecoration.inputFieldUnderline,
+            focusedBorder: searchBarUnderline,
+            enabledBorder: searchBarUnderline,
             icon: Icon(
               Icons.search,
               color: AppColor.dp24,
@@ -45,10 +54,10 @@ class _SearchBodyState extends State<SearchBody> {
             ),
           ),
           onChanged: (text) {
-            if (text == '') {
+            if (_searchController.text == '') {
               _bloc.changeState(PageState(state: SearchState.IDLE));
             } else {
-              _bloc.searchEvents(text);
+              _bloc.searchEvents(_searchController.text);
             }
           },
         ),
@@ -93,43 +102,55 @@ class _SearchBodyState extends State<SearchBody> {
                       genreText: 'Alternative',
                       genreImage: AssetImage(
                           "lib/assets/images/welcome-background.jpeg"),
-                      onPressed: () =>
-                          _bloc.searchEvents('', genreFilter: 'Alternative'),
+                      onPressed: () {
+                        _searchController.text = 'Alternative';
+                        _bloc.searchEvents('', genreFilter: 'Alternative');
+                      },
                     ),
                     GenreCard(
                       genreText: 'Country',
                       genreImage: AssetImage(
                           "lib/assets/images/welcome-background.jpeg"),
-                      onPressed: () =>
-                          _bloc.searchEvents('', genreFilter: 'Country'),
+                      onPressed: () {
+                        _searchController.text = 'Country';
+                        _bloc.searchEvents('', genreFilter: 'Country');
+                      },
                     ),
                     GenreCard(
                       genreText: 'Pop',
                       genreImage: AssetImage(
                           "lib/assets/images/welcome-background.jpeg"),
-                      onPressed: () =>
-                          _bloc.searchEvents('', genreFilter: 'Pop'),
+                      onPressed: () {
+                        _searchController.text = 'Pop';
+                        _bloc.searchEvents('', genreFilter: 'Pop');
+                      },
                     ),
                     GenreCard(
                       genreText: 'Rock',
                       genreImage: AssetImage(
                           "lib/assets/images/welcome-background.jpeg"),
-                      onPressed: () =>
-                          _bloc.searchEvents('', genreFilter: 'Rock'),
+                      onPressed: () {
+                        _searchController.text = 'Rock';
+                        _bloc.searchEvents('', genreFilter: 'Rock');
+                      },
                     ),
                     GenreCard(
                       genreText: 'Hip-Hop',
                       genreImage: AssetImage(
                           "lib/assets/images/welcome-background.jpeg"),
-                      onPressed: () =>
-                          _bloc.searchEvents('', genreFilter: 'Hip-Hop'),
+                      onPressed: () {
+                        _searchController.text = 'Hip-Hop';
+                        _bloc.searchEvents('', genreFilter: 'Hip-Hop');
+                      },
                     ),
                     GenreCard(
                       genreText: 'Electronic',
                       genreImage: AssetImage(
                           "lib/assets/images/welcome-background.jpeg"),
-                      onPressed: () =>
-                          _bloc.searchEvents('', genreFilter: 'Electronic'),
+                      onPressed: () {
+                        _searchController.text = 'Electronic';
+                        _bloc.searchEvents('', genreFilter: 'Electronic');
+                      },
                     ),
                   ],
                 ),

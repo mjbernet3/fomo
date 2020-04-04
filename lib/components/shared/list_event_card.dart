@@ -15,59 +15,68 @@ class ListEventCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(event.imageUrl),
+          Expanded(
+            flex: 2,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                event.imageUrl,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 0.0,
-                  horizontal: 10.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      event.name,
-                      style: TextStyle(
-                        color: AppTextColor.highEmphasis,
-                        fontSize: AppFontSize.size18,
-                        fontFamily: AppFontFamily.family,
-                        fontWeight: AppFontWeight.normal,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          event.venueName,
-                          style: TextStyle(
-                            color: AppTextColor.mediumEmphasis,
-                            fontSize: AppFontSize.size14,
-                            fontFamily: AppFontFamily.family,
-                          ),
-                        ),
-                        Text(
-                          event.dateTime.day.toString(),
-                          style: TextStyle(
-                            color: AppTextColor.mediumEmphasis,
-                            fontSize: AppFontSize.size14,
-                            fontFamily: AppFontFamily.family,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-          Icon(
-            Icons.keyboard_arrow_right,
-            color: AppTextColor.mediumEmphasis,
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 0.0,
+                horizontal: 10.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    event.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: AppTextColor.highEmphasis,
+                      fontSize: AppFontSize.size18,
+                      fontFamily: AppFontFamily.family,
+                      fontWeight: AppFontWeight.normal,
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        event.venueName,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: AppTextColor.mediumEmphasis,
+                          fontSize: AppFontSize.size14,
+                          fontFamily: AppFontFamily.family,
+                        ),
+                      ),
+                      Text(
+                        event.dateTime.day.toString(),
+                        style: TextStyle(
+                          color: AppTextColor.mediumEmphasis,
+                          fontSize: AppFontSize.size14,
+                          fontFamily: AppFontFamily.family,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Icon(
+              Icons.keyboard_arrow_right,
+              color: AppTextColor.mediumEmphasis,
+            ),
           ),
         ],
       ),

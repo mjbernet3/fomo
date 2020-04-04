@@ -73,11 +73,15 @@ class _SearchBodyState extends State<SearchBody> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
-                child: Text('Oops...Something went wrong!'),
+                child: Text(
+                  snapshot.error.toString(),
+                ),
               );
             } else if (snapshot.data.state == SearchState.RESULT) {
               return Expanded(
-                child: VerticalEventListing(),
+                child: VerticalEventListing(
+                  events: snapshot.data.data,
+                ),
               );
             } else if (snapshot.data.state == SearchState.LOADING) {
               return LoadingIndicator();

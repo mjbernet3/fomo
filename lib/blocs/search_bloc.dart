@@ -21,8 +21,10 @@ class SearchBloc extends Bloc {
 
   Function(PageState state) get changeState => _searchStateSubject.sink.add;
 
-  Future<void> search(String searchText) async {
-    Response response = await _searchService.searchEvents(searchText);
+  Future<void> searchEvents(String searchText,
+      {String genreFilter = ''}) async {
+    Response response =
+        await _searchService.searchEvents(searchText, genreFilter);
 
     if (response.status == Status.SUCCESS) {
       _searchStateSubject.sink

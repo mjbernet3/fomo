@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/blocs/search_bloc.dart';
+import 'package:project_fomo/components/search/genre_card.dart';
 import 'package:project_fomo/components/search/genre_grid.dart';
 import 'package:project_fomo/components/shared/error_indicator.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/components/shared/vertical_event_listing.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/style.dart';
@@ -48,7 +48,7 @@ class _SearchBodyState extends State<SearchBody> {
             if (text == '') {
               _bloc.changeState(PageState(state: SearchState.IDLE));
             } else {
-              _bloc.search(text);
+              _bloc.searchEvents(text);
             }
           },
         ),
@@ -87,7 +87,52 @@ class _SearchBodyState extends State<SearchBody> {
               }
             } else {
               return Expanded(
-                child: GenreGrid(),
+                child: GenreGrid(
+                  genreCards: [
+                    GenreCard(
+                      genreText: 'Alternative',
+                      genreImage: AssetImage(
+                          "lib/assets/images/welcome-background.jpeg"),
+                      onPressed: () =>
+                          _bloc.searchEvents('', genreFilter: 'Alternative'),
+                    ),
+                    GenreCard(
+                      genreText: 'Country',
+                      genreImage: AssetImage(
+                          "lib/assets/images/welcome-background.jpeg"),
+                      onPressed: () =>
+                          _bloc.searchEvents('', genreFilter: 'Country'),
+                    ),
+                    GenreCard(
+                      genreText: 'Pop',
+                      genreImage: AssetImage(
+                          "lib/assets/images/welcome-background.jpeg"),
+                      onPressed: () =>
+                          _bloc.searchEvents('', genreFilter: 'Pop'),
+                    ),
+                    GenreCard(
+                      genreText: 'Rock',
+                      genreImage: AssetImage(
+                          "lib/assets/images/welcome-background.jpeg"),
+                      onPressed: () =>
+                          _bloc.searchEvents('', genreFilter: 'Rock'),
+                    ),
+                    GenreCard(
+                      genreText: 'Hip-Hop',
+                      genreImage: AssetImage(
+                          "lib/assets/images/welcome-background.jpeg"),
+                      onPressed: () =>
+                          _bloc.searchEvents('', genreFilter: 'Hip-Hop'),
+                    ),
+                    GenreCard(
+                      genreText: 'Electronic',
+                      genreImage: AssetImage(
+                          "lib/assets/images/welcome-background.jpeg"),
+                      onPressed: () =>
+                          _bloc.searchEvents('', genreFilter: 'Electronic'),
+                    ),
+                  ],
+                ),
               );
             }
           },

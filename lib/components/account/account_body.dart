@@ -133,7 +133,7 @@ class _AccountBodyState extends State<AccountBody> {
                 Expanded(
                   flex: 1,
                   child: Icon(
-                    Icons.face,
+                    Icons.person,
                   ),
                 ),
                 Expanded(

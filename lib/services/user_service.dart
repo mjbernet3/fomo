@@ -5,6 +5,8 @@ class UserService {
   final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
+  final _databaseReference = Firestore.instance;
+
   final String _userId;
 
   UserService(this._userId);
@@ -17,4 +19,31 @@ class UserService {
       return UserData.fromDocSnap(userDataSnap);
     });
   }
+
+  updateName(String name) {
+    if (name != null) {
+      try {
+        _databaseReference
+          .collection('users')
+            .document(_userId)
+            .updateData({'displayName': name});
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+  }
+
+  updateUsername(String username) {
+    if (username != null) {
+      try {
+        _databaseReference
+            .collection('users')
+            .document(_userId)
+            .updateData({'userName': username});
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+  }
+
 }

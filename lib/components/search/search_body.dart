@@ -57,7 +57,7 @@ class _SearchBodyState extends State<SearchBody> {
             if (_searchController.text == '') {
               _bloc.changeState(PageState(state: SearchState.IDLE));
             } else {
-              _bloc.searchEvents(_searchController.text);
+//              _bloc.searchEvents(_searchController.text);
             }
           },
         ),
@@ -104,7 +104,7 @@ class _SearchBodyState extends State<SearchBody> {
                           "lib/assets/images/welcome-background.jpeg"),
                       onPressed: () {
                         _searchController.text = 'Alternative';
-                        _bloc.searchEvents('', genreFilter: 'Alternative');
+//                        _bloc.searchEvents('', genreFilter: 'Alternative');
                       },
                     ),
                     GenreCard(
@@ -113,7 +113,7 @@ class _SearchBodyState extends State<SearchBody> {
                           "lib/assets/images/welcome-background.jpeg"),
                       onPressed: () {
                         _searchController.text = 'Country';
-                        _bloc.searchEvents('', genreFilter: 'Country');
+//                        _bloc.searchEvents('', genreFilter: 'Country');
                       },
                     ),
                     GenreCard(
@@ -122,7 +122,7 @@ class _SearchBodyState extends State<SearchBody> {
                           "lib/assets/images/welcome-background.jpeg"),
                       onPressed: () {
                         _searchController.text = 'Pop';
-                        _bloc.searchEvents('', genreFilter: 'Pop');
+//                        _bloc.searchEvents('', genreFilter: 'Pop');
                       },
                     ),
                     GenreCard(
@@ -131,7 +131,7 @@ class _SearchBodyState extends State<SearchBody> {
                           "lib/assets/images/welcome-background.jpeg"),
                       onPressed: () {
                         _searchController.text = 'Rock';
-                        _bloc.searchEvents('', genreFilter: 'Rock');
+//                        _bloc.searchEvents('', genreFilter: 'Rock');
                       },
                     ),
                     GenreCard(
@@ -140,7 +140,7 @@ class _SearchBodyState extends State<SearchBody> {
                           "lib/assets/images/welcome-background.jpeg"),
                       onPressed: () {
                         _searchController.text = 'Hip-Hop';
-                        _bloc.searchEvents('', genreFilter: 'Hip-Hop');
+//                        _bloc.searchEvents('', genreFilter: 'Hip-Hop');
                       },
                     ),
                     GenreCard(
@@ -149,7 +149,7 @@ class _SearchBodyState extends State<SearchBody> {
                           "lib/assets/images/welcome-background.jpeg"),
                       onPressed: () {
                         _searchController.text = 'Electronic';
-                        _bloc.searchEvents('', genreFilter: 'Electronic');
+//                        _bloc.searchEvents('', genreFilter: 'Electronic');
                       },
                     ),
                   ],

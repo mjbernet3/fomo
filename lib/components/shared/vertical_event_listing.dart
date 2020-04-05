@@ -13,7 +13,7 @@ class VerticalEventListing extends StatelessWidget {
             event: Event(
               name: 'Hedonistas',
               venueName: 'Center Stage',
-              date: 'Friday, January 19th',
+              dateTime: 'Friday, January 19th',
               imageUrl:
                   'https://s1.ticketm.net/dam/a/c40/e0f4dedd-b435-4b8b-8fd0-e73e47e93c40_851341_CUSTOM.jpg',
             ),

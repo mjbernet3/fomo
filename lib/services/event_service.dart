@@ -50,7 +50,7 @@ class EventService {
           .orderBy('id', descending: false)
           .limit(limit);
     }
-    int lastNumGoing = lastEvent.numGoing;
+    int lastNumGoing = lastEvent.goingCount;
     String lastId = lastEvent.id;
     return Firestore.instance
         .collection('events')
@@ -70,16 +70,14 @@ class EventService {
           .orderBy('id', descending: false)
           .limit(limit);
     }
-    String lastDate = lastEvent.date;
-    String lastTime = lastEvent.time;
+    String lastDateTime = lastEvent.dateTime;
     String lastId = lastEvent.id;
     return Firestore.instance
         .collection('events')
         .orderBy('dateTime', descending: false)
         .orderBy('id', descending: false)
         .startAfter([
-      lastDate,
-      lastTime,
+      lastDateTime,
       lastId,
     ]).limit(limit);
   }

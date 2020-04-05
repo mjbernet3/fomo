@@ -51,7 +51,7 @@ class ListEventCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          event.date,
+                          event.dateTime,
                           style: TextStyle(
                             color: AppTextColor.mediumEmphasis,
                             fontSize: AppFontSize.size14,

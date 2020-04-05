@@ -90,7 +90,7 @@ class _EventPageBodyState extends State<EventPageBody> {
                             ),
                             InfoLine(
                               type: 'Time:',
-                              content: event.date,
+                              content: event.dateTime,
                             ),
                             InfoLine(
                               type: 'Genre(s):',

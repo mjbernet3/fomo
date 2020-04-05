@@ -37,13 +37,26 @@ class ValidInputField extends StatelessWidget {
             labelStyle: TextStyle(
               color: AppTextColor.mediumEmphasis,
             ),
-            errorText: snapshot.error,
-            errorStyle: TextStyle(
-              color: AppTextColor.highEmphasis,
-            ),
+            suffixIcon: _buildSuffixIcon(snapshot),
           ),
         );
       },
     );
+  }
+
+  Widget _buildSuffixIcon(snapshot) {
+    if (snapshot.hasData) {
+      return Icon(
+        Icons.check_circle,
+        color: Colors.greenAccent,
+      );
+    } else if (snapshot.hasError) {
+      return Icon(
+        Icons.cancel,
+        color: Colors.redAccent,
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 }

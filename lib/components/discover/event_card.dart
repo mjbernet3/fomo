@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/pages/event_page.dart';
 
 class SmallEventCard extends StatelessWidget {
   final Event event;
@@ -22,62 +23,67 @@ class SmallEventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(
-        Radius.circular(10.0),
-      ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: AppColor.dp3,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, EventPage.pageRoute);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: Image.network(event.imageUrl),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: AppColor.dp3,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image.network(event.imageUrl),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Text(
-                            "",
-                            style: eventName,
-                          ),
-                          Text(
-                            "",
-                            style: eventName,
-                          ),
-                        ],
-                      ),
-                      Text(
-                        event.name,
-                        style: eventName,
-                        maxLines: 2,
-                      ),
-                    ],
-                  ),
-                  Text(
-                    event.venueName,
-                    style: eventSubText,
-                  ),
-                  Text(
-                    event.date,
-                    style: eventSubText,
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              "",
+                              style: eventName,
+                            ),
+                            Text(
+                              "",
+                              style: eventName,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          event.name,
+                          style: eventName,
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
+                    Text(
+                      event.venueName,
+                      style: eventSubText,
+                    ),
+                    Text(
+                      event.dateTime.day.toString(),
+                      style: eventSubText,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

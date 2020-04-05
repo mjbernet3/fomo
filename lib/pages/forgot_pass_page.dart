@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/components/shared/input_field.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/components/shared/gradient_button.dart';
 import 'package:project_fomo/style.dart';
@@ -23,7 +24,9 @@ class ForgotPassPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
+              InputField(
+                labelText: 'Enter your email',
+                icon: Icons.email,
                 onChanged: (value) => _email = value,
               ),
               GradientButton(

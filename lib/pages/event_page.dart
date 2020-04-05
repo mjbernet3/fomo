@@ -3,29 +3,18 @@ import 'package:project_fomo/components/event_page/event_header.dart';
 import 'package:project_fomo/components/event_page/info_line.dart';
 import 'package:project_fomo/components/event_page/output_link.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/models/event.dart';
 
 class EventPage extends StatelessWidget {
   static const String pageRoute = '/event-page';
+  final Event event;
 
-  //Placeholder data
-  static const String imageURL =
-      'https://s1.ticketm.net/dam/a/987/76ff7a29-6b21-4ac5-bdf3-d7268760e987_1206471_RETINA_LANDSCAPE_16_9.jpg';
-  static const String eventName = 'Harry Styles';
-  static const String description =
-      'Harry Styles announced a 2020 world tour, \‘Love On Tour,\' in support of his upcoming album Fine Line. The extensive run of shows begins in April in the UK and travels across Europe and North America before concluding in Mexico in October.';
-  static const String location = 'State Farm Arena';
-  static const String date = 'Wednesday, Jul 29 at 8:00 pm';
-  static const String genre = 'Pop';
-  static const String ticketURL =
-      'https://www1.ticketmaster.com/harry-styles-love-on-tour/event/0E00576BA4553316';
-  static var coordinates = {'Latitude': '33.7573', 'Longitude': '-84.3963'};
-  static const String locationURL =
-      'https://www.google.com/maps/search/?api=1&query=33.7573,-84.3963';
-  static const String appleURL = 'https://maps.apple.com/?q=33.7573,-84.3963';
-  //End placeholder data
+  EventPage({@required this.event});
 
   @override
   Widget build(BuildContext context) {
+    final String appleUrl = 'https://maps.apple.com/?q=33.7573,-84.3963';
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -42,10 +31,19 @@ class EventPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            EventHeader(imageURL: imageURL, eventName: eventName),
+            EventHeader(
+              imageURL: event.imageUrl,
+              eventName: event.name,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                Container(
+                    height: 2,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      gradient: AppColor.gradient,
+                    )),
                 Container(
                   child: Padding(
                     padding: EdgeInsets.all(15),
@@ -78,7 +76,7 @@ class EventPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(15),
                         child: Text(
-                          description,
+                          event.description ?? "No description",
                           style: TextStyle(
                             fontFamily: AppFontFamily.family,
                             fontSize: AppFontSize.size18,
@@ -88,15 +86,15 @@ class EventPage extends StatelessWidget {
                       ),
                       InfoLine(
                         type: 'Location:',
-                        content: location,
+                        content: event.venueName,
                       ),
                       InfoLine(
                         type: 'Time:',
-                        content: date,
+                        content: event.dateTime.hour.toString(),
                       ),
                       InfoLine(
                         type: 'Genre(s):',
-                        content: genre,
+                        content: [event.genre, event.subGenre].join(','),
                       ),
                     ],
                   ),
@@ -105,12 +103,12 @@ class EventPage extends StatelessWidget {
             ),
             OutputLink(
               title: 'Get Tickets',
-              url: ticketURL,
+              url: event.ticketUrl,
               displayIcon: Icons.receipt,
             ),
             OutputLink(
               title: 'Get Directions',
-              url: appleURL,
+              url: appleUrl,
               displayIcon: Icons.gps_fixed,
             ),
           ],

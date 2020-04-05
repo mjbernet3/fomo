@@ -2,33 +2,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
   String id;
-  String address;
-  String date;
   String name;
+  String venueName;
+  String address;
+  DateTime dateTime;
+  String description; // null if there is no description
+  String genre;
+  String subGenre;
   String imageUrl;
   Map location;
-  String time;
   String ticketUrl;
-  String venueName;
-  String description;
   List usersGoing;
   List usersInterested;
-  List genres;
+  int goingCount;
+  int interestedCount;
 
   Event({
     this.id,
-    this.address,
-    this.date,
     this.name,
+    this.venueName,
+    this.address,
+    this.dateTime,
+    this.description,
+    this.genre,
+    this.subGenre,
     this.imageUrl,
     this.location,
-    this.time,
     this.ticketUrl,
-    this.venueName,
-    this.description,
     this.usersGoing,
     this.usersInterested,
-    this.genres,
+    this.goingCount,
+    this.interestedCount,
   });
 
   factory Event.fromDocSnapshot(DocumentSnapshot snapshot) {
@@ -36,18 +40,20 @@ class Event {
 
     return Event(
       id: snapshot.documentID,
-      address: event['address'],
-      date: event['date'],
       name: event['name'],
+      venueName: event['venueName'],
+      address: event['address'],
+      dateTime: DateTime.parse(event['dateTime']),
+      description: event['description'],
+      genre: event['genre'],
+      subGenre: event['subGenre'],
       imageUrl: event['imageUrl'],
       location: event['location'],
-      time: event['time'],
       ticketUrl: event['ticketUrl'],
-      venueName: event['venueName'],
-      description: event['description'],
       usersGoing: event['usersGoing'],
       usersInterested: event['usersInterested'],
-      genres: event['genres'],
+      goingCount: event['goingCount'],
+      interestedCount: event['interestedCount'],
     );
   }
 }

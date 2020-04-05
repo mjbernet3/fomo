@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/style.dart';
 
 class InputField extends StatelessWidget {
-  final String labelText;
+  final String hintText;
   final IconData icon;
   final Function onChanged;
 
-  const InputField({this.labelText, this.icon, this.onChanged});
+  const InputField({this.hintText, this.icon, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,8 @@ class InputField extends StatelessWidget {
           icon,
           color: AppColor.dp24,
         ),
-        labelText: labelText,
-        labelStyle: TextStyle(
+        hintText: hintText,
+        hintStyle: TextStyle(
           color: AppTextColor.mediumEmphasis,
         ),
       ),

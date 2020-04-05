@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/blocs/discover_bloc.dart';
 import 'package:project_fomo/components/discover/discover_body.dart';

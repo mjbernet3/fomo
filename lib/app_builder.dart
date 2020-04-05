@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/services/event_service.dart';
+import 'package:project_fomo/services/search_service.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,9 @@ class AppBuilder extends StatelessWidget {
               ),
               Provider<UserService>(
                 create: (context) => UserService(user.uid),
+              ),
+              Provider<SearchService>(
+                create: (context) => SearchService(),
               ),
             ],
             child: builder(context, snapshot),

@@ -25,7 +25,7 @@ class ForgotPassPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InputField(
-                labelText: 'Enter your email',
+                hintText: 'Enter your email',
                 icon: Icons.email,
                 onChanged: (value) => _email = value,
               ),

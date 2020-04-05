@@ -1,3 +1,4 @@
+import 'package:algolia/algolia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
@@ -54,6 +55,24 @@ class Event {
       usersInterested: event['usersInterested'],
       goingCount: event['goingCount'],
       interestedCount: event['interestedCount'],
+    );
+  }
+
+  factory Event.fromAlgoliaSnapshot(AlgoliaObjectSnapshot snapshot) {
+    Map<String, dynamic> event = snapshot.data;
+
+    return Event(
+      id: snapshot.objectID,
+      name: event['name'],
+      venueName: event['venueName'],
+      address: event['address'],
+      dateTime: DateTime.parse(event['dateTime']),
+      description: event['description'],
+      genre: event['genre'],
+      subGenre: event['subGenre'],
+      imageUrl: event['imageUrl'],
+      location: event['location'],
+      ticketUrl: event['ticketUrl'],
     );
   }
 }

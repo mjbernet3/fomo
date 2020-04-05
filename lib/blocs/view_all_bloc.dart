@@ -42,14 +42,14 @@ class ViewAllBloc extends Bloc {
 
   void getNextUpcomingEvents() async {
     List<Event> nextEvents =
-        await _eventService.getPaginatedUpcomingEvents(_lastEvent);
+        await _eventService.getUpcomingEvents(startFrom: _lastEvent);
     _lastEvent = nextEvents.last;
     _viewAllPageNextEventsSubject.sink.add(nextEvents);
   }
 
   void getNextPopularEvents() async {
     List<Event> nextEvents =
-        await _eventService.getPaginatedPopularEvents(_lastEvent);
+        await _eventService.getPopularEvents(startFrom: _lastEvent);
     _lastEvent = nextEvents.last;
     _viewAllPageNextEventsSubject.sink.add(nextEvents);
   }

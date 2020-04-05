@@ -2,45 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/vertical_event_listing.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/style.dart';
-import 'package:project_fomo/components/my_events/button_row.dart';
 
 class MyEventsPage extends StatelessWidget {
   static const String pageRoute = '/';
 
+  final List<Tab> pageTabs = <Tab>[
+    Tab(text: 'Interested'),
+    Tab(text: 'Going'),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
-                child: PageHeader("My Events")
-              ),
-              CustomButtonRow(),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                  child: SizedBox(
-                    height: 3.0,
-                    width: double.infinity,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          color: AppTextColor.disabled
-                      ),
-                    ),
-                  )
-              ),
-              Container(
-                child: Expanded(
-                  child: VerticalEventListing()
-                )
-              ),
-            ],
-          )
-        )
-      )
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            indicatorColor: AppTextColor.mediumEmphasis,
+            labelColor: AppTextColor.highEmphasis,
+            unselectedLabelColor: AppTextColor.disabled,
+            labelStyle: TextStyle(
+              fontSize: AppFontSize.size18,
+              fontWeight: AppFontWeight.bold,
+              fontFamily: AppFontFamily.family
+            ),
+            tabs: pageTabs,
+          ),
+          title: PageHeader("My Events"),
+        ),
+        body: TabBarView(
+          children:
+            [
+              VerticalEventListing(),
+              VerticalEventListing()
+            ]
+        ),
+      ),
     );
   }
 }

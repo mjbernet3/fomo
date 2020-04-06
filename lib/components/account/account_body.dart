@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
+import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/pages/forgot_pass_page.dart';
 import 'package:project_fomo/services/user_service.dart';
+import 'package:project_fomo/components/shared/loading_indicator.dart';
+import 'package:project_fomo/models/user_data.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project_fomo/models/user.dart';
+import 'package:project_fomo/models/user_data.dart';
 
 class AccountBody extends StatefulWidget {
-  final String name;
-  final String email;
-  final String username;
-  final UserService userService;
-  AccountBody(this.name, this.email, this.username, this.userService);
-
   @override
-  _AccountBodyState createState() => _AccountBodyState(name: name, username: username, email: email, userService: userService);
+  _AccountBodyState createState() => _AccountBodyState();
 }
 
 
 class _AccountBodyState extends State<AccountBody> {
   static String pageRoute = '/account';
-  static bool _emailActiveStatus = false;
   static bool _nameActiveStatus = false;
   static bool _usernameActiveStatus = false;
 
   String name;
-  String email;
   String username;
-  UserService userService;
-
-  _AccountBodyState({@required this.name, @required this.email, @required this.username, @required this.userService});
+  String email;
 
   @override
   Widget build(BuildContext context) {
+    final UserService _userService = Provider.of<UserService>(context, listen: false);
+    final AuthService _authService = Provider.of<AuthService>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -48,140 +47,133 @@ class _AccountBodyState extends State<AccountBody> {
         child: Column(
           children: <Widget> [
             PageHeader("Account"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Icon(
-                    Icons.email,
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      email = value;
-                    },
-                    initialValue: email,
-                    enabled: _emailActiveStatus,
-                    decoration: InputDecoration(
-                      labelText: "Email",
+            StreamBuilder(
+              stream: _authService.firebaseUser,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return LoadingIndicator();
+                }
+                final FirebaseUser _userData = snapshot.data;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Icon(
+                        Icons.mail,
+                      ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: (_emailActiveStatus ? Icon(Icons.check) : Icon(Icons.edit)),
-                    onPressed: () {
-                      setState(() {
-                        if (_emailActiveStatus) {
-                          _emailActiveStatus = false;
-                        } else {
-                          _emailActiveStatus = true;
-                        }
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Icon(
-                    Icons.face,
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      name = value;
-                    },
-                    initialValue: name,
-                    enabled: _nameActiveStatus,
-                    decoration: InputDecoration(
-                      labelText: "Name",
+                    Expanded(
+                      flex: 4,
+                      child: TextFormField(
+                        initialValue: _userData.email,
+                        enabled: false,
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: (_nameActiveStatus ? Icon(Icons.check) : Icon(Icons.edit)),
-                    onPressed: () {
-                      setState(() {
-                        if (_nameActiveStatus) {
-                          _nameActiveStatus = false;
-                          userService.updateName(name);
-                        } else {
-                          _nameActiveStatus = true;
-                        }
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Icon(
-                    Icons.person,
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      username = value;
-                    },
-                    initialValue: username,
-                    enabled: _usernameActiveStatus,
-                    decoration: InputDecoration(
-                      labelText: "Username",
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(height: 10,)
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: (_usernameActiveStatus ? Icon(Icons.check) : Icon(Icons.edit)),
-                    onPressed: () {
-                      setState(() {
-                        if (_usernameActiveStatus) {
-                          _usernameActiveStatus = false;
-                          userService.updateUsername(username);
-                        } else {
-                          _usernameActiveStatus = true;
-                        }
-                      });
-                    },
-                  ),
-                ),
-              ],
+                  ],
+                );
+              }
             ),
-//            FlatButton(
-//              onPressed: () {
-//                Navigator.pushNamed(context, ForgotPassPage.pageRoute);
-//              },
-//              child: Text(
-//                'Forgot Password?',
-//                style: TextStyle(
-//                  color: AppTextColor.mediumEmphasis,
-//                  fontFamily: AppFontFamily.family,
-//                  fontSize: AppFontSize.size14,
-//                ),
-//              ),
-//            ),
+            StreamBuilder(
+            stream: _userService.userData,
+            builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return LoadingIndicator();
+                }
+                final UserData _userData = snapshot.data;
+                return Column(
+                    children: <Widget> [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: Icon(
+                              Icons.face,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                name = value;
+                              },
+                              initialValue: _userData.displayName,
+                              enabled: _nameActiveStatus,
+                              decoration: InputDecoration(
+                                labelText: "Name",
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: IconButton(
+                              icon: (_nameActiveStatus ? Icon(Icons.check) : Icon(Icons.edit)),
+                              onPressed: () {
+                                setState(() {
+                                  if (_nameActiveStatus) {
+                                    _nameActiveStatus = false;
+                                    _userService.updateName(name);
+                                  } else {
+                                    _nameActiveStatus = true;
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: Icon(
+                              Icons.person,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                username = value;
+                              },
+                              initialValue: _userData.userName,
+                              enabled: _usernameActiveStatus,
+                              decoration: InputDecoration(
+                                labelText: "Username",
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: IconButton(
+                              icon: (_usernameActiveStatus ? Icon(Icons.check) : Icon(Icons.edit)),
+                              onPressed: () {
+                                setState(() {
+                                  if (_usernameActiveStatus) {
+                                    _usernameActiveStatus = false;
+                                    _userService.updateUsername(username);
+                                  } else {
+                                    _usernameActiveStatus = true;
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                );},
+            ),
           ],
-
         ),
       ),
     );

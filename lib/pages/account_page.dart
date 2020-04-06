@@ -21,12 +21,7 @@ class AccountPage extends StatelessWidget {
                 return LoadingIndicator();
               }
               final UserData _userData = snapshot.data;
-              return AccountBody(
-                _userData.displayName,
-                _userData.displayName,
-                _userData.userName,
-                _userService,
-              );
+              return AccountBody( );
             }),
       ),
     );

@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/style.dart';
-import 'package:project_fomo/pages/forgot_pass_page.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_fomo/models/user.dart';
-import 'package:project_fomo/models/user_data.dart';
 
 class AccountBody extends StatefulWidget {
   @override

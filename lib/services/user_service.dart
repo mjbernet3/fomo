@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/models/user_data.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/utils/structures/response.dart';
-import 'package:rxdart/rxdart.dart';
 
 class UserService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
@@ -22,15 +18,6 @@ class UserService {
         .snapshots()
         .map((DocumentSnapshot userDataSnap) {
       return UserData.fromDocSnap(userDataSnap);
-    });
-  }
-
-  Stream<User> get signedInUser {
-    return _auth.onAuthStateChanged.map((FirebaseUser firebaseUser) {
-      if (firebaseUser == null) {
-        return null;
-      }
-      return User.fromFirebaseUser(firebaseUser);
     });
   }
 

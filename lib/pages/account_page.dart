@@ -10,19 +10,10 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserService _userService = Provider.of<UserService>(context, listen: false);
 
     return Scaffold(
       body: SafeArea(
-        child: StreamBuilder(
-            stream: _userService.userData,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return LoadingIndicator();
-              }
-              final UserData _userData = snapshot.data;
-              return AccountBody( );
-            }),
+        child: AccountBody(),
       ),
     );
   }

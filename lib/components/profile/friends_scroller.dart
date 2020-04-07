@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/profile/profile_card.dart';
+import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/pages/friends_list_page.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
 
 class FriendsScroller extends StatelessWidget {
   @override
@@ -84,9 +84,9 @@ class FriendsScroller extends StatelessWidget {
                   width: 15.0,
                 ),
                 separatorBuilder: (context, index) => SizedBox(
-                    width: 110,
-                    height: 100,
-                    child: ProfileCard(userid: friends[index]),
+                  width: 110,
+                  height: 100,
+                  child: ProfileCard(userid: friends[index]),
                 ),
               ),
             );
@@ -98,16 +98,3 @@ class FriendsScroller extends StatelessWidget {
     );
   }
 }
-
-//
-//ListView.separated(
-//scrollDirection: Axis.horizontal,
-//itemCount: friends.length,
-//itemBuilder: (context, index) => SizedBox(
-//width: 15.0,
-//),
-//separatorBuilder: (context, index) => SizedBox(
-//width: 110,
-//child: ProfileCard(userid: friends[index]),
-//),
-//);

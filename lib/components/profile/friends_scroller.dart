@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/profile/profile_card.dart';
+import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/pages/friends_list_page.dart';
+import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
+import 'package:provider/provider.dart';
 
 class FriendsScroller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final UserService _userService =
+        Provider.of<UserService>(context, listen: false);
+
     return Column(
       children: <Widget>[
         Padding(
@@ -58,21 +64,32 @@ class FriendsScroller extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 110,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) => SizedBox(
-              width: 15.0,
-            ),
-            separatorBuilder: (context, index) => SizedBox(
-              width: 110,
-              child: ProfileCard(),
-            ),
-          ),
+        StreamBuilder(
+          stream: _userService.userData,
+          builder: (context, snapshot) {
+            final UserData _userData = snapshot.data;
+
+            List friends = _userData.friends;
+
+            return Expanded(
+              child: SizedBox(
+                height: 110,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: friends.length,
+                  itemBuilder: (context, index) => SizedBox(
+                    width: 15.0,
+                  ),
+                  separatorBuilder: (context, index) => SizedBox(
+                    width: 110,
+                    child: ProfileCard(userid: friends[index]),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 15),
         Divider(color: Colors.grey),
       ],
     );

@@ -29,7 +29,7 @@ class UserData {
       displayName: name,
       bio: '',
       profileUrl:
-          'https://twistedsifter.files.wordpress.com/2012/09/trippy-profile-pic-portrait-head-on-and-from-side-angle.jpg?w=800',
+          'http://www.eurogeosurveys.org/wp-content/uploads/2014/02/default_profile_pic.jpg',
       shouldLocate: false,
       shouldNotify: false,
       interested: [],

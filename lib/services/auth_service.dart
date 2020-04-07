@@ -19,16 +19,6 @@ class AuthService {
     });
   }
 
-  Stream<FirebaseUser> get firebaseUser {
-    return _auth.onAuthStateChanged.map((FirebaseUser firebaseUser) {
-      if (firebaseUser == null) {
-        return null;
-      }
-
-      return firebaseUser;
-    });
-  }
-
   Future<Response> registerWithEmailAndPassword(
       String email, String password, String userName, String name) async {
     try {

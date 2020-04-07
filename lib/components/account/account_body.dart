@@ -4,6 +4,7 @@ import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
+import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +22,6 @@ class _AccountBodyState extends State<AccountBody> {
 
   String name;
   String username;
-  String email;
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +45,12 @@ class _AccountBodyState extends State<AccountBody> {
           children: <Widget> [
             PageHeader("Account"),
             StreamBuilder(
-              stream: _authService.firebaseUser,
+              stream: _authService.signedInUser,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return LoadingIndicator();
                 }
-                final FirebaseUser _userData = snapshot.data;
+                final User _userData = snapshot.data;
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

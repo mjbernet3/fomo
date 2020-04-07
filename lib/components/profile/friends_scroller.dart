@@ -5,6 +5,7 @@ import 'package:project_fomo/pages/friends_list_page.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
+import 'package:project_fomo/components/shared/loading_indicator.dart';
 
 class FriendsScroller extends StatelessWidget {
   @override
@@ -67,23 +68,25 @@ class FriendsScroller extends StatelessWidget {
         StreamBuilder(
           stream: _userService.userData,
           builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return LoadingIndicator();
+            }
             final UserData _userData = snapshot.data;
-
-            List friends = _userData.friends;
-
-            return Expanded(
-              child: SizedBox(
-                height: 110,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: friends.length,
-                  itemBuilder: (context, index) => SizedBox(
-                    width: 15.0,
-                  ),
-                  separatorBuilder: (context, index) => SizedBox(
+            List<dynamic> friends = _userData.friends;
+            print(friends.length);
+            return SizedBox(
+              height: 110,
+              child: ListView.separated(
+                physics: const AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: friends.length,
+                itemBuilder: (context, index) => SizedBox(
+                  width: 15.0,
+                ),
+                separatorBuilder: (context, index) => SizedBox(
                     width: 110,
+                    height: 100,
                     child: ProfileCard(userid: friends[index]),
-                  ),
                 ),
               ),
             );
@@ -95,3 +98,16 @@ class FriendsScroller extends StatelessWidget {
     );
   }
 }
+
+//
+//ListView.separated(
+//scrollDirection: Axis.horizontal,
+//itemCount: friends.length,
+//itemBuilder: (context, index) => SizedBox(
+//width: 15.0,
+//),
+//separatorBuilder: (context, index) => SizedBox(
+//width: 110,
+//child: ProfileCard(userid: friends[index]),
+//),
+//);

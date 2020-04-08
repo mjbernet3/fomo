@@ -19,7 +19,7 @@ class UserService {
     });
   }
 
-  updateName(String name) {
+  Response updateName(String name) {
     try {
       _userDataCollection
           .document(_userId)
@@ -30,7 +30,7 @@ class UserService {
     }
   }
 
-  updateUsername(String username) {
+  Response updateUsername(String username) {
     try {
       _userDataCollection
           .document(_userId)

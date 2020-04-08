@@ -73,7 +73,7 @@ class FriendsScroller extends StatelessWidget {
             }
             final UserData _userData = snapshot.data;
             List<dynamic> friends = _userData.friends;
-            print(friends.length);
+
             return SizedBox(
               height: 110,
               child: ListView.separated(

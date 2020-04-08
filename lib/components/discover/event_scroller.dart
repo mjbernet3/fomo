@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/blocs/view_all_bloc.dart';
 import 'package:project_fomo/components/discover/event_card.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/pages/view_all_page.dart';
 import 'package:project_fomo/style.dart';
+import 'package:provider/provider.dart';
 
 const double leftTitlePadding = 15.0;
 
@@ -39,6 +41,9 @@ class EventScroller extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
+                  ViewAllBloc bloc =
+                      Provider.of<ViewAllBloc>(context, listen: false);
+                  bloc.setCategory(this.title.toLowerCase());
                   Navigator.pushNamed(context, ViewAllPage.pageRoute);
                 },
                 child: Row(

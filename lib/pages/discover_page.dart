@@ -12,11 +12,10 @@ class DiscoverPage extends StatelessWidget {
     return Scaffold(
       body: Provider<DiscoverBloc>(
         create: (context) => DiscoverBloc(
-          eventService: Provider.of<EventService>(
-            context,
-            listen: false,
-          ),
-        ),
+            eventService: Provider.of<EventService>(
+          context,
+          listen: false,
+        )),
         dispose: (context, bloc) => bloc.dispose(),
         child: DiscoverBody(),
       ),

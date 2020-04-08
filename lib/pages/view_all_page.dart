@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/shared/vertical_event_listing.dart';
+import 'package:project_fomo/components/view_all/view_all_body.dart';
 import 'package:project_fomo/style.dart';
 
 class ViewAllPage extends StatelessWidget {
@@ -36,7 +36,7 @@ class ViewAllPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: VerticalEventListing(),
+      body: ViewAllBody(),
     );
   }
 }

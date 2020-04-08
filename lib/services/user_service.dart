@@ -6,8 +6,6 @@ class UserService {
   final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
-  static final _databaseReference = Firestore.instance;
-
   final String _userId;
 
   UserService (this._userId);
@@ -22,30 +20,24 @@ class UserService {
   }
 
   updateName(String name) {
-    if (name != null) {
-      try {
-        _databaseReference
-          .collection('users')
-            .document(_userId)
-            .updateData({'displayName': name});
-        return Response(status: Status.SUCCESS);
-      } catch (error) {
-        return Response(status: Status.FAILURE, message: error.toString());
-      }
+    try {
+      _userDataCollection
+          .document(_userId)
+          .updateData({'displayName': name});
+      return Response(status: Status.SUCCESS);
+    } catch (error) {
+      return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 
   updateUsername(String username) {
-    if (username != null) {
-      try {
-        _databaseReference
-            .collection('users')
-            .document(_userId)
-            .updateData({'userName': username});
-        return Response(status: Status.SUCCESS);
-      } catch (error) {
-        return Response(status: Status.FAILURE, message: error.toString());
-      }
+    try {
+      _userDataCollection
+          .document(_userId)
+          .updateData({'userName': username});
+      return Response(status: Status.SUCCESS);
+    } catch (error) {
+      return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 }

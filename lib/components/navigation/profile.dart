@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/pages/about_page.dart';
 import 'package:project_fomo/pages/account_page.dart';
+import 'package:project_fomo/pages/forgot_pass_page.dart';
 import 'package:project_fomo/pages/profile_page.dart';
 import 'package:project_fomo/pages/unknown_page.dart';
 
@@ -25,6 +26,8 @@ class _ProfileState extends State<Profile> {
                 return AccountPage();
               case AboutPage.pageRoute:
                 return AboutPage();
+              case ForgotPassPage.pageRoute:
+                return ForgotPassPage();
               default:
                 return UnknownPage();
             }

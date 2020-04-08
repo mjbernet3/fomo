@@ -11,17 +11,16 @@ class EventService {
     categories['featured'] = await getTaggedEvents('featured');
     categories['popular'] = await getPopularEvents();
     categories['upcoming'] = await getUpcomingEvents();
-    print(categories);
     return categories;
   }
 
-  Future<List<Event>> getPopularEvents({Event startFrom, int limit}) async {
-    Query query = _getPopularQuery(startFrom, limit: limit);
+  Future<List<Event>> getPopularEvents({Event startAfter, int limit}) async {
+    Query query = _getPopularQuery(startAfter, limit: limit);
     return _queryEvents(query);
   }
 
-  Future<List<Event>> getUpcomingEvents({Event startFrom, int limit}) async {
-    Query query = _getUpcomingQuery(startFrom, limit: limit);
+  Future<List<Event>> getUpcomingEvents({Event startAfter, int limit}) async {
+    Query query = _getUpcomingQuery(startAfter, limit: limit);
     return _queryEvents(query);
   }
 
@@ -38,7 +37,6 @@ class EventService {
         events.add(event);
       }
     });
-    print(events);
     return events;
   }
 

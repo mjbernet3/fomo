@@ -7,29 +7,35 @@ class ViewAllBloc extends Bloc {
   EventService _eventService;
   Event _lastEvent;
   String _category;
-  final BehaviorSubject<List<Event>> _viewAllPageNextEventsSubject =
-      BehaviorSubject<List<Event>>();
+  List<Event> _events;
+  List<String>
+      _ids; // TODO: Fixes the bug of showing the last event infinitely but the cause of the bug is still a mystery.
+  final PublishSubject<List<Event>> _viewAllPageEventsSubject =
+      PublishSubject<List<Event>>();
   final BehaviorSubject<String> _viewAllPageCategorySubject =
       BehaviorSubject<String>();
 
-  Stream<List<Event>> get nextEvents => _viewAllPageNextEventsSubject.stream;
-  Stream<String> get viewAllVCategory => _viewAllPageCategorySubject.stream;
+  Stream<List<Event>> get events => _viewAllPageEventsSubject.stream;
+  Stream<String> get category => _viewAllPageCategorySubject.stream;
 
   ViewAllBloc({EventService eventService}) : _eventService = eventService;
 
   void setCategory(String category) {
     _category = category;
     _lastEvent = null;
+    _events = []; // TODO : Potentially cache these events
+    _ids = [];
     _viewAllPageCategorySubject.sink.add(_category);
   }
 
-  void loadNextEvents() {
+  void loadMoreEvents() async {
+    print("loading events from $_category...");
     switch (_category) {
       case 'upcoming':
-        getNextUpcomingEvents();
+        getMoreUpcomingEvents();
         break;
       case 'popular':
-        getNextPopularEvents();
+        getMorePopularEvents();
         break;
       case '':
         throw FormatException("Category has not been set");
@@ -40,23 +46,41 @@ class ViewAllBloc extends Bloc {
     }
   }
 
-  void getNextUpcomingEvents() async {
+  void getMoreUpcomingEvents() async {
     List<Event> nextEvents =
-        await _eventService.getUpcomingEvents(startFrom: _lastEvent);
+        await _eventService.getUpcomingEvents(startAfter: _lastEvent);
+    for (Event event in nextEvents) {
+      // This bug fix could be improved
+      if (_ids.contains(event.id))
+        return;
+      else
+        _ids.add(event.id);
+    }
+    if (nextEvents.isEmpty) return;
     _lastEvent = nextEvents.last;
-    _viewAllPageNextEventsSubject.sink.add(nextEvents);
+    _events.addAll(nextEvents);
+    _viewAllPageEventsSubject.sink.add(_events);
   }
 
-  void getNextPopularEvents() async {
+  void getMorePopularEvents() async {
     List<Event> nextEvents =
-        await _eventService.getPopularEvents(startFrom: _lastEvent);
+        await _eventService.getPopularEvents(startAfter: _lastEvent);
+    if (nextEvents.isEmpty) return;
+    for (Event event in nextEvents) {
+      // This bug fix could be improved
+      if (_ids.contains(event.id))
+        return;
+      else
+        _ids.add(event.id);
+    }
     _lastEvent = nextEvents.last;
-    _viewAllPageNextEventsSubject.sink.add(nextEvents);
+    _events.addAll(nextEvents);
+    _viewAllPageEventsSubject.sink.add(_events);
   }
 
   @override
   void dispose() {
-    _viewAllPageNextEventsSubject.close();
+    _viewAllPageEventsSubject.close();
     _viewAllPageCategorySubject.close();
   }
 }

@@ -38,7 +38,6 @@ class Event {
 
   factory Event.fromDocSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> event = snapshot.data;
-
     return Event(
       id: snapshot.documentID,
       name: event['name'],

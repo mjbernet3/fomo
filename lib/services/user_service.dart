@@ -8,7 +8,7 @@ class UserService {
 
   final String _userId;
 
-  UserService (this._userId);
+  UserService(this._userId);
 
   Stream<UserData> get userData {
     return _userDataCollection
@@ -19,11 +19,18 @@ class UserService {
     });
   }
 
+  Stream<UserData> otherUserData(String id) {
+    return _userDataCollection
+        .document(id)
+        .snapshots()
+        .map((DocumentSnapshot userDataSnap) {
+      return UserData.fromDocSnap(userDataSnap);
+    });
+  }
+
   Response updateName(String name) {
     try {
-      _userDataCollection
-          .document(_userId)
-          .updateData({'displayName': name});
+      _userDataCollection.document(_userId).updateData({'displayName': name});
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());
@@ -32,9 +39,7 @@ class UserService {
 
   Response updateUsername(String username) {
     try {
-      _userDataCollection
-          .document(_userId)
-          .updateData({'userName': username});
+      _userDataCollection.document(_userId).updateData({'userName': username});
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserData {
   String userName;
   String displayName;
-  String bio;
   String profileUrl;
   bool shouldLocate;
   bool shouldNotify;
@@ -14,7 +13,6 @@ class UserData {
   UserData({
     this.userName,
     this.displayName,
-    this.bio,
     this.profileUrl,
     this.shouldLocate,
     this.shouldNotify,
@@ -27,9 +25,8 @@ class UserData {
     return UserData(
       userName: userName,
       displayName: name,
-      bio: '',
       profileUrl:
-          'https://twistedsifter.files.wordpress.com/2012/09/trippy-profile-pic-portrait-head-on-and-from-side-angle.jpg?w=800',
+          'http://www.eurogeosurveys.org/wp-content/uploads/2014/02/default_profile_pic.jpg',
       shouldLocate: false,
       shouldNotify: false,
       interested: [],
@@ -42,7 +39,6 @@ class UserData {
     return UserData(
       userName: doc['userName'],
       displayName: doc['displayName'],
-      bio: doc['bio'],
       profileUrl: doc['profileUrl'],
       shouldLocate: doc['shouldLocate'],
       shouldNotify: doc['shouldNotify'],
@@ -56,7 +52,6 @@ class UserData {
     return {
       'userName': userName,
       'displayName': displayName,
-      'bio': bio,
       'profileUrl': profileUrl,
       'shouldLocate': shouldLocate,
       'shouldNotify': shouldNotify,

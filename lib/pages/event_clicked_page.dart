@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:project_fomo/components/event_clicked/event_clicked_body.dart';
 import 'package:project_fomo/models/event.dart';
 
-class EventPage extends StatelessWidget {
+class EventClickedPage extends StatelessWidget {
   static const String pageRoute = '/event-page';
   final Event event;
 
-  EventPage({@required this.event});
+  EventClickedPage({@required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class EventPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: EventPageBody(),
+      body: EventClickedPageBody(),
     );
   }
 }

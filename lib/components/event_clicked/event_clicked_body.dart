@@ -9,12 +9,12 @@ import 'package:provider/provider.dart';
 
 const double leftTitlePadding = 15.0;
 
-class EventPageBody extends StatefulWidget {
+class EventClickedPageBody extends StatefulWidget {
   @override
-  _EventPageBodyState createState() => _EventPageBodyState();
+  _EventClickedPageBodyState createState() => _EventClickedPageBodyState();
 }
 
-class _EventPageBodyState extends State<EventPageBody> {
+class _EventClickedPageBodyState extends State<EventClickedPageBody> {
   EventPageBloc _bloc;
 
   @override
@@ -30,7 +30,6 @@ class _EventPageBodyState extends State<EventPageBody> {
           builder: (context, AsyncSnapshot<Event> eventSnapshot) {
             if (!eventSnapshot.hasData) return Container();
             Event event = eventSnapshot.data;
-            print(event.genres);
             return SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -76,7 +75,9 @@ class _EventPageBodyState extends State<EventPageBody> {
                             Padding(
                               padding: EdgeInsets.all(15),
                               child: Text(
-                                event.description,
+                                event.description != null
+                                    ? event.description
+                                    : "This event has no description.",
                                 style: TextStyle(
                                   fontFamily: AppFontFamily.family,
                                   fontSize: AppFontSize.size18,
@@ -90,11 +91,11 @@ class _EventPageBodyState extends State<EventPageBody> {
                             ),
                             InfoLine(
                               type: 'Time:',
-                              content: event.dateTime,
+                              content: event.dateTime.toIso8601String(),
                             ),
                             InfoLine(
                               type: 'Genre(s):',
-                              content: event.genres.join(', '),
+                              content: '${event.genre}, ${event.subGenre}',
                             ),
                           ],
                         ),

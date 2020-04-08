@@ -23,8 +23,8 @@ class _DiscoverState extends State<Discover> {
                 return DiscoverPage();
               case ViewAllPage.pageRoute:
                 return ViewAllPage();
-              case EventPage.pageRoute:
-                return EventPage();
+              case EventClickedPage.pageRoute:
+                return EventClickedPage();
               default:
                 return UnknownPage();
             }

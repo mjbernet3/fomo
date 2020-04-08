@@ -1,3 +1,4 @@
+import 'package:algolia/algolia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
@@ -6,13 +7,14 @@ class Event {
   String name;
   String imageUrl;
   Map location;
-  String dateTime;
+  DateTime dateTime;
   String ticketUrl;
   String venueName;
   String description;
   List usersGoing;
   List usersInterested;
-  List genres;
+  String genre;
+  String subGenre;
   int goingCount;
   int interestedCount;
 
@@ -28,7 +30,8 @@ class Event {
     this.description,
     this.usersGoing,
     this.usersInterested,
-    this.genres,
+    this.genre,
+    this.subGenre,
     this.goingCount,
     this.interestedCount,
   });
@@ -37,19 +40,39 @@ class Event {
     Map<String, dynamic> event = snapshot.data;
 
     return Event(
-        id: event['id'],
-        address: event['address'],
-        dateTime: event['dateTime'],
-        name: event['name'],
-        imageUrl: event['imageUrl'],
-        location: event['location'],
-        ticketUrl: event['ticketUrl'],
-        venueName: event['venueName'],
-        description: event['description'],
-        usersGoing: event['usersGoing'],
-        usersInterested: event['usersInterested'],
-        genres: event['genres'],
-        goingCount: event['goingCount'],
-        interestedCount: event['interestedCount']);
+      id: event['id'],
+      name: event['name'],
+      venueName: event['venueName'],
+      address: event['address'],
+      dateTime: DateTime.parse(event['dateTime']),
+      description: event['description'],
+      genre: event['genre'],
+      subGenre: event['subGenre'],
+      imageUrl: event['imageUrl'],
+      location: event['location'],
+      ticketUrl: event['ticketUrl'],
+      usersGoing: event['usersGoing'],
+      usersInterested: event['usersInterested'],
+      goingCount: event['goingCount'],
+      interestedCount: event['interestedCount'],
+    );
+  }
+
+  factory Event.fromAlgoliaSnapshot(AlgoliaObjectSnapshot snapshot) {
+    Map<String, dynamic> event = snapshot.data;
+
+    return Event(
+      id: snapshot.objectID,
+      name: event['name'],
+      venueName: event['venueName'],
+      address: event['address'],
+      dateTime: DateTime.parse(event['dateTime']),
+      description: event['description'],
+      genre: event['genre'],
+      subGenre: event['subGenre'],
+      imageUrl: event['imageUrl'],
+      location: event['location'],
+      ticketUrl: event['ticketUrl'],
+    );
   }
 }

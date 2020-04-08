@@ -70,7 +70,7 @@ class EventService {
           .orderBy('id', descending: false)
           .limit(limit);
     }
-    String lastDateTime = lastEvent.dateTime;
+    String lastDateTime = lastEvent.dateTime.toIso8601String();
     String lastId = lastEvent.id;
     return Firestore.instance
         .collection('events')

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/components/profile/friends_scroller.dart';
 import 'package:project_fomo/components/profile/profile_header.dart';
 import 'package:project_fomo/components/profile/settings_list.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
@@ -26,26 +27,30 @@ class ProfilePage extends StatelessWidget {
 
               final UserData _userData = snapshot.data;
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              return ListView(
                 children: <Widget>[
-                  ProfileHeader(
-                    displayName: _userData.displayName,
-                    userName: _userData.userName,
-                    bio: _userData.bio,
-                    profileUrl: _userData.profileUrl,
-                  ),
-                  Container(
-                    height: 2,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      gradient: AppColor.gradient,
-                    ),
-                  ),
-                  SettingList(
-                    shouldNotify: _userData.shouldNotify,
-                    shouldLocate: _userData.shouldLocate,
-                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      ProfileHeader(
+                        displayName: _userData.displayName,
+                        userName: _userData.userName,
+                        profileUrl: _userData.profileUrl,
+                      ),
+                      Container(
+                        height: 2,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          gradient: AppColor.gradient,
+                        ),
+                      ),
+                      FriendsScroller(),
+                      SettingList(
+                        shouldNotify: _userData.shouldNotify,
+                        shouldLocate: _userData.shouldLocate,
+                      ),
+                    ],
+                  )
                 ],
               );
             }),

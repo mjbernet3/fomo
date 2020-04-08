@@ -3,6 +3,7 @@ import 'package:project_fomo/models/event.dart';
 
 class EventService {
   final String _userId;
+  DocumentSnapshot lastDocument;
 
   EventService(this._userId);
 
@@ -14,12 +15,14 @@ class EventService {
     return categories;
   }
 
-  Future<List<Event>> getPopularEvents({Event startAfter, int limit}) async {
+  Future<List<Event>> getPopularEvents(
+      {DocumentSnapshot startAfter, int limit}) async {
     Query query = _getPopularQuery(startAfter, limit: limit);
     return _queryEvents(query);
   }
 
-  Future<List<Event>> getUpcomingEvents({Event startAfter, int limit}) async {
+  Future<List<Event>> getUpcomingEvents(
+      {DocumentSnapshot startAfter, int limit}) async {
     Query query = _getUpcomingQuery(startAfter, limit: limit);
     return _queryEvents(query);
   }
@@ -35,48 +38,41 @@ class EventService {
       for (DocumentSnapshot ds in qs.documents) {
         Event event = Event.fromDocSnapshot(ds);
         events.add(event);
+        lastDocument = ds;
       }
     });
     return events;
   }
 
-  Query _getPopularQuery(Event lastEvent, {int limit: 10}) {
-    if (lastEvent == null) {
+  Query _getPopularQuery(DocumentSnapshot lastDocument, {int limit: 10}) {
+    if (lastDocument == null) {
       return Firestore.instance
           .collection('events')
           .orderBy('goingCount', descending: true)
-          .orderBy('id', descending: false)
           .limit(limit);
     }
-    int lastNumGoing = lastEvent.goingCount;
-    String lastId = lastEvent.id;
+    int lastNumGoing = lastDocument.data['goingCount'];
     return Firestore.instance
         .collection('events')
         .orderBy('goingCount', descending: true)
-        .orderBy('id', descending: false)
         .startAfter([
       lastNumGoing,
-      lastId,
     ]).limit(limit);
   }
 
-  Query _getUpcomingQuery(Event lastEvent, {int limit: 10}) {
-    if (lastEvent == null) {
+  Query _getUpcomingQuery(DocumentSnapshot lastDocument, {int limit: 10}) {
+    if (lastDocument == null) {
       return Firestore.instance
           .collection('events')
           .orderBy('dateTime', descending: false)
-          .orderBy('id', descending: false)
           .limit(limit);
     }
-    String lastDateTime = lastEvent.dateTime.toIso8601String();
-    String lastId = lastEvent.id;
+    String lastDateTime = lastDocument.data['dateTime'];
     return Firestore.instance
         .collection('events')
         .orderBy('dateTime', descending: false)
-        .orderBy('id', descending: false)
         .startAfter([
       lastDateTime,
-      lastId,
     ]).limit(limit);
   }
 
@@ -84,7 +80,6 @@ class EventService {
     return Firestore.instance
         .collection('events')
         .where('tags', arrayContains: tag)
-        .orderBy('id', descending: false)
         .limit(limit);
   }
 }

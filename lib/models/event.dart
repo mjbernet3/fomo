@@ -40,7 +40,7 @@ class Event {
     Map<String, dynamic> event = snapshot.data;
 
     return Event(
-      id: event['id'],
+      id: snapshot.documentID,
       name: event['name'],
       venueName: event['venueName'],
       address: event['address'],

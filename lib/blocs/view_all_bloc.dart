@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/blocs/bloc.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/services/event_service.dart';
@@ -5,7 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 class ViewAllBloc extends Bloc {
   EventService _eventService;
-  Event _lastEvent;
+  DocumentSnapshot _lastDocument;
   String _category;
   List<Event> _events;
   List<String>
@@ -22,7 +23,7 @@ class ViewAllBloc extends Bloc {
 
   void setCategory(String category) {
     _category = category;
-    _lastEvent = null;
+    _lastDocument = null;
     _events = []; // TODO : Potentially cache these events
     _ids = [];
     _viewAllPageCategorySubject.sink.add(_category);
@@ -44,11 +45,12 @@ class ViewAllBloc extends Bloc {
         throw FormatException("Category: $_category is not recognized");
         break;
     }
+    _lastDocument = _eventService.lastDocument;
   }
 
   void getMoreUpcomingEvents() async {
     List<Event> nextEvents =
-        await _eventService.getUpcomingEvents(startAfter: _lastEvent);
+        await _eventService.getUpcomingEvents(startAfter: _lastDocument);
     for (Event event in nextEvents) {
       // This bug fix could be improved
       if (_ids.contains(event.id))
@@ -57,14 +59,13 @@ class ViewAllBloc extends Bloc {
         _ids.add(event.id);
     }
     if (nextEvents.isEmpty) return;
-    _lastEvent = nextEvents.last;
     _events.addAll(nextEvents);
     _viewAllPageEventsSubject.sink.add(_events);
   }
 
   void getMorePopularEvents() async {
     List<Event> nextEvents =
-        await _eventService.getPopularEvents(startAfter: _lastEvent);
+        await _eventService.getPopularEvents(startAfter: _lastDocument);
     if (nextEvents.isEmpty) return;
     for (Event event in nextEvents) {
       // This bug fix could be improved
@@ -73,7 +74,6 @@ class ViewAllBloc extends Bloc {
       else
         _ids.add(event.id);
     }
-    _lastEvent = nextEvents.last;
     _events.addAll(nextEvents);
     _viewAllPageEventsSubject.sink.add(_events);
   }

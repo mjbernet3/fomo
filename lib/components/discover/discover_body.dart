@@ -36,7 +36,7 @@ class _DiscoverBodyState extends State<DiscoverBody> {
               Map<String, List<Event>> categories = snapshot.data;
               for (String category in categories.keys) {
                 List<Event> events = categories[category];
-                if (category == "featured") {
+                if (category == "featured" && events.length > 0) {
                   listChildren.insert(0, FeaturedCarousel(events));
                 } else {
                   listChildren.add(Padding(

@@ -20,11 +20,10 @@ class _DiscoverBodyState extends State<DiscoverBody> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _bloc = Provider.of<DiscoverBloc>(context, listen: false);
+    _bloc.refreshEventCategories();
   }
 
   Widget build(BuildContext context) {
-    _bloc.refreshEventCategories();
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),

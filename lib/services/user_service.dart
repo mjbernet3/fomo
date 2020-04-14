@@ -20,7 +20,8 @@ class UserService {
 
   Future<void> addFriend(String userName) async {
     // Assumes the userName property of all users is unique
-    UserData me = await this.userData.last;
+    UserData me = await this.userData.first;
+    print(me);
     String myUserName = me.userName;
     if (me.friends.contains(userName)) {
       throw Exception('user ${myUserName} is already friends with ${userName}');

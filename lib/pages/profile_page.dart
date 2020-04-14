@@ -43,8 +43,10 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   SettingList(
-                    shouldNotify: _userData.shouldNotify,
-                    shouldLocate: _userData.shouldLocate,
+//                    shouldNotify: _userData.shouldNotify,
+//                    shouldLocate: _userData.shouldLocate,
+                    shouldNotify: false,
+                    shouldLocate: false,
                   ),
                 ],
               );

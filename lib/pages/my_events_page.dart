@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/components/my_events/MyAppBar.dart';
 import 'package:project_fomo/components/shared/vertical_event_listing.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/style.dart';
@@ -24,14 +25,14 @@ class MyEventsPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
+        appBar: MyAppbar(
+          tabBar: TabBar(
             indicatorColor: AppTextColor.mediumEmphasis,
             labelColor: AppTextColor.highEmphasis,
             unselectedLabelColor: AppTextColor.disabled,
             labelPadding: EdgeInsets.only(top: 10.0),
             labelStyle: TextStyle(
-                fontSize: AppFontSize.size18,
+                fontSize: AppFontSize.size20,
                 fontWeight: AppFontWeight.bold,
                 fontFamily: AppFontFamily.family
             ),

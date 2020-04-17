@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/blocs/event_page_bloc.dart';
 import 'package:project_fomo/blocs/view_all_bloc.dart';
 import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/services/auth_service.dart';
@@ -34,10 +33,6 @@ class AppBuilder extends StatelessWidget {
               ),
               Provider<SearchService>(
                 create: (context) => SearchService(),
-              ),
-              Provider<EventPageBloc>(
-                create: (context) => EventPageBloc(),
-                dispose: (context, bloc) => bloc.dispose(),
               ),
               Provider(
                 create: (context) => ViewAllBloc(

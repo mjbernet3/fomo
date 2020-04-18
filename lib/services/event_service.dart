@@ -5,10 +5,6 @@ class EventService {
   final CollectionReference _eventCollection =
       Firestore.instance.collection('events');
 
-  final String _userId;
-
-  EventService(this._userId);
-
   Future<List<Event>> getAllEvents() async {
     QuerySnapshot eventSnapshot = await _eventCollection.getDocuments();
 

@@ -20,7 +20,7 @@ class MyEventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserService _userService =
-      Provider.of<UserService>(context, listen: false);
+        Provider.of<UserService>(context, listen: false);
 
     return DefaultTabController(
       length: 2,
@@ -34,12 +34,10 @@ class MyEventsPage extends StatelessWidget {
             labelStyle: TextStyle(
                 fontSize: AppFontSize.size20,
                 fontWeight: AppFontWeight.bold,
-                fontFamily: AppFontFamily.family
-            ),
+                fontFamily: AppFontFamily.family),
             tabs: pageTabs,
           ),
-
-          title: PageHeader("My Events")
+          title: PageHeader("My Events"),
         ),
         body: TabBarView(
           children: [
@@ -52,7 +50,8 @@ class MyEventsPage extends StatelessWidget {
 
                 final UserData _userData = snapshot.data;
 
-                List<Event> interestedEvents = List<Event>.from(_userData.interested.where((i) => i.flag == true));
+                List<Event> interestedEvents =
+                    List<Event>.from(_userData.interested);
 
                 return VerticalEventListing(events: interestedEvents);
               },
@@ -66,14 +65,14 @@ class MyEventsPage extends StatelessWidget {
 
                 final UserData _userData = snapshot.data;
 
-                List<Event> goingEvents = List<Event>.from(_userData.going.where((i) => i.flag == true));
+                List<Event> goingEvents = List<Event>.from(_userData.going);
 
                 return VerticalEventListing(events: goingEvents);
-              }
-            )
+              },
+            ),
           ],
-        )
-      )
+        ),
+      ),
     );
   }
 }

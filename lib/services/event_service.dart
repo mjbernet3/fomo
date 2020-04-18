@@ -5,8 +5,6 @@ class EventService {
   final CollectionReference _eventCollection =
       Firestore.instance.collection('events');
 
-  EventService();
-
   Future<List<Event>> getAllEvents() async {
     QuerySnapshot eventSnapshot = await _eventCollection.getDocuments();
 
@@ -17,19 +15,4 @@ class EventService {
 
     return events;
   }
-
-  Stream<QuerySnapshot> get events {
-    return _eventCollection
-        .snapshots();
-  }
-
-  Stream<Event> getEvent(String _eventId) {
-    return _eventCollection
-        .document(_eventId)
-        .snapshots()
-        .map((DocumentSnapshot snapshot) {
-            return Event.fromDocSnapshot(snapshot);
-        });
-  }
 }
-

@@ -10,16 +10,16 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        height: preferredSize.height,
-        child: Column (
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(15.0, 50.0, 0.0, 5.0),
-              child: title,
-            ),
-            tabBar
-          ],
-        )
+      height: preferredSize.height,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(15.0, 50.0, 0.0, 5.0),
+            child: title,
+          ),
+          tabBar
+        ],
+      ),
     );
   }
 

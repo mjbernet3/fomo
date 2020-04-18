@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/account/edit_field.dart';
 import 'package:project_fomo/models/user.dart';
-import 'package:project_fomo/pages/forgot_pass_page.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
@@ -67,7 +66,7 @@ class _AccountPageState extends State<AccountPage> {
                 return EditField(
                   data: _user.email,
                   icon: Icons.mail,
-                  toChange: null,
+                  onChanged: null,
                   dataActive: false,
                   editable: false,
                   title: "Email",
@@ -81,42 +80,31 @@ class _AccountPageState extends State<AccountPage> {
                   return LoadingIndicator();
                 }
                 final UserData _userData = snapshot.data;
-                return Column(children: <Widget>[
-                  EditField(
-                    data: _userData.displayName,
-                    icon: Icons.face,
-                    toChange: (String data) {
-                      _userService.updateName(data);
-                    },
-                    dataActive: false,
-                    editable: true,
-                    title: "Name",
-                  ),
-                  EditField(
-                    data: _userData.userName,
-                    icon: Icons.person,
-                    toChange: (String data) {
-                      _userService.updateUsername(data);
-                    },
-                    dataActive: false,
-                    editable: true,
-                    title: "Username",
-                  ),
-                ]);
+                return Column(
+                  children: <Widget>[
+                    EditField(
+                      data: _userData.displayName,
+                      icon: Icons.face,
+                      onChanged: (String data) {
+                        _userService.updateName(data);
+                      },
+                      dataActive: false,
+                      editable: true,
+                      title: "Name",
+                    ),
+                    EditField(
+                      data: _userData.userName,
+                      icon: Icons.person,
+                      onChanged: (String data) {
+                        _userService.updateUsername(data);
+                      },
+                      dataActive: false,
+                      editable: true,
+                      title: "Username",
+                    ),
+                  ],
+                );
               },
-            ),
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ForgotPassPage.pageRoute);
-              },
-              child: Text(
-                'Reset Password',
-                style: TextStyle(
-                  color: AppTextColor.mediumEmphasis,
-                  fontFamily: AppFontFamily.family,
-                  fontSize: AppFontSize.size14,
-                ),
-              ),
             ),
           ],
         ),

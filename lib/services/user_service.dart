@@ -17,4 +17,13 @@ class UserService {
       return UserData.fromDocSnap(userDataSnap);
     });
   }
+
+  Stream<UserData> otherUserData(String id) {
+    return _userDataCollection
+        .document(id)
+        .snapshots()
+        .map((DocumentSnapshot userDataSnap) {
+      return UserData.fromDocSnap(userDataSnap);
+    });
+  }
 }

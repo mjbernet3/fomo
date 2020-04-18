@@ -26,7 +26,7 @@ class SettingsItem extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-        padding: padding ?? EdgeInsets.all(0.0),
+        padding: padding ?? EdgeInsets.only(left: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

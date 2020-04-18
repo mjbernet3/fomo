@@ -8,14 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user_data.dart';
 
-class AccountPage extends StatefulWidget {
+class AccountPage extends StatelessWidget {
   static const String pageRoute = '/account';
 
-  @override
-  _AccountPageState createState() => _AccountPageState();
-}
-
-class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     final UserService _userService =
@@ -66,7 +61,7 @@ class _AccountPageState extends State<AccountPage> {
                 return EditField(
                   data: _user.email,
                   icon: Icons.mail,
-                  onChanged: null,
+                  onSubmit: null,
                   dataActive: false,
                   editable: false,
                   title: "Email",
@@ -85,7 +80,7 @@ class _AccountPageState extends State<AccountPage> {
                     EditField(
                       data: _userData.displayName,
                       icon: Icons.face,
-                      onChanged: (String data) {
+                      onSubmit: (String data) {
                         _userService.updateName(data);
                       },
                       dataActive: false,
@@ -95,7 +90,7 @@ class _AccountPageState extends State<AccountPage> {
                     EditField(
                       data: _userData.userName,
                       icon: Icons.person,
-                      onChanged: (String data) {
+                      onSubmit: (String data) {
                         _userService.updateUsername(data);
                       },
                       dataActive: false,

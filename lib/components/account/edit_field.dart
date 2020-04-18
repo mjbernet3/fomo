@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class EditField extends StatefulWidget {
   final String data;
-  final Function onChanged;
+  final Function onSubmit;
   final IconData icon;
   final bool dataActive;
   final bool editable;
@@ -10,7 +10,7 @@ class EditField extends StatefulWidget {
 
   EditField({
     this.data,
-    this.onChanged,
+    this.onSubmit,
     this.icon,
     this.dataActive,
     this.editable,
@@ -20,7 +20,7 @@ class EditField extends StatefulWidget {
   @override
   _EditFieldState createState() => _EditFieldState(
       data: data,
-      onChanged: onChanged,
+      onChanged: onSubmit,
       icon: icon,
       dataActive: dataActive,
       title: title,
@@ -43,7 +43,7 @@ class _EditFieldState extends State<EditField> {
     this.dataActive,
     this.editable,
     this.title,
-  });
+  }) : editedData = data;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,10 @@ class _EditFieldState extends State<EditField> {
                       () {
                         if (dataActive) {
                           dataActive = false;
-                          onChanged(editedData);
+
+                          if (editedData != data) {
+                            onChanged(editedData);
+                          }
                         } else {
                           dataActive = true;
                         }

@@ -4,6 +4,7 @@ import 'package:project_fomo/models/event.dart';
 class EventService {
   DocumentSnapshot lastDocument;
 
+  // TODO: Change to solution that uses one query to get events
   Future<Map<String, List<Event>>> getEventsByCategory() async {
     Map<String, List<Event>> categories = Map<String, List<Event>>();
     categories['featured'] = await getTaggedEvents('featured');

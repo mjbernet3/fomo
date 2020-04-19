@@ -9,8 +9,7 @@ class ViewAllBloc extends Bloc {
   DocumentSnapshot _lastDocument;
   String _category;
   List<Event> _events;
-  List<String>
-      _ids; // TODO: Fixes the bug of showing the last event infinitely but the cause of the bug is still a mystery.
+  List<String> _ids; // TODO: Addresses bug of showing last event infinitely
   final PublishSubject<List<Event>> _viewAllPageEventsSubject =
       PublishSubject<List<Event>>();
   final BehaviorSubject<String> _viewAllPageCategorySubject =
@@ -80,6 +79,7 @@ class ViewAllBloc extends Bloc {
 
   @override
   void dispose() {
+    print('Disposing view all bloc...');
     _viewAllPageEventsSubject.close();
     _viewAllPageCategorySubject.close();
   }

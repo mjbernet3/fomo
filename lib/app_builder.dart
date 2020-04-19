@@ -46,8 +46,7 @@ class AppBuilder extends StatelessWidget {
           );
         }
 
-        return builder(context,
-            snapshot); // TODO should populate with an error or fail screen
+        return builder(context, snapshot);
       },
     );
   }

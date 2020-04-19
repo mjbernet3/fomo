@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/style.dart';
 
-class DynamicSettingsItem extends StatefulWidget {
+class Toggle extends StatefulWidget {
   final String name;
   final Function onPressed;
   final EdgeInsetsGeometry padding;
   final bool toggle;
 
-  DynamicSettingsItem({
+  Toggle({
     @required this.name,
     this.onPressed,
     this.padding,
@@ -15,18 +15,18 @@ class DynamicSettingsItem extends StatefulWidget {
   });
 
   @override
-  _DynamicSettingsItemState createState() => _DynamicSettingsItemState(name: name,
+  _ToggleState createState() => _ToggleState(name: name,
     onPressed: onPressed, padding: padding, toggle: toggle);
 }
 
-class _DynamicSettingsItemState extends State<DynamicSettingsItem> {
+class _ToggleState extends State<Toggle> {
   String name;
   Function onPressed;
   EdgeInsetsGeometry padding;
   bool toggle;
 
 
-  _DynamicSettingsItemState({
+  _ToggleState({
     @required this.name,
     this.onPressed,
     this.padding,

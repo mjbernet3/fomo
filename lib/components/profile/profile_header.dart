@@ -5,13 +5,11 @@ import 'package:project_fomo/style.dart';
 class ProfileHeader extends StatelessWidget {
   final String displayName;
   final String userName;
-  final String bio;
   final String profileUrl;
 
   ProfileHeader({
     @required this.displayName,
     @required this.userName,
-    @required this.bio,
     @required this.profileUrl,
   });
 
@@ -69,6 +67,7 @@ class ProfileHeader extends StatelessWidget {
                   ),
                   Text(
                     '@$userName',
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontWeight: AppFontWeight.normal,
                       fontSize: AppFontSize.size16,
@@ -82,15 +81,6 @@ class ProfileHeader extends StatelessWidget {
           ),
           SizedBox(
             height: 15,
-          ),
-          Text(
-            bio,
-            style: TextStyle(
-              fontWeight: AppFontWeight.bold,
-              fontSize: AppFontSize.size16,
-              fontFamily: AppFontFamily.family,
-              color: AppTextColor.title,
-            ),
           ),
         ],
       ),

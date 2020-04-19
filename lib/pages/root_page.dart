@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/navigation/discover.dart';
-import 'package:project_fomo/components/navigation/friends.dart';
 import 'package:project_fomo/components/navigation/my_events.dart';
 import 'package:project_fomo/components/navigation/profile.dart';
 import 'package:project_fomo/components/navigation/search.dart';
-import 'package:project_fomo/style.dart';
 import 'package:project_fomo/components/shared/gradient_icon.dart';
+import 'package:project_fomo/style.dart';
 
 class RootPage extends StatefulWidget {
   static const String pageRoute = '/root';
@@ -20,7 +19,6 @@ class _RootPageState extends State<RootPage> {
   List<Widget> subNavigators = [
     Discover(),
     Search(),
-    Friends(),
     MyEvents(),
     Profile(),
   ];
@@ -57,7 +55,10 @@ class _RootPageState extends State<RootPage> {
               size: 30,
             ),
             title: Text('Discover'),
-            activeIcon: GradientIcon(icon: Icons.home, size: 30,),
+            activeIcon: GradientIcon(
+              icon: Icons.home,
+              size: 30,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -65,15 +66,10 @@ class _RootPageState extends State<RootPage> {
               size: 30,
             ),
             title: Text('Search'),
-            activeIcon: GradientIcon(icon: Icons.search, size: 30,),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people_outline,
+            activeIcon: GradientIcon(
+              icon: Icons.search,
               size: 30,
             ),
-            title: Text('Friends'),
-            activeIcon: GradientIcon(icon: Icons.people_outline, size: 30,),
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -81,7 +77,10 @@ class _RootPageState extends State<RootPage> {
               size: 30,
             ),
             title: Text('Events'),
-            activeIcon: GradientIcon(icon: Icons.event_note, size: 30,),
+            activeIcon: GradientIcon(
+              icon: Icons.event_note,
+              size: 30,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -89,7 +88,10 @@ class _RootPageState extends State<RootPage> {
               size: 30,
             ),
             title: Text('Profile'),
-            activeIcon: GradientIcon(icon: Icons.person_outline, size: 30,),
+            activeIcon: GradientIcon(
+              icon: Icons.person_outline,
+              size: 30,
+            ),
           ),
         ],
       ),

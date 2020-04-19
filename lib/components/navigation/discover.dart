@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/pages/discover_page.dart';
+import 'package:project_fomo/pages/event_clicked_page.dart';
 import 'package:project_fomo/pages/unknown_page.dart';
 import 'package:project_fomo/pages/view_all_page.dart';
-import 'package:project_fomo/pages/event_page.dart';
 
 class Discover extends StatefulWidget {
   @override
@@ -23,8 +23,8 @@ class _DiscoverState extends State<Discover> {
                 return DiscoverPage();
               case ViewAllPage.pageRoute:
                 return ViewAllPage();
-              case EventPage.pageRoute:
-                return EventPage();
+              case EventClickedPage.pageRoute:
+                return EventClickedPage();
               default:
                 return UnknownPage();
             }

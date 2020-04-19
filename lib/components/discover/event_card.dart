@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/models/event.dart';
+import 'package:project_fomo/pages/event_clicked_page.dart';
 import 'package:project_fomo/style.dart';
-import 'package:project_fomo/pages/event_page.dart';
 
 class SmallEventCard extends StatelessWidget {
   final Event event;
@@ -25,7 +25,8 @@ class SmallEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, EventPage.pageRoute);
+        Navigator.pushNamed(context, EventClickedPage.pageRoute,
+            arguments: event);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.all(
@@ -76,7 +77,7 @@ class SmallEventCard extends StatelessWidget {
                       style: eventSubText,
                     ),
                     Text(
-                      event.dateTime.day.toString(),
+                      event.dateTime.toString(),
                       style: eventSubText,
                     ),
                   ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/profile/settings_item.dart';
-import 'package:project_fomo/components/profile/dynamic_settings_item.dart';
+import 'package:project_fomo/components/profile/toggle.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/style.dart';
@@ -50,7 +50,7 @@ class SettingList extends StatelessWidget {
                 SizedBox(
                   height: 10.0,
                 ),
-                DynamicSettingsItem(
+                Toggle(
                   name: 'Location Services',
                   onPressed: (bool data) {
                     _userService.updateLocation(data);
@@ -58,7 +58,7 @@ class SettingList extends StatelessWidget {
                   toggle: _userData.shouldLocate,
                 ),
                 Divider(color: Colors.grey),
-                DynamicSettingsItem(
+                Toggle(
                   name: 'Notifications',
                   onPressed: (bool data) {
                     _userService.updateNotification(data);

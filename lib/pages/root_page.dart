@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/navigation/discover.dart';
-import 'package:project_fomo/components/navigation/friends.dart';
 import 'package:project_fomo/components/navigation/my_events.dart';
 import 'package:project_fomo/components/navigation/profile.dart';
 import 'package:project_fomo/components/navigation/search.dart';
@@ -20,7 +19,6 @@ class _RootPageState extends State<RootPage> {
   List<Widget> subNavigators = [
     Discover(),
     Search(),
-    Friends(),
     MyEvents(),
     Profile(),
   ];
@@ -70,17 +68,6 @@ class _RootPageState extends State<RootPage> {
             title: Text('Search'),
             activeIcon: GradientIcon(
               icon: Icons.search,
-              size: 30,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people_outline,
-              size: 30,
-            ),
-            title: Text('Friends'),
-            activeIcon: GradientIcon(
-              icon: Icons.people_outline,
               size: 30,
             ),
           ),

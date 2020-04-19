@@ -2,10 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/models/event.dart';
 
 class EventService {
-  final String _userId;
   DocumentSnapshot lastDocument;
-
-  EventService(this._userId);
 
   Future<Map<String, List<Event>>> getEventsByCategory() async {
     Map<String, List<Event>> categories = Map<String, List<Event>>();

@@ -26,7 +26,7 @@ class AppBuilder extends StatelessWidget {
           return MultiProvider(
             providers: [
               Provider<EventService>(
-                create: (context) => EventService(user.uid),
+                create: (context) => EventService(),
               ),
               Provider<UserService>(
                 create: (context) => UserService(user.uid),

@@ -4,6 +4,7 @@ import 'package:project_fomo/models/user.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/utils/structures/response.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user_data.dart';
@@ -80,8 +81,12 @@ class AccountPage extends StatelessWidget {
                     EditField(
                       data: _userData.displayName,
                       icon: Icons.face,
-                      onSubmit: (String data) {
-                        _userService.updateName(data);
+                      onSubmit: (String data) async {
+                        Response response = await _userService.updateName(data);
+
+                        if (response.status == Status.FAILURE) {
+                          print(response.message); // TODO: Inform user of error
+                        }
                       },
                       dataActive: false,
                       editable: true,
@@ -90,8 +95,13 @@ class AccountPage extends StatelessWidget {
                     EditField(
                       data: _userData.userName,
                       icon: Icons.person,
-                      onSubmit: (String data) {
-                        _userService.updateUsername(data);
+                      onSubmit: (String data) async {
+                        Response response =
+                            await _userService.updateUsername(data);
+
+                        if (response.status == Status.FAILURE) {
+                          print(response.message); // TODO: Inform user of error
+                        }
                       },
                       dataActive: false,
                       editable: true,

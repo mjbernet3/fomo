@@ -20,7 +20,7 @@ class EditField extends StatefulWidget {
   @override
   _EditFieldState createState() => _EditFieldState(
       data: data,
-      onChanged: onSubmit,
+      onSubmit: onSubmit,
       icon: icon,
       dataActive: dataActive,
       title: title,
@@ -33,12 +33,12 @@ class _EditFieldState extends State<EditField> {
   String title;
   bool dataActive;
   bool editable;
-  Function onChanged;
+  Function onSubmit;
   IconData icon;
 
   _EditFieldState({
     this.data,
-    this.onChanged,
+    this.onSubmit,
     this.icon,
     this.dataActive,
     this.editable,
@@ -86,7 +86,7 @@ class _EditFieldState extends State<EditField> {
                           dataActive = false;
 
                           if (editedData != data) {
-                            onChanged(editedData);
+                            onSubmit(editedData);
                           }
                         } else {
                           dataActive = true;

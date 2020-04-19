@@ -28,18 +28,22 @@ class UserService {
     });
   }
 
-  Response updateName(String name) {
+  Future<Response> updateName(String name) async {
     try {
-      _userDataCollection.document(_userId).updateData({'displayName': name});
+      await _userDataCollection
+          .document(_userId)
+          .updateData({'displayName': name});
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 
-  Response updateUsername(String username) {
+  Future<Response> updateUsername(String username) async {
     try {
-      _userDataCollection.document(_userId).updateData({'userName': username});
+      await _userDataCollection
+          .document(_userId)
+          .updateData({'userName': username});
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());

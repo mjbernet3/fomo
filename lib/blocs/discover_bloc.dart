@@ -5,29 +5,26 @@ import 'package:rxdart/rxdart.dart';
 
 class DiscoverBloc extends Bloc {
   final EventService _eventService;
-  final PublishSubject<List<Event>> _eventsSubject =
-      PublishSubject<List<Event>>();
-
-  /*
-      Idea for later: How about caching a timestamp and then only getting
-      events since that timestamp?
-
-      This bloc is not finished, just brainstorming. Right now you would refresh
-      and get duplicates.
-   */
+  final PublishSubject<Map<String, List<Event>>> _eventsSubject =
+      PublishSubject<Map<String, List<Event>>>();
 
   DiscoverBloc({EventService eventService}) : _eventService = eventService;
 
-  Stream<List<Event>> get events => _eventsSubject.stream;
+  Stream<Map<String, List<Event>>> get events => _eventsSubject.stream;
 
-  Future<void> refreshEvents() async {
-    List<Event> events = await _eventService.getAllEvents();
-
-    _eventsSubject.sink.add(events);
+  Future<void> refreshEventCategories() async {
+    if (!_eventsSubject.isClosed) {
+      Map<String, List<Event>> categories =
+          await _eventService.getEventsByCategory();
+      if (!_eventsSubject.isClosed) {
+        _eventsSubject.sink.add(categories);
+      }
+    }
   }
 
   @override
   void dispose() {
+    print('Disposing discover bloc...');
     _eventsSubject.close();
   }
 }

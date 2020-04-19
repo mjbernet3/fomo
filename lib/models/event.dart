@@ -3,35 +3,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
   String id;
-  String name;
-  String venueName;
   String address;
-  DateTime dateTime;
-  String description; // null if there is no description
-  String genre;
-  String subGenre;
+  String name;
   String imageUrl;
   Map location;
+  DateTime dateTime;
   String ticketUrl;
+  String venueName;
+  String description;
   List usersGoing;
   List usersInterested;
+  String genre;
+  String subGenre;
   int goingCount;
   int interestedCount;
 
   Event({
     this.id,
-    this.name,
-    this.venueName,
     this.address,
     this.dateTime,
-    this.description,
-    this.genre,
-    this.subGenre,
+    this.name,
     this.imageUrl,
     this.location,
     this.ticketUrl,
+    this.venueName,
+    this.description,
     this.usersGoing,
     this.usersInterested,
+    this.genre,
+    this.subGenre,
     this.goingCount,
     this.interestedCount,
   });

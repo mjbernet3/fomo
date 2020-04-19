@@ -3,8 +3,8 @@ import 'package:project_fomo/components/navigation/discover.dart';
 import 'package:project_fomo/components/navigation/my_events.dart';
 import 'package:project_fomo/components/navigation/profile.dart';
 import 'package:project_fomo/components/navigation/search.dart';
-import 'package:project_fomo/style.dart';
 import 'package:project_fomo/components/shared/gradient_icon.dart';
+import 'package:project_fomo/style.dart';
 
 class RootPage extends StatefulWidget {
   static const String pageRoute = '/root';

@@ -19,41 +19,42 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: StreamBuilder(
-            stream: _userService.userData,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return LoadingIndicator();
-              }
+          stream: _userService.userData,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return LoadingIndicator();
+            }
 
-              final UserData _userData = snapshot.data;
+            final UserData _userData = snapshot.data;
 
-              return ListView(
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      ProfileHeader(
-                        displayName: _userData.displayName,
-                        userName: _userData.userName,
-                        profileUrl: _userData.profileUrl,
+            return ListView(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    ProfileHeader(
+                      displayName: _userData.displayName,
+                      userName: _userData.userName,
+                      profileUrl: _userData.profileUrl,
+                    ),
+                    Container(
+                      height: 2,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        gradient: AppColor.gradient,
                       ),
-                      Container(
-                        height: 2,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          gradient: AppColor.gradient,
-                        ),
-                      ),
-                      FriendsScroller(),
-                      SettingList(
-                        shouldNotify: _userData.shouldNotify,
-                        shouldLocate: _userData.shouldLocate,
-                      ),
-                    ],
-                  )
-                ],
-              );
-            }),
+                    ),
+                    FriendsScroller(),
+                    SettingList(
+                      shouldNotify: _userData.shouldNotify,
+                      shouldLocate: _userData.shouldLocate,
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

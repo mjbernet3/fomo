@@ -4,6 +4,47 @@ import 'package:project_fomo/models/event.dart';
 class EventService {
   DocumentSnapshot lastDocument;
 
+  static Future<void> addUserToGoing(String eventId, String userId) async {
+    return _getGoingUsers(eventId).then((List<dynamic> goingUsers) {
+      if (goingUsers.contains(userId)) {
+        return Future.error("User $userId is alread going to event $eventId");
+      }
+      goingUsers.add(userId);
+      return _setGoingUsers(eventId, goingUsers);
+    }).catchError((error) => Future.error(error));
+  }
+
+  static Future<void> removeUserFromGoing(String eventId, String userId) async {
+    return _getGoingUsers(eventId).then((List<dynamic> goingUsers) {
+      if (!goingUsers.contains(userId)) {
+        return Future.error("User $userId is not going to event $eventId");
+      }
+      goingUsers.remove(userId);
+      return _setGoingUsers(eventId, goingUsers);
+    }).catchError((error) => Future.error(error));
+  }
+
+  // Large security flaw in fetching userIds
+  static Future<List<dynamic>> _getGoingUsers(String eventId) async {
+    return Firestore.instance
+        .collection('events')
+        .document(eventId)
+        .get()
+        .then((DocumentSnapshot ds) {
+      List<dynamic> goingUsers = ds.data['usersGoing'];
+      return goingUsers;
+    }).catchError((error) => Future.error(error));
+  }
+
+  // array adds are unsafe in multi-user database
+  static Future<void> _setGoingUsers(
+      String eventId, List<dynamic> newGoingUsers) async {
+    return Firestore.instance
+        .collection('events')
+        .document(eventId)
+        .updateData({'usersGoing': newGoingUsers});
+  }
+
   // TODO: Change to solution that uses one query to get events
   Future<Map<String, List<Event>>> getEventsByCategory() async {
     Map<String, List<Event>> categories = Map<String, List<Event>>();

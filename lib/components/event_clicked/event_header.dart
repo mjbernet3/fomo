@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/gradient_button.dart';
+import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
+import 'package:provider/provider.dart';
 
 class EventHeader extends StatelessWidget {
   final String imageURL;
@@ -43,7 +45,8 @@ class EventHeader extends StatelessWidget {
                       ),
                     ),
                     buttonPressed: () {
-                      print('User wants to go');
+                      Provider.of<UserService>(context, listen: false)
+                          .setGoingStatus('0B8Hs2w6pAOHZoVOaEPN', true);
                     },
                   ),
                   SizedBox(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/models/user_data.dart';
+import 'package:project_fomo/services/event_service.dart';
 import 'package:project_fomo/utils/structures/response.dart';
 
 class UserService {
@@ -50,10 +51,29 @@ class UserService {
     }
   }
 
+  Future<void> _addIsGoingEvent(String eventId) async {
+    UserData me = await this.userData.first;
+    List<dynamic> goingEvents = me.going;
+    goingEvents.add(eventId);
+    return _updateGoingEvents(goingEvents);
+  }
+
+  Future<void> _removeIsGoingEvent(String eventId) async {
+    UserData me = await this.userData.first;
+    List<dynamic> goingEvents = me.going;
+    goingEvents.remove(eventId);
+    return _updateGoingEvents(goingEvents);
+  }
+
+  Future<void> _updateGoingEvents(List<dynamic> newGoingEvents) async {
+    return _userDataCollection
+        .document(_userId)
+        .updateData({'going': newGoingEvents});
+  }
+
   Future<bool> addFriend(String userName) async {
     // Assumes the userName property of all users is unique
     UserData me = await this.userData.first;
-    print(me);
     String myUserName = me.userName;
     if (me.friends.contains(userName)) {
       return false;
@@ -99,5 +119,21 @@ class UserService {
         .document(_userId)
         .updateData({'friends': newFriends});
     return true;
+  }
+
+  Future<void> setGoingStatus(String eventId, bool status) async {
+    UserData me = await this.userData.first;
+    bool isGoing = me.going.contains(eventId);
+    if (isGoing == status) return true; // no status change needed
+    // Set status in user document
+    if (status) {
+      await _addIsGoingEvent(eventId)
+          .catchError((error) => Future.error(error));
+      return EventService.addUserToGoing(eventId, _userId);
+    } else {
+      await _removeIsGoingEvent(eventId)
+          .catchError((error) => Future.error(error));
+      return EventService.removeUserFromGoing(eventId, _userId);
+    }
   }
 }

@@ -50,54 +50,72 @@ class UserService {
     }
   }
 
-  Future<bool> addFriend(String userName) async {
-    // Assumes the userName property of all users is unique
-    UserData me = await this.userData.first;
-    print(me);
-    String myUserName = me.userName;
-    if (me.friends.contains(userName)) {
-      return false;
-      // throw Exception('user ${myUserName} is already friends with ${userName}');
+  // Security flaw, exposes id of user
+  Future<UserData> _getUserDataFromUserName(String userName) async {
+    try {
+      return _userDataCollection
+          .where('userName', isEqualTo: userName)
+          .limit(1)
+          .getDocuments()
+          .then((QuerySnapshot qs) {
+        if (qs.documents.length == 0) {
+          throw Future.error('failed to find user $userName');
+        }
+        return UserData.fromDocSnap(qs.documents[0]);
+      });
+    } catch (error) {
+      return Future.error(error);
     }
-    UserData friend;
-    // Find target user
-    await _userDataCollection
+  }
+
+  Future<void> _setFriendsOfUser(
+      String userName, List<dynamic> newFriends) async {
+    return _userDataCollection
         .where('userName', isEqualTo: userName)
         .limit(1)
         .getDocuments()
-        .then((QuerySnapshot friends) {
-      if (friends.documents.length == 1) {
-        // Add my userName to target user's friend list
-        DocumentSnapshot doc = friends.documents[0];
-        friend = UserData.fromDocSnap(doc);
-        if (doc.data['friends'].contains(myUserName)) {
-          return false;
-//          throw Exception(
-//              'user ${userName} is already friends with ${myUserName}');
-        }
-        List<dynamic> newFriends = doc.data['friends'];
-        newFriends.add(myUserName);
-        _userDataCollection
-            .document(doc.documentID)
-            .updateData({'friends': newFriends});
-      } else {
-        return false;
-//        throw Exception(
-//            'user with userName ${userName} not found.'); // Logically equivalent to next possible Exception. Consider keeping only one.
+        .then((QuerySnapshot qs) {
+      if (qs.documents.length == 0) {
+        throw Future.error('failed to find user $userName');
       }
-      return true;
+      qs.documents.forEach((DocumentSnapshot ds) {
+        _userDataCollection
+            .document(ds.documentID)
+            .updateData({'friends': newFriends});
+      });
     });
-    if (friend == null) {
-      return false;
-//      throw Exception(
-//          'user with userName ${userName} not found.'); // Logically equivalent to previous possible Exception. Consider removing.
-    }
-    // Add target user to my friend list
-    List<dynamic> newFriends = me.friends;
-    newFriends.add(userName);
-    await _userDataCollection
+  }
+
+  Future<void> _setFriends(List<dynamic> newFriends) {
+    return _userDataCollection
         .document(_userId)
         .updateData({'friends': newFriends});
-    return true;
+  }
+
+  Future<void> addFriend(String userName) async {
+    // Assumes the userName property of all users is unique
+    try {
+      UserData me = await this.userData.first;
+      String myUserName = me.userName;
+      if (me.friends.contains(userName)) {
+        return Future.error(
+            'user $myUserName is already friends with $userName');
+      }
+      UserData friendData = await _getUserDataFromUserName(userName);
+      if (friendData.friends.contains(myUserName)) {
+        return Future.error(
+            'user $userName is already friends with $myUserName');
+      }
+      List<dynamic> targetNewFriends = friendData.friends;
+      targetNewFriends.add(myUserName);
+      await _setFriendsOfUser(userName, targetNewFriends);
+
+      // Add target user to my friend list
+      List<dynamic> myNewFriends = me.friends;
+      myNewFriends.add(userName);
+      await _setFriends(myNewFriends);
+    } catch (error) {
+      return Future.error(error);
+    }
   }
 }

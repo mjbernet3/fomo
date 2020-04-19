@@ -7,10 +7,17 @@ class EventService {
   // TODO: Change to solution that uses one query to get events
   Future<Map<String, List<Event>>> getEventsByCategory() async {
     Map<String, List<Event>> categories = Map<String, List<Event>>();
-    categories['featured'] = await getTaggedEvents('featured');
-    categories['popular'] = await getPopularEvents();
-    categories['upcoming'] = await getUpcomingEvents();
-    return categories;
+    try {
+      await getTaggedEvents('featured')
+          .then((List<Event> events) => categories['featured'] = events);
+      await getPopularEvents()
+          .then((List<Event> events) => categories['popular'] = events);
+      await getUpcomingEvents()
+          .then((List<Event> events) => categories['upcoming'] = events);
+      return categories;
+    } catch (error) {
+      return Future.error(error);
+    }
   }
 
   Future<List<Event>> getPopularEvents(
@@ -38,7 +45,7 @@ class EventService {
         events.add(event);
         lastDocument = ds;
       }
-    });
+    }).catchError((error) => Future.error(error));
     return events;
   }
 

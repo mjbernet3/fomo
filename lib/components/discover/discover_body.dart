@@ -4,6 +4,7 @@ import 'package:project_fomo/components/discover/event_scroller.dart';
 import 'package:project_fomo/components/discover/featured_carousel.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/models/event.dart';
+import 'package:project_fomo/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 const double leftTitlePadding = 15.0;
@@ -53,6 +54,11 @@ class _DiscoverBodyState extends State<DiscoverBody> {
                 child: PageHeader("Discover"),
               ),
             );
+            listChildren.add(GestureDetector(
+              onTap: () => Provider.of<UserService>(context, listen: false)
+                  .addFriend("Jack"),
+              child: Container(height: 50, color: Colors.red),
+            ));
             return RefreshIndicator(
               displacement: 0,
               onRefresh: () => _bloc.refreshEventCategories(),

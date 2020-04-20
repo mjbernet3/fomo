@@ -27,6 +27,7 @@ class ListEventCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
                   event.imageUrl,
+                  scale: 0.2,
                 ),
               ),
             ),
@@ -64,7 +65,7 @@ class ListEventCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${event.dateTime}/${event.dateTime}/${event.dateTime}',
+                          '${event.dateTime.month}/${event.dateTime.day}/${event.dateTime.year}',
                           style: TextStyle(
                             color: AppTextColor.mediumEmphasis,
                             fontSize: AppFontSize.size14,

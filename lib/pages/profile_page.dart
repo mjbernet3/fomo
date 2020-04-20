@@ -45,10 +45,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     FriendsScroller(),
-                    SettingList(
-                      shouldNotify: _userData.shouldNotify,
-                      shouldLocate: _userData.shouldLocate,
-                    ),
+                    SettingList(),
                   ],
                 ),
               ],

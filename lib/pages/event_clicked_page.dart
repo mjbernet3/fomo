@@ -41,25 +41,6 @@ class EventClickedPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Text(
-                          'Future friend work here',
-                          style: TextStyle(
-                            fontFamily: AppFontFamily.family,
-                            color: AppTextColor.mediumEmphasis,
-                            fontSize: AppFontSize.size18,
-                            fontWeight: AppFontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: Color(0xFF343434)),
-                        ),
-                      ),
-                    ),
-                    Container(
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
@@ -68,27 +49,29 @@ class EventClickedPage extends StatelessWidget {
                         ),
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Text(
-                              _event.description != null
-                                  ? _event.description
-                                  : "This event has no description.",
-                              style: TextStyle(
-                                fontFamily: AppFontFamily.family,
-                                fontSize: AppFontSize.size18,
-                                fontWeight: AppFontWeight.normal,
-                              ),
-                            ),
-                          ),
+                          _event.description != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 15, top: 25, right: 15, bottom: 15),
+                                  child: Text(
+                                    _event.description,
+                                    style: TextStyle(
+                                      fontFamily: AppFontFamily.family,
+                                      fontSize: AppFontSize.size18,
+                                      fontWeight: AppFontWeight.normal,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox.shrink(),
                           InfoLine(
                             type: 'Location:',
                             content: _event.venueName,
                           ),
                           InfoLine(
                             type: 'Time:',
-                            content: _event.dateTime.toIso8601String(),
+                            content: _event.getDateTimeString(),
                           ),
                           InfoLine(
                             type: 'Genre(s):',

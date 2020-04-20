@@ -27,9 +27,7 @@ class _LoginBodyState extends State<LoginBody> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 40, left: 15, right: 15, top: 30),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: ListView(
         children: <Widget>[
           PageHeader('Log In'),
           SizedBox(height: 40),

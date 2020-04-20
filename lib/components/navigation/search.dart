@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_fomo/pages/event_clicked_page.dart';
 import 'package:project_fomo/pages/search_page.dart';
 import 'package:project_fomo/pages/unknown_page.dart';
 
@@ -19,6 +20,8 @@ class _SearchState extends State<Search> {
             switch (settings.name) {
               case SearchPage.pageRoute:
                 return SearchPage();
+              case EventClickedPage.pageRoute:
+                return EventClickedPage();
               default:
                 return UnknownPage();
             }

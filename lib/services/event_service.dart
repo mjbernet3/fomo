@@ -4,6 +4,13 @@ import 'package:project_fomo/models/event.dart';
 class EventService {
   DocumentSnapshot lastDocument;
 
+  final CollectionReference _eventDataCollection =
+    Firestore.instance.collection('events');
+
+  DocumentReference getDocumentReference(String eventId) {
+    return _eventDataCollection.document(eventId);
+  }
+
   static Future<void> addUserToGoing(String eventId, String userId) async {
     return _getGoingUsers(eventId).then((List<dynamic> goingUsers) {
       if (goingUsers.contains(userId)) {

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/my_events/MyAppBar.dart';
+import 'package:project_fomo/components/my_events/events_app_bar.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:provider/provider.dart';
-import 'package:project_fomo/models/user_data.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
-import 'package:project_fomo/models/event.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/components/my_events/my_events_body.dart';
 import 'package:project_fomo/blocs/my_events_bloc.dart';
 
@@ -21,11 +17,10 @@ class MyEventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: MyAppbar(
+        appBar: EventsAppBar(
           tabBar: TabBar(
             indicatorColor: AppTextColor.mediumEmphasis,
             labelColor: AppTextColor.highEmphasis,

@@ -65,10 +65,10 @@ class UserService {
     return _updateGoingEvents(goingEvents);
   }
 
-  Future<void> _updateGoingEvents(List<dynamic> newInterestedEvents) async {
+  Future<void> _updateGoingEvents(List<dynamic> newGoingEvents) async {
     return _userDataCollection
         .document(_userId)
-        .updateData({'interested': newInterestedEvents});
+        .updateData({'going': newGoingEvents});
   }
 
   Future<void> _addIsInterestedEvent(String eventId) async {

@@ -41,25 +41,6 @@ class EventClickedPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Text(
-                          'Future friend work here',
-                          style: TextStyle(
-                            fontFamily: AppFontFamily.family,
-                            color: AppTextColor.mediumEmphasis,
-                            fontSize: AppFontSize.size18,
-                            fontWeight: AppFontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: Color(0xFF343434)),
-                        ),
-                      ),
-                    ),
-                    Container(
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
@@ -68,9 +49,11 @@ class EventClickedPage extends StatelessWidget {
                         ),
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: EdgeInsets.only(
+                                left: 15, top: 25, right: 15, bottom: 15),
                             child: Text(
                               _event.description != null
                                   ? _event.description
@@ -88,7 +71,7 @@ class EventClickedPage extends StatelessWidget {
                           ),
                           InfoLine(
                             type: 'Time:',
-                            content: _event.dateTime.toIso8601String(),
+                            content: _event.getDateTimeString(),
                           ),
                           InfoLine(
                             type: 'Genre(s):',

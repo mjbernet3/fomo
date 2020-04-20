@@ -51,17 +51,17 @@ class UserService {
     }
   }
 
-  Future<void> _addIsGoingEvent(String eventId) async {
+  Future<void> _addIsGoingEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
     List<dynamic> goingEvents = me.going;
-    goingEvents.add(eventId);
+    goingEvents.add(documentId);
     return _updateGoingEvents(goingEvents);
   }
 
-  Future<void> _removeIsGoingEvent(String eventId) async {
+  Future<void> _removeIsGoingEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
     List<dynamic> goingEvents = me.going;
-    goingEvents.remove(eventId);
+    goingEvents.remove(documentId);
     return _updateGoingEvents(goingEvents);
   }
 
@@ -142,17 +142,18 @@ class UserService {
     return true;
   }
 
-  Future<void> setGoingStatus(String eventId, bool status) async {
+  Future<void> setGoingStatus(String eventId, bool status,
+      DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    bool isGoing = me.going.contains(eventId);
+    bool isGoing = me.going.contains(documentId);
     if (isGoing == status) return true; // no status change needed
     // Set status in user document
     if (status) {
-      await _addIsGoingEvent(eventId)
+      await _addIsGoingEvent(documentId)
           .catchError((error) => Future.error(error));
       return EventService.addUserToGoing(eventId, _userId);
     } else {
-      await _removeIsGoingEvent(eventId)
+      await _removeIsGoingEvent(documentId)
           .catchError((error) => Future.error(error));
       return EventService.removeUserFromGoing(eventId, _userId);
     }

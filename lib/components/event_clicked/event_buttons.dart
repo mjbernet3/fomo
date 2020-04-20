@@ -4,9 +4,11 @@ import 'package:project_fomo/style.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/services/user_service.dart';
+import 'package:project_fomo/services/event_service.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
 import 'package:project_fomo/models/event.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventButtons extends StatefulWidget {
   final Event event;
@@ -27,6 +29,9 @@ class _EventButtonsState extends State<EventButtons> {
     final UserService _userService =
       Provider.of<UserService>(context, listen: false);
 
+    final EventService _eventService =
+      Provider.of<EventService>(context, listen: false);
+
     return StreamBuilder(
         stream: _userService.userData,
     builder: (context, snapshot) {
@@ -35,8 +40,10 @@ class _EventButtonsState extends State<EventButtons> {
       }
 
       final UserData _userData = snapshot.data;
+
+      DocumentReference documentId = _eventService.getDocumentReference(event.id);
       
-      bool isGoing = _userData.going.contains(event.id);
+      bool isGoing = _userData.going.contains(documentId);
       
       bool isInterested = _userData.interested.contains(event.id);
       
@@ -55,7 +62,7 @@ class _EventButtonsState extends State<EventButtons> {
               if (isGoing == false && isInterested == true) {
                 _userService.setInterestedStatus(event.id, false);
               }
-              _userService.setGoingStatus(event.id, !isGoing);
+              _userService.setGoingStatus(event.id, !isGoing, documentId);
             },
             outlineColor: isGoing,
           ),
@@ -73,7 +80,7 @@ class _EventButtonsState extends State<EventButtons> {
             ),
             buttonPressed: () {
               if (isInterested == false && isGoing == true) {
-                _userService.setGoingStatus(event.id, false);
+                _userService.setGoingStatus(event.id, false, documentId);
               }
               _userService.setInterestedStatus(event.id, !isInterested);
             },

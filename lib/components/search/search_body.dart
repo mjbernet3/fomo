@@ -20,7 +20,7 @@ class _SearchBodyState extends State<SearchBody> {
 
   static const UnderlineInputBorder searchBarUnderline = UnderlineInputBorder(
     borderSide: BorderSide(
-      color: Colors.redAccent,
+      color: AppTextColor.mediumEmphasis,
       width: 2,
     ),
   );

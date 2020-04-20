@@ -64,7 +64,7 @@ class ListEventCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${event.dateTime}/${event.dateTime}/${event.dateTime}',
+                          '${event.dateTime.month}/${event.dateTime.day}/${event.dateTime.year}',
                           style: TextStyle(
                             color: AppTextColor.mediumEmphasis,
                             fontSize: AppFontSize.size14,

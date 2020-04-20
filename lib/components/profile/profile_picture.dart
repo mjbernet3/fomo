@@ -37,21 +37,17 @@ class _ProfilePictureState extends State<ProfilePicture> {
             right: 10,
           ),
           child: _profileFile == null ?
-          CachedNetworkImage(
-            imageUrl: profileUrl,
-            imageBuilder: (context, imageProvider) => Container(
+          Container(
               width: 125,
               height: 125,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: imageProvider,
+                  image: NetworkImage(profileUrl),
                 ),
               ),
-            ),
-            placeholder: (context, url) => CircularProgressIndicator(),
-          )
+            )
               :Container(
             width: 125,
             height: 125,

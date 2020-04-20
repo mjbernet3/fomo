@@ -7,7 +7,7 @@ class EventService {
   // TODO: Change to solution that uses one query to get events
   Future<Map<String, List<Event>>> getEventsByCategory() async {
     Map<String, List<Event>> categories = Map<String, List<Event>>();
-    categories['featured'] = await getTaggedEvents('featured');
+    categories['featured'] = await getFeaturedEvents();
     categories['popular'] = await getPopularEvents();
     categories['upcoming'] = await getUpcomingEvents();
     return categories;
@@ -25,8 +25,8 @@ class EventService {
     return _queryEvents(query);
   }
 
-  Future<List<Event>> getTaggedEvents(String tag, {int limit}) async {
-    Query query = _getTaggedQuery(tag, limit: limit);
+  Future<List<Event>> getFeaturedEvents({int limit}) async {
+    Query query = _getFeaturedQuery(limit: limit);
     return _queryEvents(query);
   }
 
@@ -74,10 +74,10 @@ class EventService {
     ]).limit(limit);
   }
 
-  Query _getTaggedQuery(String tag, {int limit}) {
+  Query _getFeaturedQuery({int limit}) {
     return Firestore.instance
         .collection('events')
-        .where('tags', arrayContains: tag)
+        .where('featured', isEqualTo: true)
         .limit(limit);
   }
 }

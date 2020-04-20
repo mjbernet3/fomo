@@ -27,10 +27,12 @@ class _MyEventsBodyState extends State<MyEventsBody> {
         StreamBuilder(
           stream: _bloc.interestedEvents,
           builder: (context, snapshot) {
+            print("called build of interested");
             if (!snapshot.hasData) {
               return LoadingIndicator();
             }
             List<Event> interestedEvents = snapshot.data;
+            print(interestedEvents.length);
             return VerticalEventListing(events: interestedEvents);
           },
         ),

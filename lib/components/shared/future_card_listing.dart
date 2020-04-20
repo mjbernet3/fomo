@@ -18,7 +18,7 @@ class FutureCardListing extends StatelessWidget {
               future: EventService.getEventFromDocRef(events[index]),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return LoadingIndicator();
+                  return Container();
                 }
                 return ListEventCard(
                   event: snapshot.data,

@@ -30,7 +30,7 @@ class _MyEventsBodyState extends State<MyEventsBody> {
             stream: Provider.of<UserService>(context, listen: false).userData,
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return LoadingIndicator();
+                return Container();
               }
               List<dynamic> interestedEventIds = snapshot.data.interested;
               return FutureCardListing(events: interestedEventIds);
@@ -39,7 +39,7 @@ class _MyEventsBodyState extends State<MyEventsBody> {
           stream: Provider.of<UserService>(context, listen: false).userData,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return LoadingIndicator();
+              return Container();
             }
             List<dynamic> goingEventIds = snapshot.data.going;
             return FutureCardListing(events: goingEventIds);

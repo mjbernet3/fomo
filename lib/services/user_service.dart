@@ -3,7 +3,7 @@ import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/utils/structures/response.dart';
 
 class UserService {
-  final CollectionReference _userDataCollection =
+  static final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
   final String _userId;
@@ -47,6 +47,23 @@ class UserService {
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());
+    }
+  }
+
+  static Future<UserData> getUserDataFromUserName(String userName) async {
+    try {
+      return _userDataCollection
+          .where('userName', isEqualTo: userName)
+          .limit(1)
+          .getDocuments()
+          .then((QuerySnapshot qs) {
+        if (qs.documents.length == 0) {
+          throw Future.error('failed to find user $userName');
+        }
+        return UserData.fromDocSnap(qs.documents[0]);
+      });
+    } catch (error) {
+      return Future.error(error);
     }
   }
 

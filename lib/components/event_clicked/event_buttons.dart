@@ -52,6 +52,9 @@ class _EventButtonsState extends State<EventButtons> {
               ),
             ),
             buttonPressed: () {
+              if (isGoing == false && isInterested == true) {
+                _userService.setInterestedStatus(event.id, false);
+              }
               _userService.setGoingStatus(event.id, !isGoing);
             },
             outlineColor: isGoing,
@@ -69,7 +72,10 @@ class _EventButtonsState extends State<EventButtons> {
               ),
             ),
             buttonPressed: () {
-//              _userService.setInterestedStatus(event.id, !isInterested);
+              if (isInterested == false && isGoing == true) {
+                _userService.setGoingStatus(event.id, false);
+              }
+              _userService.setInterestedStatus(event.id, !isInterested);
             },
               outlineColor: isInterested,
           ),

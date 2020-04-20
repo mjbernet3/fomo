@@ -100,8 +100,8 @@ class _SearchBodyState extends State<SearchBody> {
                   genreCards: [
                     GenreCard(
                       genreText: 'Alternative',
-                      genreImage:
-                          AssetImage("lib/assets/images/alternativeDARK.png"),
+                      genreImage: AssetImage(
+                          "lib/assets/images/alternativedarkLOWQ.jpg"),
                       onPressed: () {
                         _searchController.text = 'Alternative';
                         _bloc.searchEvents('', genreFilter: 'Alternative');
@@ -110,7 +110,7 @@ class _SearchBodyState extends State<SearchBody> {
                     GenreCard(
                       genreText: 'Country',
                       genreImage:
-                          AssetImage("lib/assets/images/countryDARK.png"),
+                          AssetImage("lib/assets/images/countrydarkLOWQ.jpg"),
                       onPressed: () {
                         _searchController.text = 'Country';
                         _bloc.searchEvents('', genreFilter: 'Country');
@@ -118,7 +118,8 @@ class _SearchBodyState extends State<SearchBody> {
                     ),
                     GenreCard(
                       genreText: 'Rock',
-                      genreImage: AssetImage("lib/assets/images/rockDARK.png"),
+                      genreImage:
+                          AssetImage("lib/assets/images/rockdarkLOWQ.jpg"),
                       onPressed: () {
                         _searchController.text = 'Rock';
                         _bloc.searchEvents('', genreFilter: 'Rock');
@@ -126,7 +127,8 @@ class _SearchBodyState extends State<SearchBody> {
                     ),
                     GenreCard(
                       genreText: 'Pop',
-                      genreImage: AssetImage("lib/assets/images/popDARK.png"),
+                      genreImage:
+                          AssetImage("lib/assets/images/popdarkLOWQ.jpg"),
                       onPressed: () {
                         _searchController.text = 'Pop';
                         _bloc.searchEvents('', genreFilter: 'Pop');
@@ -135,7 +137,7 @@ class _SearchBodyState extends State<SearchBody> {
                     GenreCard(
                       genreText: 'Hip-Hop',
                       genreImage:
-                          AssetImage("lib/assets/images/hiphopDARK.png"),
+                          AssetImage("lib/assets/images/hiphopdarkLOWQ.jpg"),
                       onPressed: () {
                         _searchController.text = 'Hip-Hop';
                         _bloc.searchEvents('', genreFilter: 'Hip-Hop');
@@ -143,8 +145,8 @@ class _SearchBodyState extends State<SearchBody> {
                     ),
                     GenreCard(
                       genreText: 'Electronic',
-                      genreImage:
-                          AssetImage("lib/assets/images/electronicDARK.png"),
+                      genreImage: AssetImage(
+                          "lib/assets/images/electronicdarkLOWQ.jpg"),
                       onPressed: () {
                         _searchController.text = 'Electronic';
                         _bloc.searchEvents('', genreFilter: 'Electronic');

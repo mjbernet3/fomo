@@ -77,7 +77,7 @@ class SmallEventCard extends StatelessWidget {
                       style: eventSubText,
                     ),
                     Text(
-                      event.dateTime.toString(),
+                      event.getDateTimeString(),
                       style: eventSubText,
                     ),
                   ],

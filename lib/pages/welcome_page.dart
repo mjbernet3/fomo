@@ -49,11 +49,11 @@ class WelcomePage extends StatelessWidget {
                     ),
                     SizedBox(height: 75),
                     Text(
-                      'Bringing Atlanta together',
+                      'Your Guide to',
                       style: subTextStyle,
                     ),
                     Text(
-                      'through NOISE',
+                      "Atlanta's music scene",
                       style: subTextStyle,
                     ),
                   ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/my_events/MyAppBar.dart';
-import 'package:project_fomo/components/my_events/event_listing_docref.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/services/user_service.dart';
@@ -9,6 +8,8 @@ import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_fomo/components/my_events/my_events_body.dart';
+import 'package:project_fomo/blocs/my_events_bloc.dart';
 
 class MyEventsPage extends StatelessWidget {
   static const String pageRoute = '/';
@@ -20,8 +21,6 @@ class MyEventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserService _userService =
-        Provider.of<UserService>(context, listen: false);
 
     return DefaultTabController(
       length: 2,
@@ -40,37 +39,15 @@ class MyEventsPage extends StatelessWidget {
           ),
           title: PageHeader("My Events"),
         ),
-        body: TabBarView(
-          children: [
-            StreamBuilder(
-              stream: _userService.userData,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return LoadingIndicator();
-                }
-
-                final UserData _userData = snapshot.data;
-
-                List<DocumentReference> interestedEvents =
-                    List<DocumentReference>.from(_userData.interested).toList();
-
-                return VerticalReferenceListing(events: interestedEvents);
-              },
+        body: Provider<MyEventsBloc>(
+          create: (context) => MyEventsBloc(
+            userService: Provider.of<UserService>(
+              context,
+              listen: false,
             ),
-            StreamBuilder(
-              stream: _userService.userData,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return LoadingIndicator();
-                }
-
-                final UserData _userData = snapshot.data;
-
-                List<DocumentReference> goingEvents = List<DocumentReference>.from(_userData.going).toList();
-                return VerticalReferenceListing(events: goingEvents);
-              },
-            ),
-          ],
+          ),
+          dispose: (context, bloc) => bloc.dispose(),
+          child: MyEventsBody(),
         ),
       ),
     );

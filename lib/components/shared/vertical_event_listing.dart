@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/list_event_card.dart';
-import 'package:project_fomo/models/event.dart';
 
 class VerticalEventListing extends StatelessWidget {
-  final List<Event> events;
+  final List<dynamic> events;
 
   const VerticalEventListing({this.events});
 

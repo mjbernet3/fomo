@@ -1,13 +1,12 @@
 import 'package:project_fomo/blocs/bloc.dart';
 import 'package:project_fomo/models/event.dart';
-import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MyEventsBloc extends Bloc {
   final UserService _userService;
   final BehaviorSubject<List<Event>> _goingSubject =
-      BehaviorSubject<List<dynamic>>();
+      BehaviorSubject<List<Event>>();
   final BehaviorSubject<List<Event>> _interestedSubject =
       BehaviorSubject<List<Event>>();
 
@@ -19,8 +18,7 @@ class MyEventsBloc extends Bloc {
 
   Future<void> refreshEventCategories() async {
     if (!_goingSubject.isClosed) {
-      UserData ud = await _userService.userData.first;
-      List<dynamic> going = ud.going;
+      List<Event> going = await _userService.getGoingEvents();
       if (!_goingSubject.isClosed) {
         _goingSubject.sink.add(going);
       }

@@ -5,10 +5,20 @@ class EventService {
   DocumentSnapshot lastDocument;
 
   final CollectionReference _eventDataCollection =
-    Firestore.instance.collection('events');
+      Firestore.instance.collection('events');
 
   DocumentReference getDocumentReference(String eventId) {
     return _eventDataCollection.document(eventId);
+  }
+
+  static Future<Event> getEventFromDocRef(DocumentReference dr) async {
+    try {
+      DocumentSnapshot ds = await dr.get();
+      return Event.fromDocSnapshot(ds);
+    } catch (error) {
+      return Future.error(error);
+    }
+
   }
 
   static Future<void> addUserToGoing(String eventId, String userId) async {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/blocs/my_events_bloc.dart';
+import 'package:project_fomo/components/shared/future_card_listing.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
-import 'package:project_fomo/components/shared/vertical_event_listing.dart';
 import 'package:project_fomo/models/event.dart';
+import 'package:project_fomo/services/event_service.dart';
+import 'package:project_fomo/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 class MyEventsBody extends StatefulWidget {
@@ -25,28 +27,36 @@ class _MyEventsBodyState extends State<MyEventsBody> {
     return TabBarView(
       children: [
         StreamBuilder(
-          stream: _bloc.interestedEvents,
-          builder: (context, snapshot) {
-            print("called build of interested");
-            if (!snapshot.hasData) {
-              return LoadingIndicator();
-            }
-            List<Event> interestedEvents = snapshot.data;
-            print(interestedEvents.length);
-            return VerticalEventListing(events: interestedEvents);
-          },
-        ),
+            stream: Provider.of<UserService>(context, listen: false).userData,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return LoadingIndicator();
+              }
+              List<dynamic> interestedEventIds = snapshot.data.interested;
+              return FutureCardListing(events: interestedEventIds);
+            }),
         StreamBuilder(
-          stream: _bloc.goingEvents,
+          stream: Provider.of<UserService>(context, listen: false).userData,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return LoadingIndicator();
             }
-            List<Event> goingEvents = snapshot.data;
-            return VerticalEventListing(events: goingEvents);
+            List<dynamic> goingEventIds = snapshot.data.going;
+            return FutureCardListing(events: goingEventIds);
           },
         ),
       ],
     );
+  }
+
+  Future<List<dynamic>> getListFuture(List<dynamic> eventIds) async {
+    print(eventIds);
+    List<Event> events = [];
+    for (dynamic id in events) {
+      Event event = await EventService.getEventFromDocRef(id);
+      events.add(event);
+    }
+    print(events);
+    return events;
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/pages/event_clicked_page.dart';
 import 'package:project_fomo/style.dart';
 
 class ListEventCard extends StatelessWidget {
-  final Event event;
+  final dynamic event;
 
   ListEventCard({this.event});
 

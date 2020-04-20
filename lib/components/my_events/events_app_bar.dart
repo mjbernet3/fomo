@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 
-class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
+class EventsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PageHeader title;
   final TabBar tabBar;
 
-  const MyAppbar({this.title, this.tabBar});
+  const EventsAppBar({this.title, this.tabBar});
 
   @override
   Widget build(BuildContext context) {

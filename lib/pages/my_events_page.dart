@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/my_events/MyAppBar.dart';
-import 'package:project_fomo/components/shared/vertical_event_listing.dart';
+import 'package:project_fomo/components/my_events/events_app_bar.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:provider/provider.dart';
-import 'package:project_fomo/models/user_data.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
-import 'package:project_fomo/models/event.dart';
+import 'package:project_fomo/components/my_events/my_events_body.dart';
+import 'package:project_fomo/blocs/my_events_bloc.dart';
 
 class MyEventsPage extends StatelessWidget {
   static const String pageRoute = '/';
@@ -19,13 +17,10 @@ class MyEventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserService _userService =
-        Provider.of<UserService>(context, listen: false);
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: MyAppbar(
+        appBar: EventsAppBar(
           tabBar: TabBar(
             indicatorColor: AppTextColor.mediumEmphasis,
             labelColor: AppTextColor.highEmphasis,
@@ -39,38 +34,15 @@ class MyEventsPage extends StatelessWidget {
           ),
           title: PageHeader("My Events"),
         ),
-        body: TabBarView(
-          children: [
-            StreamBuilder(
-              stream: _userService.userData,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return LoadingIndicator();
-                }
-
-                final UserData _userData = snapshot.data;
-
-                List<Event> interestedEvents =
-                    List<Event>.from(_userData.interested);
-
-                return VerticalEventListing(events: interestedEvents);
-              },
+        body: Provider<MyEventsBloc>(
+          create: (context) => MyEventsBloc(
+            userService: Provider.of<UserService>(
+              context,
+              listen: false,
             ),
-            StreamBuilder(
-              stream: _userService.userData,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return LoadingIndicator();
-                }
-
-                final UserData _userData = snapshot.data;
-
-                List<Event> goingEvents = List<Event>.from(_userData.going);
-
-                return VerticalEventListing(events: goingEvents);
-              },
-            ),
-          ],
+          ),
+          dispose: (context, bloc) => bloc.dispose(),
+          child: MyEventsBody(),
         ),
       ),
     );

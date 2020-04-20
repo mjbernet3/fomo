@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/services/event_service.dart';
 import 'package:project_fomo/utils/structures/response.dart';
+import 'package:project_fomo/models/event.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 class UserService {
+  DocumentSnapshot lastDocument;
+
   final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
@@ -181,5 +184,29 @@ class UserService {
           .catchError((error) => Future.error(error));
       return EventService.removeUserFromInterested(eventId, _userId);
     }
+  }
+
+  Future<List<Event>> getGoingEvents() async {
+    UserData _userData = await this.userData.first;
+    List<Event> events = [];
+    List<dynamic> goingList = _userData.going;
+    for (DocumentReference df in goingList) {
+      DocumentSnapshot _doc = await df.get();
+      Event _event = Event.fromDocSnapshot(_doc);
+      events.add(_event);
+    }
+    return events;
+  }
+
+  Future<List<Event>> getInterestedEvents() async {
+    UserData _userData = await this.userData.first;
+    List<Event> events = [];
+    List<dynamic> interestedList = _userData.interested;
+    for (DocumentReference df in interestedList) {
+      DocumentSnapshot _doc = await df.get();
+      Event _event = Event.fromDocSnapshot(_doc);
+      events.add(_event);
+    }
+    return events;
   }
 }

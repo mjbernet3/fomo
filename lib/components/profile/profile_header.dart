@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/shared/gradient_icon.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/components/profile/profile_picture.dart';
 
@@ -23,7 +22,9 @@ class ProfileHeader extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              ProfilePicture(profileUrl: profileUrl,),
+              ProfilePicture(
+                profileUrl: profileUrl,
+              ),
               SizedBox(
                 width: 20,
               ),

@@ -61,15 +61,17 @@ class UserService {
       await _storage.ref().child(_storagePath).putFile(image).onComplete;
       String _downloadUrl =
           await _storage.ref().child(_storagePath).getDownloadURL();
-      return updateProfileUrl(_downloadUrl);
+      return await updateProfileUrl(_downloadUrl);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());
     }
   }
 
-  Response updateProfileUrl(String url) {
+  Future<Response> updateProfileUrl(String url) async {
     try {
-      _userDataCollection.document(_userId).updateData({'profileUrl': url});
+      await _userDataCollection
+          .document(_userId)
+          .updateData({'profileUrl': url});
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());

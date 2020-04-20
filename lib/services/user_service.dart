@@ -178,36 +178,27 @@ class UserService {
   }
 
   Future<List<Event>> getGoingEvents() async {
+    UserData _userData = await this.userData.first;
     List<Event> events = [];
-    await _userDataCollection
-        .document(_userId)
-        .collection("going")
-        .getDocuments()
-        .then((QuerySnapshot qs) {
-      for (DocumentSnapshot ds in qs.documents) {
-        Event event = Event.fromDocSnapshot(ds);
-        events.add(event);
-        lastDocument = ds;
-      }
-    });
-    print(events);
+    List<dynamic> goingList = _userData.going;
+    for (DocumentReference df in goingList) {
+      DocumentSnapshot _doc = await df.get();
+      Event _event = Event.fromDocSnapshot(_doc);
+      events.add(_event);
+    }
     return events;
   }
 
   Future<List<Event>> getInterestedEvents() async {
+
+    UserData _userData = await this.userData.first;
     List<Event> events = [];
-    await _userDataCollection
-        .document(_userId)
-        .collection('interested')
-        .getDocuments()
-        .then((QuerySnapshot qs) {
-      for (DocumentSnapshot ds in qs.documents) {
-        Event event = Event.fromDocSnapshot(ds);
-        events.add(event);
-        lastDocument = ds;
+      List<dynamic> interestedList = _userData.interested;
+      for (DocumentReference df in interestedList) {
+        DocumentSnapshot _doc = await df.get();
+        Event _event = Event.fromDocSnapshot(_doc);
+        events.add(_event);
       }
-    });
-    print(events);
     return events;
   }
 

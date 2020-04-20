@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:project_fomo/components/shared/vertical_event_listing.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
-import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/blocs/my_events_bloc.dart';
+import 'package:project_fomo/components/shared/loading_indicator.dart';
+import 'package:project_fomo/components/shared/vertical_event_listing.dart';
+import 'package:project_fomo/models/event.dart';
+import 'package:provider/provider.dart';
 
 import '../shared/vertical_event_listing.dart';
 
@@ -49,5 +49,4 @@ class _MyEventsBodyState extends State<MyEventsBody> {
       ],
     );
   }
-
 }

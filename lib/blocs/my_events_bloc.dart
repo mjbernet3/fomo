@@ -5,10 +5,10 @@ import 'package:rxdart/rxdart.dart';
 
 class MyEventsBloc extends Bloc {
   final UserService _userService;
-  final PublishSubject <List<Event>> _goingSubject =
-    PublishSubject<List<Event>>();
-  final PublishSubject <List<Event>> _interestedSubject =
-  PublishSubject<List<Event>>();
+  final BehaviorSubject<List<Event>> _goingSubject =
+      BehaviorSubject<List<Event>>();
+  final BehaviorSubject<List<Event>> _interestedSubject =
+      BehaviorSubject<List<Event>>();
 
   MyEventsBloc({UserService userService}) : _userService = userService;
 
@@ -18,15 +18,13 @@ class MyEventsBloc extends Bloc {
 
   Future<void> refreshEventCategories() async {
     if (!_goingSubject.isClosed) {
-      List<Event> going =
-      await _userService.getGoingEvents();
+      List<Event> going = await _userService.getGoingEvents();
       if (!_goingSubject.isClosed) {
         _goingSubject.sink.add(going);
       }
     }
     if (!_interestedSubject.isClosed) {
-      List<Event> interested =
-      await _userService.getInterestedEvents();
+      List<Event> interested = await _userService.getInterestedEvents();
       if (!_interestedSubject.isClosed) {
         _interestedSubject.sink.add(interested);
       }

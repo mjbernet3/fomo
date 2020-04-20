@@ -60,8 +60,9 @@ class UserService {
 
   Future<void> _removeIsGoingEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    List<dynamic> goingEvents = me.going;
-    goingEvents.remove(documentId);
+    List<dynamic> goingEvents =
+        me.going.map<String>((dynamic df) => df.path).toList();
+    goingEvents.remove(documentId.path);
     return _updateGoingEvents(goingEvents);
   }
 
@@ -142,10 +143,12 @@ class UserService {
     return true;
   }
 
-  Future<void> setGoingStatus(String eventId, bool status,
-      DocumentReference documentId) async {
+  Future<void> setGoingStatus(
+      String eventId, bool status, DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    bool isGoing = me.going.contains(documentId);
+    List<String> meGoingPaths =
+        me.going.map<String>((dynamic df) => df.path).toList();
+    bool isGoing = meGoingPaths.contains(documentId.path);
     if (isGoing == status) return true; // no status change needed
     // Set status in user document
     if (status) {

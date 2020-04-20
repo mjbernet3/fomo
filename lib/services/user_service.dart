@@ -57,6 +57,7 @@ class UserService {
           .limit(1)
           .getDocuments()
           .then((QuerySnapshot qs) {
+        print(qs.documents.length);
         if (qs.documents.length == 0) {
           throw Future.error('failed to find user $userName');
         }

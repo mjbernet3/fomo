@@ -14,7 +14,7 @@ class EventService {
     categories['featured'] = await getFeaturedEvents();
     categories['popular'] = await getPopularEvents();
     categories['upcoming'] = await getUpcomingEvents();
-    categories['friend'] = await getFriendEvents(userService: userService);
+    categories['friends'] = await getFriendEvents(userService: userService);
     return categories;
   }
 

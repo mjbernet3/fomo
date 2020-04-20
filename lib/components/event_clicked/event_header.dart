@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/shared/gradient_button.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/components/event_clicked/event_buttons.dart';
+import 'package:project_fomo/models/event.dart';
 
 class EventHeader extends StatelessWidget {
-  final String imageURL;
-  final String eventName;
+  final Event event;
 
-  EventHeader({@required this.imageURL, @required this.eventName});
+  EventHeader({@required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class EventHeader extends StatelessWidget {
       alignment: Alignment.bottomLeft,
       children: <Widget>[
         Image.network(
-          imageURL,
+          event.imageUrl,
           scale: 0.2,
           color: Color.fromRGBO(255, 255, 255, 0.5),
           colorBlendMode: BlendMode.modulate,
@@ -25,46 +25,16 @@ class EventHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                eventName,
+                event.name,
                 style: TextStyle(
                     color: AppTextColor.title,
                     fontWeight: AppFontWeight.bold,
                     fontFamily: AppFontFamily.family,
                     fontSize: AppFontSize.size28),
               ),
-              Row(
-                children: <Widget>[
-                  GradientButton(
-                    buttonText: Text(
-                      'Going',
-                      style: TextStyle(
-                        fontSize: AppFontSize.size18,
-                        fontFamily: AppFontFamily.family,
-                        color: AppTextColor.highEmphasis,
-                      ),
-                    ),
-                    buttonPressed: () {
-                      print('User wants to go');
-                    },
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  GradientButton(
-                    buttonText: Text(
-                      'Interested',
-                      style: TextStyle(
-                        fontSize: AppFontSize.size18,
-                        fontFamily: AppFontFamily.family,
-                        color: AppTextColor.highEmphasis,
-                      ),
-                    ),
-                    buttonPressed: () {
-                      print('User is interested');
-                    },
-                  ),
-                ],
-              )
+              EventButtons(
+                event: event,
+              ),
             ],
           ),
         ),

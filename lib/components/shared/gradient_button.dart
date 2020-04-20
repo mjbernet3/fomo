@@ -4,8 +4,12 @@ import 'package:project_fomo/style.dart';
 class GradientButton extends StatelessWidget {
   final Text buttonText;
   final Function buttonPressed;
+  final bool outlineColor;
 
-  GradientButton({@required this.buttonText, @required this.buttonPressed});
+  GradientButton(
+      {@required this.buttonText,
+      @required this.buttonPressed,
+      this.outlineColor = true});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +38,11 @@ class GradientButton extends StatelessWidget {
       ),
       constraints: const BoxConstraints(minWidth: 88.0, minHeight: 36.0),
       height: MediaQuery.of(context).size.width * 0.14,
-      decoration: BoxDecoration(
+      decoration: outlineColor == true ? BoxDecoration(
         gradient: AppColor.gradient,
+        borderRadius: BorderRadius.circular(50),
+      ) : BoxDecoration(
+        color: AppTextColor.mediumEmphasis,
         borderRadius: BorderRadius.circular(50),
       ),
     );

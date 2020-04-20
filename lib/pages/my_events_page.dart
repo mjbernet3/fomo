@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/my_events/MyAppBar.dart';
-import 'package:project_fomo/components/shared/vertical_event_listing.dart';
+import 'package:project_fomo/components/my_events/event_listing_docref.dart';
 import 'package:project_fomo/components/shared/page_header.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/services/user_service.dart';
@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/event.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyEventsPage extends StatelessWidget {
   static const String pageRoute = '/';
@@ -50,10 +51,10 @@ class MyEventsPage extends StatelessWidget {
 
                 final UserData _userData = snapshot.data;
 
-                List<Event> interestedEvents =
-                    List<Event>.from(_userData.interested);
+                List<DocumentReference> interestedEvents =
+                    List<DocumentReference>.from(_userData.interested).toList();
 
-                return VerticalEventListing(events: interestedEvents);
+                return VerticalReferenceListing(events: interestedEvents);
               },
             ),
             StreamBuilder(
@@ -65,9 +66,8 @@ class MyEventsPage extends StatelessWidget {
 
                 final UserData _userData = snapshot.data;
 
-                List<Event> goingEvents = List<Event>.from(_userData.going);
-
-                return VerticalEventListing(events: goingEvents);
+                List<DocumentReference> goingEvents = List<DocumentReference>.from(_userData.going).toList();
+                return VerticalReferenceListing(events: goingEvents);
               },
             ),
           ],

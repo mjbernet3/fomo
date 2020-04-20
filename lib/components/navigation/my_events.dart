@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/pages/my_events_page.dart';
 import 'package:project_fomo/pages/unknown_page.dart';
+import 'package:project_fomo/pages/event_clicked_page.dart';
+
+import '../../pages/event_clicked_page.dart';
 
 class MyEvents extends StatefulWidget {
   @override
@@ -19,6 +22,8 @@ class _MyEventsState extends State<MyEvents> {
             switch (settings.name) {
               case MyEventsPage.pageRoute:
                 return MyEventsPage();
+              case EventClickedPage.pageRoute:
+                return EventClickedPage();
               default:
                 return UnknownPage();
             }

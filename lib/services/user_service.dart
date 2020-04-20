@@ -101,6 +101,7 @@ class UserService {
     }
   }
 
+  // TODO: Clean up section below
   Future<void> _addIsGoingEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
     List<dynamic> goingEvents = me.going;

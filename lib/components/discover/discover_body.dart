@@ -31,8 +31,11 @@ class _DiscoverBodyState extends State<DiscoverBody> {
         child: StreamBuilder(
           stream: _bloc.events,
           builder: (context, AsyncSnapshot<Map<String, List<Event>>> snapshot) {
+            if (!snapshot.hasData) {
+              return LoadingIndicator();
+            }
+
             List<Widget> listChildren = [];
-            if (!snapshot.hasData) return LoadingIndicator();
             Map<String, List<Event>> categories = snapshot.data;
             for (String category in categories.keys) {
               List<Event> events = categories[category];

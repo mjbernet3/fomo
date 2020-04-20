@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/components/shared/gradient_button.dart';
-import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
-import 'package:provider/provider.dart';
 import 'package:project_fomo/components/event_clicked/event_buttons.dart';
 import 'package:project_fomo/models/event.dart';
 
@@ -18,6 +15,7 @@ class EventHeader extends StatelessWidget {
       children: <Widget>[
         Image.network(
           event.imageUrl,
+          scale: 0.2,
           color: Color.fromRGBO(255, 255, 255, 0.5),
           colorBlendMode: BlendMode.modulate,
         ),
@@ -34,7 +32,9 @@ class EventHeader extends StatelessWidget {
                     fontFamily: AppFontFamily.family,
                     fontSize: AppFontSize.size28),
               ),
-              EventButtons(event: event,),
+              EventButtons(
+                event: event,
+              ),
             ],
           ),
         ),

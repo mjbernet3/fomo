@@ -29,7 +29,7 @@ class EventClickedPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                EventHeader(imageURL: _event.imageUrl, eventName: _event.name),
+                EventHeader(event: _event,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[

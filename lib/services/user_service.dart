@@ -1,10 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/utils/structures/response.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class UserService {
   final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
+
+  final FirebaseStorage _storage =
+      FirebaseStorage(storageBucket: 'gs://fomo-d20a9.appspot.com');
 
   final String _userId;
 
@@ -44,6 +49,29 @@ class UserService {
       await _userDataCollection
           .document(_userId)
           .updateData({'shouldLocate': data});
+      return Response(status: Status.SUCCESS);
+    } catch (error) {
+      return Response(status: Status.FAILURE, message: error.toString());
+    }
+  }
+
+  Future<Response> uploadImage(File image) async {
+    try {
+      String _storagePath = "images/$_userId.jpg";
+      await _storage.ref().child(_storagePath).putFile(image).onComplete;
+      String _downloadUrl =
+          await _storage.ref().child(_storagePath).getDownloadURL();
+      return await updateProfileUrl(_downloadUrl);
+    } catch (error) {
+      return Response(status: Status.FAILURE, message: error.toString());
+    }
+  }
+
+  Future<Response> updateProfileUrl(String url) async {
+    try {
+      await _userDataCollection
+          .document(_userId)
+          .updateData({'profileUrl': url});
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());

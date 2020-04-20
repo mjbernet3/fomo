@@ -5,8 +5,6 @@ import 'package:project_fomo/components/shared/vertical_event_listing.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:provider/provider.dart';
 
-import '../shared/vertical_event_listing.dart';
-
 class MyEventsBody extends StatefulWidget {
   @override
   _MyEventsBodyState createState() => _MyEventsBodyState();

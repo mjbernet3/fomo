@@ -25,12 +25,15 @@ class InfoLine extends StatelessWidget {
           SizedBox(
             width: 10,
           ),
-          Text(
-            content,
-            style: TextStyle(
-              fontWeight: AppFontWeight.normal,
-              fontFamily: AppFontFamily.family,
-              fontSize: AppFontSize.size18,
+          Expanded(
+            child: Text(
+              content,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: AppFontWeight.normal,
+                fontFamily: AppFontFamily.family,
+                fontSize: AppFontSize.size18,
+              ),
             ),
           ),
         ],

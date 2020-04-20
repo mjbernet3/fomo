@@ -26,7 +26,7 @@ class _MyEventsBodyState extends State<MyEventsBody> {
   Widget build(BuildContext context) {
     return TabBarView(
       children: [
-        StreamBuilder(git 
+        StreamBuilder(
           stream: _bloc.interestedEvents,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {

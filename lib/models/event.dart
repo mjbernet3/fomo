@@ -75,4 +75,60 @@ class Event {
       ticketUrl: event['ticketUrl'],
     );
   }
+
+  String getDateTimeString() {
+    if (dateTime == null) {
+      return "";
+    }
+    List<String> months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    String month = months[dateTime.month - 1];
+
+    List<String> weekdays = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
+    String weekday = weekdays[dateTime.weekday - 1];
+
+    String day = dateTime.day.toString();
+    String hour;
+    String tod;
+
+    // Someone with more time could do this more cleverly with % operator
+    if (dateTime.hour == 0) {
+      hour = "12";
+      tod = "AM";
+    } else if (dateTime.hour <= 11) {
+      hour = dateTime.hour.toString();
+      tod = 'AM';
+    } else if (dateTime.hour == 12) {
+      hour = "12";
+      tod = "PM";
+    } else {
+      hour = (dateTime.hour - 12).toString();
+      tod = "PM";
+    }
+    String minute = dateTime.minute.toString();
+    if (minute.length == 1) {
+      minute = "0$minute";
+    }
+    return "$weekday, $month $day, $hour:$minute $tod";
+  }
 }

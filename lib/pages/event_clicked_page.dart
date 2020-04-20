@@ -88,7 +88,7 @@ class EventClickedPage extends StatelessWidget {
                           ),
                           InfoLine(
                             type: 'Time:',
-                            content: _event.dateTime.toIso8601String(),
+                            content: _event.getDateTimeString(),
                           ),
                           InfoLine(
                             type: 'Genre(s):',

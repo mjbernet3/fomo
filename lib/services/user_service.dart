@@ -65,10 +65,31 @@ class UserService {
     return _updateGoingEvents(goingEvents);
   }
 
-  Future<void> _updateGoingEvents(List<dynamic> newGoingEvents) async {
+  Future<void> _updateGoingEvents(List<dynamic> newInterestedEvents) async {
     return _userDataCollection
         .document(_userId)
-        .updateData({'going': newGoingEvents});
+        .updateData({'interested': newInterestedEvents});
+  }
+
+  Future<void> _addIsInterestedEvent(String eventId) async {
+    UserData me = await this.userData.first;
+    List<dynamic> interestedEvents = me.interested;
+    interestedEvents.add(eventId);
+    return _updateInterestedEvents(interestedEvents);
+  }
+
+  Future<void> _removeIsInterestedEvent(String eventId) async {
+    UserData me = await this.userData.first;
+    List<dynamic> interestedEvents = me.interested;
+    interestedEvents.remove(eventId);
+    return _updateInterestedEvents(interestedEvents);
+  }
+
+  Future<void> _updateInterestedEvents(
+      List<dynamic> newInterestedEvents) async {
+    return _userDataCollection
+        .document(_userId)
+        .updateData({'interested': newInterestedEvents});
   }
 
   Future<bool> addFriend(String userName) async {
@@ -134,6 +155,22 @@ class UserService {
       await _removeIsGoingEvent(eventId)
           .catchError((error) => Future.error(error));
       return EventService.removeUserFromGoing(eventId, _userId);
+    }
+  }
+
+  Future<void> setInterestedStatus(String eventId, bool status) async {
+    UserData me = await this.userData.first;
+    bool isInterested = me.interested.contains(eventId);
+    if (isInterested == status) return true; // no status change needed
+    // Set status in user document
+    if (status) {
+      await _addIsInterestedEvent(eventId)
+          .catchError((error) => Future.error(error));
+      return EventService.addUserToInterested(eventId, _userId);
+    } else {
+      await _removeIsInterestedEvent(eventId)
+          .catchError((error) => Future.error(error));
+      return EventService.removeUserFromInterested(eventId, _userId);
     }
   }
 }

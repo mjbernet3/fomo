@@ -45,6 +45,49 @@ class EventService {
         .updateData({'usersGoing': newGoingUsers});
   }
 
+  static Future<void> addUserToInterested(String eventId, String userId) async {
+    return _getInterestedUsers(eventId).then((List<dynamic> interestedUsers) {
+      if (interestedUsers.contains(userId)) {
+        return Future.error(
+            "User $userId is alread interested in event $eventId");
+      }
+      interestedUsers.add(userId);
+      return _setInterestedUsers(eventId, interestedUsers);
+    }).catchError((error) => Future.error(error));
+  }
+
+  static Future<void> removeUserFromInterested(
+      String eventId, String userId) async {
+    return _getInterestedUsers(eventId).then((List<dynamic> interestedUsers) {
+      if (!interestedUsers.contains(userId)) {
+        return Future.error("User $userId is not interested to event $eventId");
+      }
+      interestedUsers.remove(userId);
+      return _setInterestedUsers(eventId, interestedUsers);
+    }).catchError((error) => Future.error(error));
+  }
+
+  // Large security flaw in fetching userIds
+  static Future<List<dynamic>> _getInterestedUsers(String eventId) async {
+    return Firestore.instance
+        .collection('events')
+        .document(eventId)
+        .get()
+        .then((DocumentSnapshot ds) {
+      List<dynamic> interestedUsers = ds.data['usersInterested'];
+      return interestedUsers;
+    }).catchError((error) => Future.error(error));
+  }
+
+  // array adds are unsafe in multi-user database
+  static Future<void> _setInterestedUsers(
+      String eventId, List<dynamic> newInterestedUsers) async {
+    return Firestore.instance
+        .collection('events')
+        .document(eventId)
+        .updateData({'usersInterested': newInterestedUsers});
+  }
+
   // TODO: Change to solution that uses one query to get events
   Future<Map<String, List<Event>>> getEventsByCategory() async {
     Map<String, List<Event>> categories = Map<String, List<Event>>();

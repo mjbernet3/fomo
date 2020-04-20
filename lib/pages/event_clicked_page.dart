@@ -82,7 +82,7 @@ class EventClickedPage extends StatelessWidget {
               ),
               OutputLink(
                 title: 'Get Directions',
-                url: "formely the variable \"apple url\"",
+                url: 'https://www.google.com/maps/search/?api=1&query=${_event.location['latitude']},${_event.location['longitude']}',
                 displayIcon: Icons.gps_fixed,
               ),
             ],

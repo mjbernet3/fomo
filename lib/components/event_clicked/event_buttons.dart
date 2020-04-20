@@ -47,7 +47,10 @@ class _EventButtonsState extends State<EventButtons> {
               .toList()
               .contains(documentId.path);
 
-          bool isInterested = _userData.interested.contains(event.id);
+          bool isInterested = _userData.interested
+              .map<String>((dynamic df) => df.path)
+              .toList()
+              .contains(documentId.path);
 
           return Row(
             children: <Widget>[
@@ -62,7 +65,7 @@ class _EventButtonsState extends State<EventButtons> {
                 ),
                 buttonPressed: () {
                   if (isGoing == false && isInterested == true) {
-                    _userService.setInterestedStatus(event.id, false);
+                    _userService.setInterestedStatus(event.id, false, documentId);
                   }
                   _userService.setGoingStatus(event.id, !isGoing, documentId);
                 },
@@ -84,7 +87,7 @@ class _EventButtonsState extends State<EventButtons> {
                   if (isInterested == false && isGoing == true) {
                     _userService.setGoingStatus(event.id, false, documentId);
                   }
-                  _userService.setInterestedStatus(event.id, !isInterested);
+                  _userService.setInterestedStatus(event.id, !isInterested, documentId);
                 },
                 outlineColor: isInterested,
               ),

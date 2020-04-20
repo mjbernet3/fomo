@@ -72,17 +72,18 @@ class UserService {
         .updateData({'going': newGoingEvents});
   }
 
-  Future<void> _addIsInterestedEvent(String eventId) async {
+  Future<void> _addIsInterestedEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
     List<dynamic> interestedEvents = me.interested;
-    interestedEvents.add(eventId);
+    interestedEvents.add(documentId);
     return _updateInterestedEvents(interestedEvents);
   }
 
-  Future<void> _removeIsInterestedEvent(String eventId) async {
+  Future<void> _removeIsInterestedEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    List<dynamic> interestedEvents = me.interested;
-    interestedEvents.remove(eventId);
+    List<dynamic> interestedEvents =
+      me.interested.map<String>((dynamic df) => df.path).toList();
+    interestedEvents.remove(documentId.path);
     return _updateInterestedEvents(interestedEvents);
   }
 
@@ -162,17 +163,20 @@ class UserService {
     }
   }
 
-  Future<void> setInterestedStatus(String eventId, bool status) async {
+  Future<void> setInterestedStatus(
+      String eventId, bool status, DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    bool isInterested = me.interested.contains(eventId);
+    List<String> meInterestedPaths =
+      me.interested.map<String>((dynamic df) => df.path).toList();
+    bool isInterested = meInterestedPaths.contains(documentId.path);
     if (isInterested == status) return true; // no status change needed
     // Set status in user document
     if (status) {
-      await _addIsInterestedEvent(eventId)
+      await _addIsInterestedEvent(documentId)
           .catchError((error) => Future.error(error));
       return EventService.addUserToInterested(eventId, _userId);
     } else {
-      await _removeIsInterestedEvent(eventId)
+      await _removeIsInterestedEvent(documentId)
           .catchError((error) => Future.error(error));
       return EventService.removeUserFromInterested(eventId, _userId);
     }

@@ -114,9 +114,16 @@ class UserService {
 
   Future<void> _removeIsGoingEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    List<dynamic> goingEvents =
-        me.going.map<String>((dynamic df) => df.path).toList();
-    goingEvents.remove(documentId.path);
+    List<dynamic> goingEvents = me.going;
+    DocumentReference docRemove;
+    for (DocumentReference dr in goingEvents) {
+      if (dr.path == documentId.path) {
+        docRemove = dr;
+      }
+    }
+    if (docRemove != null) {
+      goingEvents.remove(docRemove);
+    }
     return _updateGoingEvents(goingEvents);
   }
 
@@ -135,9 +142,17 @@ class UserService {
 
   Future<void> _removeIsInterestedEvent(DocumentReference documentId) async {
     UserData me = await this.userData.first;
-    List<dynamic> interestedEvents =
-        me.interested.map<String>((dynamic df) => df.path).toList();
-    interestedEvents.remove(documentId.path);
+
+    List<dynamic> interestedEvents = me.interested;
+    DocumentReference docRemove;
+    for (DocumentReference dr in interestedEvents) {
+      if (dr.path == documentId.path) {
+        docRemove = dr;
+      }
+    }
+    if (docRemove != null) {
+      interestedEvents.remove(docRemove);
+    }
     return _updateInterestedEvents(interestedEvents);
   }
 

@@ -15,6 +15,7 @@ class EventHeader extends StatelessWidget {
       children: <Widget>[
         Image.network(
           imageURL,
+          scale: 0.2,
           color: Color.fromRGBO(255, 255, 255, 0.5),
           colorBlendMode: BlendMode.modulate,
         ),

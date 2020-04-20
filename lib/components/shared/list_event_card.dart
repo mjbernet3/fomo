@@ -27,6 +27,7 @@ class ListEventCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
                   event.imageUrl,
+                  scale: 0.2,
                 ),
               ),
             ),

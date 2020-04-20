@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/account/edit_field.dart';
+import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user.dart';
+import 'package:project_fomo/models/user_data.dart';
 import 'package:project_fomo/services/auth_service.dart';
 import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
 import 'package:project_fomo/utils/structures/response.dart';
 import 'package:provider/provider.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
-import 'package:project_fomo/models/user_data.dart';
 
 class AccountPage extends StatelessWidget {
   static const String pageRoute = '/account';
@@ -23,6 +23,7 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,

@@ -59,12 +59,29 @@ You must have the following installed and configured before proceeding, see prov
 - Android Studio Emulator
 - XCode and iOS SDK (mac only: https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 - iOS Device Simulator (mac only)
+- Flutter SDK (https://flutter.dev/docs/get-started/install)
+- Dart SDK (https://dart.dev/get-dart)
 
 ### Dependent Libraries
 Download and install the following:
-- Flutter SDK (https://flutter.dev/docs/get-started/install)
-- Dart SDK (https://dart.dev/get-dart)
-- Google Services Firestore Configuration File for Android/iOS
+- Google Services Firestore Configuration File for Android/iOS  
+  
+The following libraries are also required:  
+- provider
+- rxdart
+- firebase core
+- cloud firestore
+- algolia
+- firebase auth
+- carousel slider
+- cupertino icons
+- firebase storage
+- image cropper
+- image picker
+- url launcher
+
+To get these dependencies open a terminal window and navigate to the repository and run the following command:  
+	flutter pub get
 
 ### Download
 Clone https://github.com/mjbernet3/fomo.git
@@ -80,8 +97,7 @@ For more information on opening the emulator through Android Studio or XCode vis
 	XCode
 (https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)  
 
-Then open the terminal window and navigate to the repository and run the following commands:  
-	flutter pub get  
+Then open the terminal window and navigate to the repository and run the following command:  
 	flutter run  
 
 ### Installation

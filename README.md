@@ -1,8 +1,8 @@
 # Project Fomo
-**Atlanta Arts Initiative App**
-JIA - 9340
-Release Notes
-Updated: April 20th, 2020
+**Atlanta Arts Initiative App**  
+JIA - 9340  
+Release Notes  
+Updated: April 20th, 2020  
 
 ## Release Notes
 
@@ -40,69 +40,79 @@ April 20th, 2020
 - Fixed a bug in which date/time fields were not appearing properly on event cards on the discover and view all pages
 - Fixed a bug in which images were not scaling properly to event cards
 - Fixed a bug in which images were not fitting properly to the top of the event clicked page
+- Fixed a bug that caused erroneous loading of events at the bottom of the view all page
+- Fixed a bug in which removing events from interested and going in Firebase resulted in data corruption
+
 
 #### Known Bugs or Remaining Implementations
 - Adding Friends is not currently supported on the frontend, there is a backend method but the interface to add friends has not yet been created
-- Backend functionality for Notifications slider in settings has not yet been implemented
-- Saved Events do not currently update in real time, but instead require a page refresh to update
+- Backend functionality for Notifications or Location Services sliders in settings has not yet been implemented
 - If an account on your friends list is deleted, it will still show up on your friends list and friends scroller in the form of an infinite loading symbol
+- Friends Category not yet added to Discover page
 
 
 
 ## Install Guide
 ### Pre-Requisites
 You must have the following installed and configured before proceeding, see provided links for more information:
-Android Studio and Android SDK (https://developer.android.com/studio)
-XCode and iOS SDK (mac only: https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+- Android Studio and Android SDK (https://developer.android.com/studio)
+- Android Studio Emulator
+- XCode and iOS SDK (mac only: https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+- iOS Device Simulator (mac only)
 
 ### Dependent Libraries
 Download and install the following:
-Flutter SDK (https://flutter.dev/docs/get-started/install)
-Dart SDK (https://dart.dev/get-dart)
+- Flutter SDK (https://flutter.dev/docs/get-started/install)
+- Dart SDK (https://dart.dev/get-dart)
+- Google Services Firestore Configuration File for Android/iOS
 
 ### Download
 Clone https://github.com/mjbernet3/fomo.git
 
 ### Build Instructions
-Open an emulator using Android Studio or XCode or through the command line using the following command:
-	emulator -avd avd_name [ {-option [value]} …]
-To view a list of AVD names, enter the following command:
-	emulator -list-avds
-For more information on opening the emulator through Android Studio or XCode visit the following links:
-	Android Studio (https://developer.android.com/studio/run/emulator)
+Open an emulator using Android Studio or XCode or through the command line using the following command:  
+	emulator -avd avd_name [ {-option [value]} …].  
+To view a list of AVD names, enter the following command:  
+	emulator -list-avds  
+  
+For more information on opening the emulator through Android Studio or XCode visit the following links:  
+	Android Studio (https://developer.android.com/studio/run/emulator)  
 	XCode
-(https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)
+(https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)  
 
-Then open the terminal window and navigate to the repository and run the following commands:
-	flutter pub get
-flutter run
+Then open the terminal window and navigate to the repository and run the following commands:  
+	flutter pub get  
+	flutter run  
 
 ### Installation
 Clone the repository using the provided github link above.
 
 ### Run Instructions
-Use the emulator to interact with the application.
+Use the emulator to interact with the application.  
+  
+Most clean clones of the app require fetching flutter and dart dependencies. Run:  
+	flutter package get
 
 ### Troubleshooting
-If your flutter install becomes corrupted, run the following commands in your flutter install directory:
-	git clean -xfd
-	git stash save --keep-index
-	git stash drop
-	git pull
-	flutter doctor
-
-If running ‘flutter run’ returns “command: flutter not found”:
-	Ensure that your path is correctly configured.
-	For more information, visit the following links:
-		For Mac: https://flutter.dev/docs/get-started/install/macos
-		For Windows: https://flutter.dev/docs/get-started/install/windows
-		For Linux: https://flutter.dev/docs/get-started/install/linux 
-
-If your pub dependencies become corrupted, run the following command:
-	pub cache repair
-
-If hot reload is not working:
-Set your environment variable NO_PROXY=127.0.0.1
-
-If missing flutter dependencies, run the following command:
-flutter doctor
+If your flutter install becomes corrupted, run the following commands in your flutter install directory:  
+	git clean -xfd  
+	git stash save --keep-index  
+	git stash drop  
+	git pull  
+	flutter doctor  
+  
+If running ‘flutter run’ returns “command: flutter not found”:  
+	Ensure that your path is correctly configured.  
+	For more information, visit the following links:  
+		For Mac: https://flutter.dev/docs/get-started/install/macos  
+		For Windows: https://flutter.dev/docs/get-started/install/windows  
+		For Linux: https://flutter.dev/docs/get-started/install/linux  
+  
+If your pub dependencies become corrupted, run the following command:  
+	pub cache repair  
+  
+If hot reload is not working:  
+Set your environment variable NO_PROXY=127.0.0.1  
+  
+If missing flutter dependencies, run the following command:  
+flutter doctor  

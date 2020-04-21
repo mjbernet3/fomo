@@ -63,9 +63,6 @@ You should have the following installed and configured before proceeding, see pr
 - Dart SDK (https://dart.dev/get-dart)
 
 ### Dependent Libraries
-Download the following:
-- Google Services Firestore Configuration File for Android/iOS from Firebase 
-  
 Install the following by running `flutter pub get` in the project directory:
 - provider
 - rxdart
@@ -93,6 +90,8 @@ For more information on opening the emulator through Android Studio or XCode vis
 	Android Studio (https://developer.android.com/studio/run/emulator)  
 	XCode
 (https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)  
+
+Download the Google services configuration file from firebase.
 
 Then open the terminal window and navigate to the repository and run the following command:  
 	`flutter run`  

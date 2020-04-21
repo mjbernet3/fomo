@@ -1,14 +1,14 @@
 # Project Fomo
-# Atlanta Arts Initiative App
+**Atlanta Arts Initiative App**
 JIA - 9340
 Release Notes
 Updated: April 20th, 2020
 
-# Release Notes
+## Release Notes
 
-# FOMO v1.0
+### FOMO v1.0
 April 20th, 2020
-# New Software Features
+#### New Software Features
 - Added a Welcome page to greet users and prompt them to login or register a brand new account
 - Added Registration page where users can create a brand new account
 - Added Login page where users can log into an existing account
@@ -33,7 +33,7 @@ April 20th, 2020
 - Added a link to an About page to the Profile page, where users will go to view relevant app information
 - Added a Sign Out button to the Profile page, bringing users back to the Welcome page
 
-# Bug Fixes
+#### Bug Fixes
 - Fixed a bug creating overflow on input fields in Login and Registration pages
 - Fixed a bug creating renderflex errors on the Event Clicked and View All Events pages
 - Improved load time of genre images on the search page
@@ -41,7 +41,7 @@ April 20th, 2020
 - Fixed a bug in which images were not scaling properly to event cards
 - Fixed a bug in which images were not fitting properly to the top of the event clicked page
 
-# Known Bugs or Remaining Implementations
+#### Known Bugs or Remaining Implementations
 - Adding Friends is not currently supported on the frontend, there is a backend method but the interface to add friends has not yet been created
 - Backend functionality for Notifications slider in settings has not yet been implemented
 - Saved Events do not currently update in real time, but instead require a page refresh to update
@@ -49,21 +49,21 @@ April 20th, 2020
 
 
 
-# Install Guide
-# Pre-Requisites
+## Install Guide
+### Pre-Requisites
 You must have the following installed and configured before proceeding, see provided links for more information:
 Android Studio and Android SDK (https://developer.android.com/studio)
 XCode and iOS SDK (mac only: https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
-# Dependent Libraries
+### Dependent Libraries
 Download and install the following:
 Flutter SDK (https://flutter.dev/docs/get-started/install)
 Dart SDK (https://dart.dev/get-dart)
 
-# Download
+### Download
 Clone https://github.com/mjbernet3/fomo.git
 
-# Build Instructions
+### Build Instructions
 Open an emulator using Android Studio or XCode or through the command line using the following command:
 	emulator -avd avd_name [ {-option [value]} …]
 To view a list of AVD names, enter the following command:
@@ -77,13 +77,13 @@ Then open the terminal window and navigate to the repository and run the followi
 	flutter pub get
 flutter run
 
-# Installation
+### Installation
 Clone the repository using the provided github link above.
 
-# Run Instructions
+### Run Instructions
 Use the emulator to interact with the application.
 
-# Troubleshooting
+### Troubleshooting
 If your flutter install becomes corrupted, run the following commands in your flutter install directory:
 	git clean -xfd
 	git stash save --keep-index

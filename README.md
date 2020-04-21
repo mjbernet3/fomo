@@ -54,7 +54,7 @@ April 20th, 2020
 
 ## Install Guide
 ### Pre-Requisites
-You must have the following installed and configured before proceeding, see provided links for more information:
+You should have the following installed and configured before proceeding, see provided links for more information:
 - Android Studio and Android SDK (https://developer.android.com/studio)
 - Android Studio Emulator
 - XCode and iOS SDK (mac only: https://apps.apple.com/us/app/xcode/id497799835?mt=12)
@@ -63,10 +63,10 @@ You must have the following installed and configured before proceeding, see prov
 - Dart SDK (https://dart.dev/get-dart)
 
 ### Dependent Libraries
-Download and install the following:
-- Google Services Firestore Configuration File for Android/iOS  
+Download the following:
+- Google Services Firestore Configuration File for Android/iOS from Firebase 
   
-The following libraries are also required:  
+Install the following by running `flutter pub get` in the project directory:
 - provider
 - rxdart
 - firebase core
@@ -80,17 +80,14 @@ The following libraries are also required:
 - image picker
 - url launcher
 
-To get these dependencies open a terminal window and navigate to the repository and run the following command:  
-	flutter pub get
-
 ### Download
 Clone https://github.com/mjbernet3/fomo.git
 
 ### Build Instructions
 Open an emulator using Android Studio or XCode or through the command line using the following command:  
-	emulator -avd avd_name [ {-option [value]} …].  
+	`emulator -avd avd_name [ {-option [value]} …]`.  
 To view a list of AVD names, enter the following command:  
-	emulator -list-avds  
+	`emulator -list-avds`  
   
 For more information on opening the emulator through Android Studio or XCode visit the following links:  
 	Android Studio (https://developer.android.com/studio/run/emulator)  
@@ -98,24 +95,24 @@ For more information on opening the emulator through Android Studio or XCode vis
 (https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html)  
 
 Then open the terminal window and navigate to the repository and run the following command:  
-	flutter run  
+	`flutter run`  
 
 ### Installation
-Clone the repository using the provided github link above.
+Clone the repository using the provided github link. After building no further installation is required.
 
 ### Run Instructions
 Use the emulator to interact with the application.  
   
 Most clean clones of the app require fetching flutter and dart dependencies. Run:  
-	flutter package get
+	`flutter pub get`
 
 ### Troubleshooting
 If your flutter install becomes corrupted, run the following commands in your flutter install directory:  
-	git clean -xfd  
-	git stash save --keep-index  
-	git stash drop  
-	git pull  
-	flutter doctor  
+	`git clean -xfd`
+	`git stash save --keep-index`  
+	`git stash drop` 
+	`git pull`  
+	`flutter doctor` 
   
 If running ‘flutter run’ returns “command: flutter not found”:  
 	Ensure that your path is correctly configured.  
@@ -125,10 +122,10 @@ If running ‘flutter run’ returns “command: flutter not found”:
 		For Linux: https://flutter.dev/docs/get-started/install/linux  
   
 If your pub dependencies become corrupted, run the following command:  
-	pub cache repair  
+	`pub cache repair`  
   
 If hot reload is not working:  
 Set your environment variable NO_PROXY=127.0.0.1  
   
 If missing flutter dependencies, run the following command:  
-flutter doctor  
+`flutter doctor`  

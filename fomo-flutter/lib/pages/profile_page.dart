@@ -44,7 +44,6 @@ class ProfilePage extends StatelessWidget {
                         gradient: AppColor.gradient,
                       ),
                     ),
-                    FriendsScroller(),
                     SettingList(),
                   ],
                 ),

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/friends/friends_list_card.dart';
-import 'package:project_fomo/components/shared/loading_indicator.dart';
 import 'package:project_fomo/models/user_data.dart';
-import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/style.dart';
-import 'package:provider/provider.dart';
 
 class FriendsListPage extends StatelessWidget {
-  static const String pageRoute = '/view-all-friends';
+  static const String pageRoute = '/friends-list';
 
   @override
   Widget build(BuildContext context) {
-    final UserService _userService =
-        Provider.of<UserService>(context, listen: false);
+    //TODO: Get friends from navigator arguments
 
     return Scaffold(
       appBar: AppBar(
@@ -24,13 +20,6 @@ class FriendsListPage extends StatelessWidget {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-            Icons.person_add,
-            color: Colors.white,
-          ))
-        ],
         title: Text(
           'All Friends',
           style: TextStyle(
@@ -52,32 +41,21 @@ class FriendsListPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: StreamBuilder(
-        stream: _userService.userData,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return LoadingIndicator();
-          }
-          final UserData _userData = snapshot.data;
-          List<dynamic> friends = _userData.friends;
-          print(friends.length);
-          return SizedBox(
-            child: ListView.separated(
-              physics: const AlwaysScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: friends.length,
-              itemBuilder: (context, index) => SizedBox(
-                width: 15.0,
-              ),
-              separatorBuilder: (context, index) => SizedBox(
-                height: 90,
-                child: FriendsListCard(
-                  userid: friends[index],
-                ),
-              ),
+      body: SizedBox(
+        child: ListView.separated(
+          physics: const AlwaysScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemCount: 0,
+          itemBuilder: (context, index) => SizedBox(
+            width: 15.0,
+          ),
+          separatorBuilder: (context, index) => SizedBox(
+            height: 90,
+            child: FriendsListCard(
+              friend: UserData(),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -28,15 +28,6 @@ class UserService {
     });
   }
 
-  Stream<UserData> otherUserData(String id) {
-    return _userDataCollection
-        .document(id)
-        .snapshots()
-        .map((DocumentSnapshot userDataSnap) {
-      return UserData.fromDocSnap(userDataSnap);
-    });
-  }
-
   Future<Response> updateName(String name) async {
     try {
       await _userDataCollection

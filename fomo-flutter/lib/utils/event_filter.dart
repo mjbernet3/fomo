@@ -1,7 +1,11 @@
 import 'package:project_fomo/models/event.dart';
 
 class EventFilter {
-  static const List FEATURED_EVENTS = [];
+  static const List FEATURED_EVENTS = [
+    "4nkEZMSzdjDDeRMOhbHI",
+    "Er300Iu2zmq1njTUlV8k",
+    "HskRO8SwoZabFu3j40XV",
+  ];
   static const int POPULAR_NUM_GOING = -1; // All events popular
   static const int POPULAR_NUM_INTERESTED = -1; // All events popular
   static const double UPCOMING_RANGE = double.infinity; // All events upcoming

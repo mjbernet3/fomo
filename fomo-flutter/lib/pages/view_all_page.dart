@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/list_event_card.dart';
 import 'package:project_fomo/style.dart';
+import 'package:project_fomo/utils/structures/view_all_arguments.dart';
 
 class ViewAllPage extends StatelessWidget {
   static const String pageRoute = '/view-all';
-  final List events = []; // TODO: Use actual events
-  final String title = ""; // TODO: Use actual title
 
   @override
   Widget build(BuildContext context) {
+    final ViewAllArguments arguments =
+        ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -20,7 +22,7 @@ class ViewAllPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          title,
+          arguments.category,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSize.size22,
@@ -41,9 +43,9 @@ class ViewAllPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView.builder(
-          itemCount: events.length,
+          itemCount: arguments.events.length,
           itemBuilder: (context, index) {
-            return ListEventCard(event: events[index]);
+            return ListEventCard(event: arguments.events[index]);
           },
         ),
       ),

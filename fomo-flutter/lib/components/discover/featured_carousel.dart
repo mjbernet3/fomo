@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/discover/carousel_ellipse.dart';
@@ -7,8 +6,6 @@ import 'package:project_fomo/components/discover/event_card.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/style.dart';
 import 'package:provider/provider.dart';
-
-const double leftTitlePadding = 15.0;
 
 class FeaturedCarousel extends StatelessWidget {
   final List<Event> events;
@@ -21,7 +18,7 @@ class FeaturedCarousel extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-            left: leftTitlePadding,
+            left: 15.0,
             bottom: 10.0,
           ),
           child: Align(

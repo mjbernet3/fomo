@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project_fomo/blocs/view_all_bloc.dart';
 import 'package:project_fomo/components/discover/event_card.dart';
 import 'package:project_fomo/models/event.dart';
 import 'package:project_fomo/pages/view_all_page.dart';
 import 'package:project_fomo/style.dart';
-import 'package:provider/provider.dart';
+import 'package:project_fomo/utils/structures/view_all_arguments.dart';
 
 const double leftTitlePadding = 15.0;
 
 class EventScroller extends StatelessWidget {
-  final String title;
+  final String category;
   final List<Event> events;
 
-  EventScroller(this.title, this.events);
+  EventScroller(this.category, this.events);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class EventScroller extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: leftTitlePadding),
                 child: Text(
-                  title,
+                  category,
                   style: TextStyle(
                     color: AppTextColor.title,
                     fontSize: AppFontSize.size18,
@@ -41,10 +40,12 @@ class EventScroller extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  ViewAllBloc bloc =
-                      Provider.of<ViewAllBloc>(context, listen: false);
-                  bloc.setCategory(this.title.toLowerCase());
-                  Navigator.pushNamed(context, ViewAllPage.pageRoute);
+                  Navigator.pushNamed(
+                    context,
+                    ViewAllPage.pageRoute,
+                    arguments:
+                        ViewAllArguments(category: category, events: events),
+                  );
                 },
                 child: Row(
                   children: <Widget>[

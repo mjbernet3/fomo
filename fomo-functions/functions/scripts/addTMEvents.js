@@ -37,9 +37,7 @@ function parseTMEvent(event) {
         genre: event['classifications'][0]['genre']['name'],
         subGenre: event['classifications'][0]['subGenre']['name'],
         usersGoing: [],
-        goingCount: 0,
         usersInterested: [],
-        interestedCount: 0,
     }
 }
 

@@ -15,8 +15,6 @@ class Event {
   List usersInterested;
   String genre;
   String subGenre;
-  int goingCount;
-  int interestedCount;
 
   Event({
     this.id,
@@ -32,8 +30,6 @@ class Event {
     this.usersInterested,
     this.genre,
     this.subGenre,
-    this.goingCount,
-    this.interestedCount,
   });
 
   factory Event.fromDocSnapshot(DocumentSnapshot snapshot) {
@@ -53,8 +49,6 @@ class Event {
       ticketUrl: event['ticketUrl'],
       usersGoing: event['usersGoing'],
       usersInterested: event['usersInterested'],
-      goingCount: event['goingCount'],
-      interestedCount: event['interestedCount'],
     );
   }
 

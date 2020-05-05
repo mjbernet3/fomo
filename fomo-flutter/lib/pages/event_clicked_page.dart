@@ -29,7 +29,7 @@ class EventClickedPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              EventHeader(event: _event),
+//              EventHeader(event: _event),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -82,7 +82,8 @@ class EventClickedPage extends StatelessWidget {
               ),
               OutputLink(
                 title: 'Get Directions',
-                url: 'https://www.google.com/maps/search/?api=1&query=${_event.location['latitude']},${_event.location['longitude']}',
+                url:
+                    'https://www.google.com/maps/search/?api=1&query=${_event.location['latitude']},${_event.location['longitude']}',
                 displayIcon: Icons.gps_fixed,
               ),
             ],

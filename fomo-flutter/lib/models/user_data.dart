@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// TODO: Change to storing event/user ids instead of full objects to save space
 class UserData {
   String userName;
   String displayName;

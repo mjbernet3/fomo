@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_fomo/models/user_data.dart';
-import 'package:project_fomo/services/event_service.dart';
 import 'package:project_fomo/utils/structures/response.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 class UserService {
-  DocumentSnapshot lastDocument;
-
   final CollectionReference _userDataCollection =
       Firestore.instance.collection('users');
 
@@ -25,6 +22,43 @@ class UserService {
         .map((DocumentSnapshot userDataSnap) {
       return UserData.fromDocSnap(userDataSnap);
     });
+  }
+
+  Future<Response> setInterested(String eventId, bool isInterested) async {
+    try {
+      if (isInterested) {
+        await _userDataCollection.document(_userId).updateData({
+          'interested': FieldValue.arrayUnion([eventId])
+        });
+      } else {
+        await _userDataCollection.document(_userId).updateData({
+          'interested': FieldValue.arrayRemove([eventId])
+        });
+      }
+
+      return Response(status: Status.SUCCESS);
+    } catch (error) {
+      print(error.toString());
+      return Response(status: Status.FAILURE, message: error.toString());
+    }
+  }
+
+  Future<Response> setGoing(String eventId, bool isGoing) async {
+    try {
+      if (isGoing) {
+        await _userDataCollection.document(_userId).updateData({
+          'going': FieldValue.arrayUnion([eventId])
+        });
+      } else {
+        await _userDataCollection.document(_userId).updateData({
+          'going': FieldValue.arrayRemove([eventId])
+        });
+      }
+
+      return Response(status: Status.SUCCESS);
+    } catch (error) {
+      return Response(status: Status.FAILURE, message: error.toString());
+    }
   }
 
   Future<Response> updateName(String name) async {
@@ -91,88 +125,6 @@ class UserService {
       return Response(status: Status.SUCCESS);
     } catch (error) {
       return Response(status: Status.FAILURE, message: error.toString());
-    }
-  }
-
-  // TODO: Clean up section below
-  Future<void> _addIsGoingEvent(DocumentReference documentId) async {
-    UserData me = await this.userData.first;
-    List<dynamic> goingEvents = me.going;
-    goingEvents.add(documentId);
-    return _updateGoingEvents(goingEvents);
-  }
-
-  Future<void> _removeIsGoingEvent(DocumentReference documentId) async {
-    UserData me = await this.userData.first;
-    List<dynamic> goingEvents =
-        me.going.map<String>((dynamic df) => df.path).toList();
-    goingEvents.remove(documentId.path);
-    return _updateGoingEvents(goingEvents);
-  }
-
-  Future<void> _updateGoingEvents(List<dynamic> newGoingEvents) async {
-    return _userDataCollection
-        .document(_userId)
-        .updateData({'going': newGoingEvents});
-  }
-
-  Future<void> _addIsInterestedEvent(DocumentReference documentId) async {
-    UserData me = await this.userData.first;
-    List<dynamic> interestedEvents = me.interested;
-    interestedEvents.add(documentId);
-    return _updateInterestedEvents(interestedEvents);
-  }
-
-  Future<void> _removeIsInterestedEvent(DocumentReference documentId) async {
-    UserData me = await this.userData.first;
-    List<dynamic> interestedEvents =
-        me.interested.map<String>((dynamic df) => df.path).toList();
-    interestedEvents.remove(documentId.path);
-    return _updateInterestedEvents(interestedEvents);
-  }
-
-  Future<void> _updateInterestedEvents(
-      List<dynamic> newInterestedEvents) async {
-    return _userDataCollection
-        .document(_userId)
-        .updateData({'interested': newInterestedEvents});
-  }
-
-  Future<void> setGoingStatus(
-      String eventId, bool status, DocumentReference documentId) async {
-    UserData me = await this.userData.first;
-    List<String> meGoingPaths =
-        me.going.map<String>((dynamic df) => df.path).toList();
-    bool isGoing = meGoingPaths.contains(documentId.path);
-    if (isGoing == status) return true; // no status change needed
-    // Set status in user document
-    if (status) {
-      await _addIsGoingEvent(documentId)
-          .catchError((error) => Future.error(error));
-      return EventService.addUserToGoing(eventId, _userId);
-    } else {
-      await _removeIsGoingEvent(documentId)
-          .catchError((error) => Future.error(error));
-      return EventService.removeUserFromGoing(eventId, _userId);
-    }
-  }
-
-  Future<void> setInterestedStatus(
-      String eventId, bool status, DocumentReference documentId) async {
-    UserData me = await this.userData.first;
-    List<String> meInterestedPaths =
-        me.interested.map<String>((dynamic df) => df.path).toList();
-    bool isInterested = meInterestedPaths.contains(documentId.path);
-    if (isInterested == status) return true; // no status change needed
-    // Set status in user document
-    if (status) {
-      await _addIsInterestedEvent(documentId)
-          .catchError((error) => Future.error(error));
-      return EventService.addUserToInterested(eventId, _userId);
-    } else {
-      await _removeIsInterestedEvent(documentId)
-          .catchError((error) => Future.error(error));
-      return EventService.removeUserFromInterested(eventId, _userId);
     }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:project_fomo/components/shared/gradient_button.dart';
 import 'package:project_fomo/components/shared/loading_indicator.dart';
@@ -28,71 +27,62 @@ class _EventButtonsState extends State<EventButtons> {
     final UserService _userService =
         Provider.of<UserService>(context, listen: false);
 
-    final EventService _eventService =
-        Provider.of<EventService>(context, listen: false);
-
     return StreamBuilder(
-        stream: _userService.userData,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return LoadingIndicator();
-          }
+      stream: _userService.userData,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return LoadingIndicator();
+        }
 
-          final UserData _userData = snapshot.data;
-          DocumentReference documentId =
-              _eventService.getDocumentReference(event.id);
+        final UserData _userData = snapshot.data;
 
-          bool isGoing = _userData.going
-              .map<String>((dynamic df) => df.path)
-              .toList()
-              .contains(documentId.path);
+        bool isGoing = _userData.going.contains(event.id);
+        bool isInterested = _userData.interested.contains(event.id);
 
-          bool isInterested = _userData.interested
-              .map<String>((dynamic df) => df.path)
-              .toList()
-              .contains(documentId.path);
-
-          return Row(
-            children: <Widget>[
-              GradientButton(
-                buttonText: Text(
-                  'Going',
-                  style: TextStyle(
-                    fontSize: AppFontSize.size18,
-                    fontFamily: AppFontFamily.family,
-                    color: AppTextColor.highEmphasis,
-                  ),
+        return Row(
+          children: <Widget>[
+            GradientButton(
+              buttonText: Text(
+                'Going',
+                style: TextStyle(
+                  fontSize: AppFontSize.size18,
+                  fontFamily: AppFontFamily.family,
+                  color: AppTextColor.highEmphasis,
                 ),
-                buttonPressed: () {
-                  if (isGoing == false && isInterested == true) {
-                    _userService.setInterestedStatus(event.id, false, documentId);
-                  }
-                  _userService.setGoingStatus(event.id, !isGoing, documentId);
-                },
-                outlineColor: isGoing,
               ),
-              SizedBox(
-                width: 15,
-              ),
-              GradientButton(
-                buttonText: Text(
-                  'Interested',
-                  style: TextStyle(
-                    fontSize: AppFontSize.size18,
-                    fontFamily: AppFontFamily.family,
-                    color: AppTextColor.highEmphasis,
-                  ),
+              buttonPressed: () {
+                // TODO: Check responses here
+                if (!isGoing && isInterested) {
+                  _userService.setInterested(event.id, false);
+                }
+                _userService.setGoing(event.id, !isGoing);
+              },
+              outlineColor: isGoing,
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            GradientButton(
+              buttonText: Text(
+                'Interested',
+                style: TextStyle(
+                  fontSize: AppFontSize.size18,
+                  fontFamily: AppFontFamily.family,
+                  color: AppTextColor.highEmphasis,
                 ),
-                buttonPressed: () {
-                  if (isInterested == false && isGoing == true) {
-                    _userService.setGoingStatus(event.id, false, documentId);
-                  }
-                  _userService.setInterestedStatus(event.id, !isInterested, documentId);
-                },
-                outlineColor: isInterested,
               ),
-            ],
-          );
-        });
+              buttonPressed: () {
+                // TODO: Check responses here
+                if (!isInterested && isGoing) {
+                  _userService.setGoing(event.id, false);
+                }
+                _userService.setInterested(event.id, !isInterested);
+              },
+              outlineColor: isInterested,
+            ),
+          ],
+        );
+      },
+    );
   }
 }

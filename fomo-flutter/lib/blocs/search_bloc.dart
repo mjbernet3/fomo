@@ -36,7 +36,6 @@ class SearchBloc extends Bloc {
 
   @override
   void dispose() {
-    print('Disposing search bloc...');
     _searchStateSubject.close();
   }
 }

@@ -63,7 +63,6 @@ class AuthBloc extends Bloc {
 
   @override
   void dispose() {
-    print('Disposing auth bloc...');
     _emailSubject.close();
     _passwordSubject.close();
     _isLoadingSubject.close();

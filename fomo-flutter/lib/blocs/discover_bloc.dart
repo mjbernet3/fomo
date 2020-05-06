@@ -35,7 +35,6 @@ class DiscoverBloc extends Bloc {
 
   @override
   void dispose() {
-    print('Disposing discover bloc...');
     _eventsSubject.close();
   }
 }

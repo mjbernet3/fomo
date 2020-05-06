@@ -7,6 +7,7 @@ import 'package:project_fomo/services/user_service.dart';
 import 'package:project_fomo/utils/structures/response.dart';
 import 'package:provider/provider.dart';
 
+// TODO: Many bugs here, commenting ability to change profile till fixed
 class ProfilePicture extends StatefulWidget {
   final String profileUrl;
 
@@ -61,28 +62,28 @@ class _ProfilePictureState extends State<ProfilePicture> {
         ),
         GestureDetector(
           onTap: () async {
-            imageLoading = true;
-            File selected =
-                await ImagePicker.pickImage(source: ImageSource.gallery);
-            File cropped = await ImageCropper.cropImage(
-              sourcePath: selected.path,
-              cropStyle: CropStyle.circle,
-              iosUiSettings: IOSUiSettings(
-                aspectRatioLockEnabled: true,
-                rotateButtonsHidden: true,
-                resetButtonHidden: true,
-                title: "Edit Profile Photo",
-              ),
-            );
-
-            setState(() async {
-              _profileFile = cropped ?? selected;
-              Response response = await _userService.uploadImage(_profileFile);
-              if (response.status == Status.FAILURE) {
-                print(response.message); // TODO: Inform user of error
-              }
-            });
-            imageLoading = false;
+//            imageLoading = true;
+//            File selected =
+//                await ImagePicker.pickImage(source: ImageSource.gallery);
+//            File cropped = await ImageCropper.cropImage(
+//              sourcePath: selected.path,
+//              cropStyle: CropStyle.circle,
+//              iosUiSettings: IOSUiSettings(
+//                aspectRatioLockEnabled: true,
+//                rotateButtonsHidden: true,
+//                resetButtonHidden: true,
+//                title: "Edit Profile Photo",
+//              ),
+//            );
+//
+//            setState(() async {
+//              _profileFile = cropped ?? selected;
+//              Response response = await _userService.uploadImage(_profileFile);
+//              if (response.status == Status.FAILURE) {
+//                print(response.message); // TODO: Inform user of error
+//              }
+//            });
+//            imageLoading = false;
           },
           child: GradientIcon(
             icon: Icons.add_circle,

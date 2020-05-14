@@ -1,13 +1,13 @@
-# Project Fomo
+# Fomo
 **Atlanta Arts Initiative App**  
 JIA - 9340  
 Release Notes  
 Updated: April 20th, 2020  
 
 ## Release Notes
-
 ### FOMO v1.0
 April 20th, 2020
+
 #### New Software Features
 - Added a Welcome page to greet users and prompt them to login or register a brand new account
 - Added Registration page where users can create a brand new account
@@ -24,12 +24,9 @@ April 20th, 2020
 - Added My Events page so that users can store and view events they are interested in or going to
 - Added ‘Interested’ and ‘Going’ categories in the My Events page so that users can sort their saved events by category
 - Added a Profile Page for the user to view and manage their personal information
-- Added a display of the user’s name, username, and profile picture.
-- Added the ability for a user to be able to change their profile picture
+- Added a display of the user’s name, username, and profile picture
 - Added sliders for account settings, such as Notifications and Location Services
-- Added a Friends slider to the Profile page in which a user can view a preview of their friend’s list
-- Added a Friends List page accessible by the Friends slider, allowing users to view their entire friends list
-- Added a link to an Account page to the Profile page where users can go to change their name, username, or email associated with their account
+- Added a link to an Account page to the Profile page where users can go to change their name and username associated with their account
 - Added a link to an About page to the Profile page, where users will go to view relevant app information
 - Added a Sign Out button to the Profile page, bringing users back to the Welcome page
 
@@ -43,14 +40,9 @@ April 20th, 2020
 - Fixed a bug that caused erroneous loading of events at the bottom of the view all page
 - Fixed a bug in which removing events from interested and going in Firebase resulted in data corruption
 
-
 #### Known Bugs or Remaining Implementations
-- Adding Friends is not currently supported on the frontend, there is a backend method but the interface to add friends has not yet been created
+- Ability to change profile picture is disabled, some edge cases can cause app crashes
 - Backend functionality for Notifications or Location Services sliders in settings has not yet been implemented
-- If an account on your friends list is deleted, it will still show up on your friends list and friends scroller in the form of an infinite loading symbol
-- Friends Category not yet added to Discover page
-
-
 
 ## Install Guide
 ### Pre-Requisites
